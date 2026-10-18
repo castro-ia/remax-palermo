@@ -235,6 +235,84 @@ select option{background:#0F1F42;color:#fff}
   .f2{grid-template-columns:1fr 1fr}
 }
 
+/* ---------- efectos ---------- */
+#prog{position:fixed;top:0;left:0;height:3px;width:0;z-index:90;
+  background:linear-gradient(90deg,var(--red),#FF7D96);transition:width .1s linear;
+  box-shadow:0 0 12px rgba(228,0,43,.6)}
+
+.js h1 .w{display:inline-block;opacity:0;transform:translateY(22px) rotate(2deg);
+  animation:wIn .72s cubic-bezier(.2,.75,.3,1) forwards}
+@keyframes wIn{to{opacity:1;transform:none}}
+
+.js .lede,.js .rating-row,.js .cta-row,.js .eyebrow{opacity:0;animation:upIn .8s cubic-bezier(.2,.75,.3,1) forwards}
+.js .eyebrow{animation-delay:.05s}
+.js .lede{animation-delay:.5s}
+.js .rating-row{animation-delay:.62s}
+.js .cta-row{animation-delay:.74s}
+@keyframes upIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+
+.portrait{will-change:transform}
+.stat b{display:block;font-variant-numeric:tabular-nums}
+
+/* brillo que cruza el boton principal */
+.btn-wa{position:relative;overflow:hidden}
+.btn-wa::after{content:"";position:absolute;top:0;left:-130%;width:60%;height:100%;
+  background:linear-gradient(100deg,transparent,rgba(255,255,255,.38),transparent);
+  transform:skewX(-18deg);animation:shine 4.5s ease-in-out infinite}
+@keyframes shine{0%,72%{left:-130%}88%,100%{left:130%}}
+
+/* las tarjetas se inclinan apenas con el cursor */
+.lk,.step,.rev,.gbadge{transform-style:preserve-3d}
+.step:hover,.gbadge:hover{transform:translateY(-4px) scale(1.012)}
+
+.hof{animation:float 3.6s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+
+.stat{transition:background .3s}
+.stat:hover{background:rgba(255,255,255,.06)}
+
+@media (prefers-reduced-motion:reduce){
+  .js h1 .w,.js .lede,.js .rating-row,.js .cta-row,.js .eyebrow{opacity:1;transform:none;animation:none}
+  .btn-wa::after,.hof{animation:none}
+  #prog{display:none}
+}
+
+/* ---------- sobre mi ---------- */
+.about{background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.about-grid{display:grid;gap:30px;align-items:start}
+/* en celular: avatar compacto al lado del nombre (la foto grande ya esta en el hero) */
+.about-photo{display:flex;align-items:center;gap:14px}
+.about-photo img{
+  width:76px;height:76px;flex:none;border-radius:50%;object-fit:cover;object-position:center 12%;
+  box-shadow:var(--sh-sm);border:3px solid var(--paper);outline:1px solid var(--line);
+}
+.about-photo .sig{font-size:12.5px;font-weight:500;color:var(--muted);line-height:1.4}
+.about-photo .sig b{display:block;font-family:Fraunces,serif;font-size:17px;font-weight:700;color:var(--ink);letter-spacing:-.015em}
+.about p + p{margin-top:14px}
+.about p{color:var(--muted);font-size:1.02rem;line-height:1.68}
+.about strong{color:var(--ink);font-weight:600}
+.pull{
+  margin:22px 0;padding:18px 20px;border-left:3px solid var(--red);
+  background:#FBF7F7;border-radius:0 14px 14px 0;
+}
+.pull q{font-family:Fraunces,serif;font-size:1.14rem;line-height:1.45;letter-spacing:-.015em;color:var(--ink)}
+.tl{margin-top:26px;display:grid;gap:0;border-top:1px solid var(--line)}
+.tl-item{display:grid;grid-template-columns:76px 1fr;gap:16px;padding:14px 0;border-bottom:1px solid var(--line);align-items:baseline}
+.tl-item b{font-family:Fraunces,serif;font-size:1rem;font-weight:700;color:var(--red);letter-spacing:.01em}
+.tl-item span{font-size:14.8px;color:var(--muted);line-height:1.5}
+.tl-item span i{font-style:normal;color:var(--ink);font-weight:600}
+@media(min-width:860px){
+  .about-grid{grid-template-columns:.78fr 1.22fr;gap:52px}
+  /* en escritorio si vale la pena el retrato grande, fijo al hacer scroll */
+  .about-photo{display:block;position:sticky;top:88px}
+  .about-photo img{width:100%;height:auto;aspect-ratio:4/5;border-radius:var(--r-lg);border:1px solid var(--line);outline:0}
+  .about-photo .sig{
+    display:block;margin-top:14px;padding:12px 16px;border-radius:14px;
+    background:var(--navy);color:rgba(255,255,255,.72);font-size:12px;
+  }
+  .about-photo .sig b{color:#fff;font-size:15px}
+}
+
 /* ---------- proceso ---------- */
 .steps{display:grid;gap:16px;counter-reset:s}
 .step{
@@ -395,6 +473,7 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
 <body>
 
 <!-- ===== NAV ===== -->
+<div id="prog"></div>
 <nav class="nav">
   <div class="wrap">
     <a class="brand" href="#top" aria-label="Inicio">
@@ -413,6 +492,7 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
     </a>
     <div class="navlinks">
       <a href="#tasacion">Tasación sin cargo</a>
+      <a href="#sobre-mi">Sobre mí</a>
       <a href="#proceso">Cómo trabajo</a>
       <a href="#resenas">Reseñas</a>
       <a href="#propiedades">Propiedades</a>
@@ -463,10 +543,10 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
   <div class="stats">
     <div class="wrap" style="padding-inline:0">
       <div class="stats-grid">
-        <div class="stat"><b>260+</b><span>Operaciones</span></div>
-        <div class="stat"><b>8 años</b><span>En el mercado</span></div>
-        <div class="stat"><b>257</b><span>Reseñas Google</span></div>
-        <div class="stat"><b>48hs</b><span>Tasación lista</span></div>
+        <div class="stat"><b data-count="260" data-suf="+">260+</b><span>Operaciones</span></div>
+        <div class="stat"><b data-count="8" data-suf=" años">8 años</b><span>En el mercado</span></div>
+        <div class="stat"><b data-count="257">257</b><span>Reseñas Google</span></div>
+        <div class="stat"><b data-count="48" data-suf="hs">48hs</b><span>Tasación lista</span></div>
       </div>
     </div>
   </div>
@@ -536,6 +616,44 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
           </button>
           <p class="form-note">No se guarda nada en esta web. Tus datos viajan solo en el mensaje de WhatsApp que vos enviás.</p>
         </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SOBRE MI ===== -->
+<section class="about" id="sobre-mi">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="about-photo rv">
+        <img src="img/fernando.webp" width="400" height="500" alt="Fernando Castro en su oficina de RE/MAX Premium 1" loading="lazy">
+        <span class="sig"><b>Fernando Castro</b>Team Leader · RE/MAX Premium 1</span>
+      </div>
+
+      <div>
+        <div class="sec-head rv" style="margin-bottom:0">
+          <span class="kicker">Sobre mí</span>
+          <h2>De Rafael Castillo al Hall of Fame.</h2>
+        </div>
+
+        <div class="rv" style="margin-top:20px">
+          <p>Empecé en <strong>2018</strong>, vendiendo casas y departamentos en la Zona Oeste del conurbano. Nadie me regaló una cartera de propiedades: la armé tocando puertas, atendiendo el teléfono a cualquier hora y aprendiendo el oficio en la calle, operación por operación.</p>
+
+          <p>En <strong>2022</strong> di el salto a Palermo, a <strong>RE/MAX Premium 1</strong>, la oficina de Av. Las Heras. Un mercado distinto, con otros valores y otro tipo de comprador, donde tuve que volver a demostrar todo desde cero. Un año después armé mi propio equipo y pasé a ser <strong>Team Leader</strong>.</p>
+
+          <p>Hoy llevo <strong>más de 260 operaciones cerradas</strong> y los dos reconocimientos más altos de la red RE/MAX: el <strong>Hall of Fame</strong> y el <strong>Lifetime Achievement</strong>. Sigo trabajando las dos zonas, Palermo y San Justo, porque de las dos aprendí algo que no cambia: detrás de cada propiedad hay una familia tomando una de las decisiones más grandes de su vida.</p>
+
+          <div class="pull">
+            <q>Por eso te digo el precio real, no el que querés escuchar. Prefiero una conversación incómoda el primer día, antes que una propiedad estancada seis meses.</q>
+          </div>
+
+          <div class="tl">
+            <div class="tl-item"><b>2018</b><span>Primeras ventas en <i>Zona Oeste</i>. Arranco de cero en el rubro.</span></div>
+            <div class="tl-item"><b>2022</b><span>Me sumo a <i>RE/MAX Premium 1</i>, en Palermo.</span></div>
+            <div class="tl-item"><b>2023</b><span>Armo el <i>Team Fernando Castro</i> y paso a Team Leader.</span></div>
+            <div class="tl-item"><b>Hoy</b><span><i>+260 operaciones</i>, Hall of Fame y Lifetime Achievement.</span></div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -632,12 +750,12 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
 
     <div class="gbadges">
       <a class="gbadge rv" href="https://share.google/ayJGn7dHlrtmHFuXk" target="_blank" rel="noopener">
-        <span class="score">5,0</span>
+        <span class="score" data-count="5" data-dec="1">5,0</span>
         <span class="meta"><b>Palermo · CABA</b><span>96 reseñas en Google</span></span>
         <svg class="arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
       </a>
       <a class="gbadge rv" href="https://www.google.com/maps?cid=6989701403040711240" target="_blank" rel="noopener">
-        <span class="score">4,9</span>
+        <span class="score" data-count="4.9" data-dec="1">4,9</span>
         <span class="meta"><b>RE/MAX San Justo</b><span>161 reseñas en Google</span></span>
         <svg class="arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
       </a>
@@ -820,6 +938,76 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
   }
   /* safety net: never leave content hidden, whatever happens above */
   setTimeout(function(){ items.forEach(function(el){ el.classList.add("in"); }); },2500);
+
+/* ---- numeros que cuentan al aparecer ---- */
+  var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion:reduce)").matches;
+  function pinta(el,v){
+    var dec=+(el.dataset.dec||0), pre=el.dataset.pre||"", suf=el.dataset.suf||"";
+    var txt = dec ? v.toFixed(dec).replace(".",",") : Math.round(v).toLocaleString("es-AR");
+    el.textContent = pre+txt+suf;
+  }
+  function contar(el){
+    var fin=parseFloat(el.dataset.count);
+    if(reduce || el.dataset.hecho){ pinta(el,fin); return; }
+    el.dataset.hecho="1";
+    var dur=1500, t0=performance.now(), listo=false;
+    /* red de seguridad: si rAF no corre (pestana en segundo plano, o lo que sea),
+       el numero igual termina en su valor real */
+    setTimeout(function(){ if(!listo) pinta(el,fin); }, dur+900);
+    pinta(el,0);
+    (function paso(t){
+      var p=Math.min((t-t0)/dur,1), e=1-Math.pow(1-p,3);
+      pinta(el, fin*e);
+      if(p<1) requestAnimationFrame(paso); else listo=true;
+    })(t0);
+  }
+  var nums=document.querySelectorAll("[data-count]");
+  if("IntersectionObserver" in window){
+    var ioN=new IntersectionObserver(function(es){
+      es.forEach(function(e){ if(e.isIntersecting){ contar(e.target); ioN.unobserve(e.target); } });
+    },{threshold:.4});
+    nums.forEach(function(el){ ioN.observe(el); });
+  } else { nums.forEach(function(el){ pinta(el,parseFloat(el.dataset.count)); }); }
+
+  /* ---- el titular aparece palabra por palabra ---- */
+  var h1=document.querySelector("h1");
+  if(h1 && !reduce){
+    var i=0;
+    h1.querySelectorAll("em, :scope").forEach(function(){});
+    [].slice.call(h1.childNodes).forEach(function(nodo){
+      if(nodo.nodeType===3){
+        var frag=document.createDocumentFragment();
+        nodo.textContent.split(/(\s+)/).forEach(function(pal){
+          if(!pal.trim()){ frag.appendChild(document.createTextNode(pal)); return; }
+          var sp=document.createElement("span"); sp.className="w"; sp.textContent=pal;
+          sp.style.animationDelay=(i++*0.075+0.1)+"s"; frag.appendChild(sp);
+        });
+        h1.replaceChild(frag,nodo);
+      } else if(nodo.nodeType===1){
+        [].slice.call(nodo.childNodes).forEach(function(hijo){
+          if(hijo.nodeType!==3) return;
+          var frag=document.createDocumentFragment();
+          hijo.textContent.split(/(\s+)/).forEach(function(pal){
+            if(!pal.trim()){ frag.appendChild(document.createTextNode(pal)); return; }
+            var sp=document.createElement("span"); sp.className="w"; sp.textContent=pal;
+            sp.style.animationDelay=(i++*0.075+0.1)+"s"; frag.appendChild(sp);
+          });
+          nodo.replaceChild(frag,hijo);
+        });
+      }
+    });
+  }
+
+  /* ---- barra de progreso + leve parallax en la foto ---- */
+  var prog=document.getElementById("prog"), retrato=document.querySelector(".portrait"), ticking=false;
+  function alScrollear(){
+    var h=document.documentElement.scrollHeight-innerHeight;
+    if(prog) prog.style.width=(h>0? (scrollY/h)*100 : 0)+"%";
+    if(retrato && !reduce && scrollY<900) retrato.style.transform="translateY("+(scrollY*0.06)+"px)";
+    ticking=false;
+  }
+  addEventListener("scroll",function(){ if(!ticking){ requestAnimationFrame(alScrollear); ticking=true; } },{passive:true});
+  alScrollear();
 
   /* sticky dock: show after the hero */
   var dock=document.getElementById("dock"), hero=document.getElementById("top");
