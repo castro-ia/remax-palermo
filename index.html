@@ -278,6 +278,23 @@ select option{background:#0F1F42;color:#fff}
   #prog{display:none}
 }
 
+/* ---------- preguntas frecuentes ---------- */
+.faq-list{display:grid;gap:10px;max-width:760px}
+.faq-item{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--sh-sm);overflow:hidden}
+.faq-item summary{
+  list-style:none;cursor:pointer;padding:17px 20px;display:flex;align-items:center;gap:14px;
+  font-weight:600;font-size:15.6px;letter-spacing:-.012em;transition:background .2s;
+}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary:hover{background:#FAFAF8}
+.faq-item summary::after{
+  content:"";margin-left:auto;flex:none;width:11px;height:11px;border-right:2px solid var(--muted);
+  border-bottom:2px solid var(--muted);transform:rotate(45deg) translate(-2px,-2px);transition:transform .25s;
+}
+.faq-item[open] summary::after{transform:rotate(225deg) translate(-3px,-3px)}
+.faq-item .a{padding:0 20px 18px;color:var(--muted);font-size:15px;line-height:1.65}
+.faq-item .a strong{color:var(--ink);font-weight:600}
+
 /* ---------- sobre mi ---------- */
 .about{background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 .about-grid{display:grid;gap:30px;align-items:start}
@@ -496,6 +513,7 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
       <a href="#sobre-mi">Sobre mí</a>
       <a href="#proceso">Cómo trabajo</a>
       <a href="#resenas">Reseñas</a>
+      <a href="#faq">Preguntas</a>
       <a href="#propiedades">Propiedades</a>
     </div>
     <a class="nav-cta" href="https://wa.me/5491150379426?text=Hola%20Fernando%2C%20entr%C3%A9%20a%20tu%20web%20y%20quiero%20hablar%20sobre%20mi%20propiedad" target="_blank" rel="noopener">
@@ -832,6 +850,42 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
   </div>
 </section>
 
+<!-- ===== PREGUNTAS FRECUENTES ===== -->
+<section id="faq">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="kicker">Preguntas frecuentes</span>
+      <h2>Lo que más me preguntan.</h2>
+    </div>
+    <div class="faq-list">
+      <details class="faq-item rv">
+        <summary>¿Quién es Fernando Castro?</summary>
+        <div class="a">Soy <strong>agente inmobiliario y Team Leader de RE/MAX Premium 1</strong>, con oficina en Palermo. Trabajo en el rubro desde 2018 y llevo más de 260 operaciones cerradas. Recibí los reconocimientos <strong>Hall of Fame</strong> y <strong>Lifetime Achievement</strong> de la red RE/MAX, y soy Corredor Público Inmobiliario.</div>
+      </details>
+      <details class="faq-item rv">
+        <summary>¿En qué zonas trabajás?</summary>
+        <div class="a">En CABA: <strong>Palermo</strong>, Recoleta y Belgrano. En el Gran Buenos Aires: <strong>San Justo</strong> y la Zona Oeste. Tengo reseñas verificadas en Google en las dos zonas: 5,0★ en Palermo y 4,9★ en San Justo.</div>
+      </details>
+      <details class="faq-item rv">
+        <summary>¿Cuánto vale mi departamento en Palermo?</summary>
+        <div class="a">Depende de metros, estado, piso, orientación, amenities y expensas, pero sobre todo de <strong>a qué precio cerraron propiedades parecidas en tu cuadra</strong>, que suele estar entre un 8 y un 15% por debajo de los precios publicados. Te preparo el análisis comparativo <strong>sin cargo, en 24 a 48 horas</strong>.</div>
+      </details>
+      <details class="faq-item rv">
+        <summary>¿La tasación tiene costo?</summary>
+        <div class="a">No, <strong>no tiene costo ni te compromete a nada</strong>. Te mando el informe por WhatsApp y lo repasamos juntos. Si después decidís vender conmigo, buenísimo; si no, te quedás igual con un número real para tomar la decisión.</div>
+      </details>
+      <details class="faq-item rv">
+        <summary>¿Cuánto tarda en venderse una propiedad?</summary>
+        <div class="a">Depende del precio de salida más que de cualquier otra cosa. Una propiedad bien tasada se mueve en semanas; una sobrevaluada puede quedar meses y después hay que bajarla igual, con el aviso ya gastado. Por eso insisto tanto con salir al precio correcto desde el primer día.</div>
+      </details>
+      <details class="faq-item rv">
+        <summary>¿Cómo me contacto?</summary>
+        <div class="a">Lo más rápido es <strong>WhatsApp al +54 9 11 5037-9426</strong>. También por mail a fcastro@remax.com.ar. Atiendo en nuestra oficina de <strong>OLA Palermo, Dorrego 3550</strong>.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
 <!-- ===== FINAL CTA ===== -->
 <section class="final">
   <div class="wrap">
@@ -909,21 +963,167 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
 
 <script type="application/ld+json">
 {
-  "@context":"https://schema.org",
-  "@type":"RealEstateAgent",
-  "name":"RE/MAX Palermo | Fernando Castro - Agente Inmobiliario",
-  "alternateName":"Fernando Castro - RE/MAX Premium 1",
-  "description":"Agente inmobiliario y Team Leader en RE/MAX Premium 1, especialista en tasación y venta de departamentos, PH y casas en Palermo y Zona Oeste. Más de 260 operaciones cerradas en 8 años.",
-  "image":"https://llamaloafer.com.ar/img/fernando.webp",
-  "telephone":"+5491150379426",
-  "email":"fcastro@remax.com.ar",
-  "priceRange":"$$$",
-  "address":{"@type":"PostalAddress","streetAddress":"Av. Las Heras 3739","addressLocality":"Palermo, Ciudad Autónoma de Buenos Aires","addressRegion":"CABA","addressCountry":"AR"},
-  "areaServed":[{"@type":"Place","name":"Palermo, CABA"},{"@type":"Place","name":"San Justo, La Matanza"},{"@type":"Place","name":"Zona Oeste, Gran Buenos Aires"}],
-  "openingHoursSpecification":{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"opens":"00:00","closes":"23:59"},
-  "aggregateRating":{"@type":"AggregateRating","ratingValue":"4.9","reviewCount":"257","bestRating":"5"},
-  "url":"https://llamaloafer.com.ar/",
-  "sameAs":["https://instagram.com/fcastro.remax","https://www.youtube.com/@fcastro.remax1","https://www.linkedin.com/in/fcastroremax/","https://fcastro.remax.com.ar/","https://www.remax.com.ar/agent/fernando-castro"]
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "¿Quién es Fernando Castro?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Soy agente inmobiliario y Team Leader de RE/MAX Premium 1, con oficina en Palermo. Trabajo en el rubro desde 2018 y llevo más de 260 operaciones cerradas. Recibí los reconocimientos Hall of Fame y Lifetime Achievement de la red RE/MAX, y soy Corredor Público Inmobiliario."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "¿En qué zonas trabajás?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "En CABA: Palermo, Recoleta y Belgrano. En el Gran Buenos Aires: San Justo y la Zona Oeste. Tengo reseñas verificadas en Google en las dos zonas: 5,0★ en Palermo y 4,9★ en San Justo."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "¿Cuánto vale mi departamento en Palermo?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Depende de metros, estado, piso, orientación, amenities y expensas, pero sobre todo de a qué precio cerraron propiedades parecidas en tu cuadra, que suele estar entre un 8 y un 15% por debajo de los precios publicados. Te preparo el análisis comparativo sin cargo, en 24 a 48 horas."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "¿La tasación tiene costo?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "No, no tiene costo ni te compromete a nada. Te mando el informe por WhatsApp y lo repasamos juntos. Si después decidís vender conmigo, buenísimo; si no, te quedás igual con un número real para tomar la decisión."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "¿Cuánto tarda en venderse una propiedad?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Depende del precio de salida más que de cualquier otra cosa. Una propiedad bien tasada se mueve en semanas; una sobrevaluada puede quedar meses y después hay que bajarla igual, con el aviso ya gastado. Por eso insisto tanto con salir al precio correcto desde el primer día."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "¿Cómo me contacto?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Lo más rápido es WhatsApp al +54 9 11 5037-9426. También por mail a fcastro@remax.com.ar. Atiendo en nuestra oficina de OLA Palermo, Dorrego 3550."
+   }
+  }
+ ]
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "RealEstateAgent",
+ "name": "Fernando Castro — Agente inmobiliario RE/MAX Palermo",
+ "alternateName": [
+  "Fernando Castro RE/MAX Premium 1",
+  "RE/MAX Palermo | Fernando Castro"
+ ],
+ "description": "Fernando Castro es agente inmobiliario y Team Leader de RE/MAX Premium 1, especializado en tasación y venta de departamentos, PH y casas en Palermo (CABA) y San Justo / Zona Oeste del Gran Buenos Aires. Más de 260 operaciones cerradas desde 2018.",
+ "url": "https://llamaloafer.com.ar/",
+ "image": "https://llamaloafer.com.ar/img/fernando.webp",
+ "telephone": "+5491150379426",
+ "email": "fcastro@remax.com.ar",
+ "priceRange": "$$$",
+ "knowsLanguage": "es-AR",
+ "knowsAbout": [
+  "Tasación de propiedades",
+  "Venta de departamentos",
+  "Venta de PH",
+  "Compraventa inmobiliaria",
+  "Mercado inmobiliario de Palermo",
+  "Mercado inmobiliario de San Justo"
+ ],
+ "address": {
+  "@type": "PostalAddress",
+  "streetAddress": "Av. Las Heras 3739",
+  "addressLocality": "Palermo",
+  "addressRegion": "Ciudad Autónoma de Buenos Aires",
+  "postalCode": "C1425",
+  "addressCountry": "AR"
+ },
+ "areaServed": [
+  {
+   "@type": "Place",
+   "name": "Palermo, CABA"
+  },
+  {
+   "@type": "Place",
+   "name": "Recoleta, CABA"
+  },
+  {
+   "@type": "Place",
+   "name": "Belgrano, CABA"
+  },
+  {
+   "@type": "Place",
+   "name": "San Justo, La Matanza"
+  },
+  {
+   "@type": "Place",
+   "name": "Zona Oeste, Gran Buenos Aires"
+  }
+ ],
+ "worksFor": {
+  "@type": "Organization",
+  "name": "RE/MAX Premium 1",
+  "url": "https://www.remax.com.ar/premium"
+ },
+ "jobTitle": "Agente inmobiliario y Team Leader",
+ "award": [
+  "RE/MAX Hall of Fame",
+  "RE/MAX Lifetime Achievement",
+  "RE/MAX Platinum 2025",
+  "RE/MAX Platinum 2024",
+  "RE/MAX Platinum 2023"
+ ],
+ "makesOffer": {
+  "@type": "Offer",
+  "itemOffered": {
+   "@type": "Service",
+   "name": "Tasación profesional de propiedades",
+   "description": "Análisis comparativo de mercado con precios de cierre reales del barrio, entregado en 24 a 48 horas.",
+   "areaServed": "Palermo, CABA"
+  },
+  "price": "0",
+  "priceCurrency": "ARS"
+ },
+ "openingHoursSpecification": {
+  "@type": "OpeningHoursSpecification",
+  "dayOfWeek": [
+   "Monday",
+   "Tuesday",
+   "Wednesday",
+   "Thursday",
+   "Friday",
+   "Saturday",
+   "Sunday"
+  ],
+  "opens": "00:00",
+  "closes": "23:59"
+ },
+ "aggregateRating": {
+  "@type": "AggregateRating",
+  "ratingValue": "4.9",
+  "reviewCount": "257",
+  "bestRating": "5"
+ },
+ "sameAs": [
+  "https://instagram.com/fcastro.remax",
+  "https://www.youtube.com/@fcastro.remax1",
+  "https://www.linkedin.com/in/fcastroremax/",
+  "https://fcastro.remax.com.ar/",
+  "https://www.remax.com.ar/agent/fernando-castro",
+  "https://www.google.com/maps?cid=1244886486968261158",
+  "https://www.google.com/maps?cid=6989701403040711240"
+ ]
 }
 </script>
 
