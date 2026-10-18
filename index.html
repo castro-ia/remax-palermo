@@ -278,6 +278,29 @@ select option{background:#0F1F42;color:#fff}
   #prog{display:none}
 }
 
+/* ---------- clientes ---------- */
+.clientes{background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.cli-reel{
+  display:grid;grid-auto-flow:column;grid-auto-columns:min(440px,92vw);gap:14px;
+  overflow-x:auto;padding:4px var(--pad) 10px;margin-inline:calc(var(--pad) * -1);
+  scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch;
+}
+.cli-reel::-webkit-scrollbar{display:none}
+.cli{
+  margin:0;scroll-snap-align:start;position:relative;border-radius:var(--r);overflow:hidden;
+  align-self:start;
+  box-shadow:var(--sh-sm);border:1px solid var(--line);background:var(--navy);
+  transition:transform .25s cubic-bezier(.2,.7,.3,1),box-shadow .25s;
+}
+.cli:hover{transform:translateY(-4px);box-shadow:var(--sh)}
+.cli img{width:100%;height:auto;aspect-ratio:2.3/1;object-fit:cover;display:block}
+.cli figcaption{
+  position:absolute;left:0;right:0;bottom:0;padding:22px 16px 12px;
+  background:linear-gradient(to top,rgba(10,23,51,.92),rgba(10,23,51,.55) 55%,transparent);
+  color:#fff;font-size:12px;font-weight:700;letter-spacing:.17em;text-transform:uppercase;
+}
+@media(min-width:900px){.cli-reel{grid-auto-columns:calc((100% - 16px) / 2)}}
+
 /* ---------- preguntas frecuentes ---------- */
 .faq-list{display:grid;gap:10px;max-width:760px}
 .faq-item{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--sh-sm);overflow:hidden}
@@ -780,6 +803,39 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
         <svg class="arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
       </a>
     </div>
+  </div>
+</section>
+
+<!-- ===== CLIENTES ===== -->
+<section class="clientes" id="clientes">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="kicker">Gente, no propiedades</span>
+      <h2>Detrás de cada venta hay una familia.</h2>
+      <p>Momentos reales de entregas, firmas y mudanzas. Esto es lo que queda cuando la operación sale bien.</p>
+    </div>
+    <div class="cli-reel">
+      <figure class="cli rv">
+        <img src="img/cliente-confianza.webp" width="900" height="390" alt="Fernando Castro con un cliente" loading="lazy">
+        <figcaption>Confianza</figcaption>
+      </figure>
+      <figure class="cli rv">
+        <img src="img/cliente-historias.webp" width="900" height="390" alt="Fernando Castro con clientes tras cerrar una operación" loading="lazy">
+        <figcaption>Historias reales</figcaption>
+      </figure>
+      <figure class="cli rv">
+        <img src="img/cliente-acompanamiento.webp" width="900" height="390" alt="Fernando Castro acompañando a una pareja de clientes" loading="lazy">
+        <figcaption>Acompañamiento</figcaption>
+      </figure>
+      <figure class="cli rv">
+        <img src="img/cliente-resultados.webp" width="900" height="390" alt="Fernando Castro con clientas tras la firma" loading="lazy">
+        <figcaption>Resultados</figcaption>
+      </figure>
+    </div>
+    <p class="reel-hint" style="color:var(--muted);margin-top:4px">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      Deslizá para ver más · <a href="https://instagram.com/fcastro.remax" target="_blank" rel="noopener" style="text-decoration:underline">seguime en Instagram</a>
+    </p>
   </div>
 </section>
 
