@@ -318,6 +318,61 @@ select option{background:#0F1F42;color:#fff}
 .faq-item .a{padding:0 20px 18px;color:var(--muted);font-size:15px;line-height:1.65}
 .faq-item .a strong{color:var(--ink);font-weight:600}
 
+/* ---------- cartel luminoso de mercado ---------- */
+.ticker{
+  position:relative;background:#06070C;border-top:1px solid rgba(255,255,255,.10);
+  border-bottom:1px solid rgba(255,255,255,.10);overflow:hidden;
+  padding:0;--vel:46s;
+}
+/* trama de puntos, como un cartel de LED de verdad */
+.ticker::before{
+  content:"";position:absolute;inset:0;pointer-events:none;z-index:2;opacity:.5;
+  background-image:radial-gradient(circle,rgba(0,0,0,.55) 46%,transparent 47%);
+  background-size:3px 3px;
+}
+/* degradados en los bordes: el texto entra y sale, no se corta de golpe */
+.ticker::after{
+  content:"";position:absolute;inset:0;pointer-events:none;z-index:3;
+  background:linear-gradient(90deg,#06070C 0%,transparent 7%,transparent 93%,#06070C 100%);
+}
+.tk-track{display:flex;width:max-content;animation:tkRun var(--vel) linear infinite}
+.ticker:hover .tk-track{animation-play-state:paused}
+@keyframes tkRun{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
+
+.tk-set{display:flex;align-items:center}
+.tk-item{
+  display:flex;align-items:baseline;gap:9px;padding:15px 0;margin-right:42px;white-space:nowrap;
+  font-variant-numeric:tabular-nums;
+}
+.tk-item .lb{
+  font-size:11px;font-weight:700;letter-spacing:.17em;text-transform:uppercase;
+  color:rgba(255,255,255,.42);
+}
+.tk-item .vl{
+  font-size:17px;font-weight:800;letter-spacing:-.01em;color:#FFC24B;
+  text-shadow:0 0 14px rgba(255,194,75,.55),0 0 34px rgba(255,160,20,.22);
+}
+.tk-item .dl{font-size:12.5px;font-weight:700}
+.tk-item .dl.up{color:#3ADB7C;text-shadow:0 0 12px rgba(58,219,124,.5)}
+.tk-item .dl.down{color:#FF5C76;text-shadow:0 0 12px rgba(255,92,118,.5)}
+.tk-item .pr{font-size:11px;color:rgba(255,255,255,.3);letter-spacing:.04em}
+.tk-sep{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.22);margin-right:42px;flex:none}
+
+/* el punto que late: senal de que el dato es vivo */
+.tk-live{
+  position:absolute;left:0;top:0;bottom:0;z-index:4;display:flex;align-items:center;gap:7px;
+  padding:0 16px 0 var(--pad);background:linear-gradient(90deg,#06070C 72%,transparent);
+  font-size:10px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.5);
+}
+.tk-live i{width:6px;height:6px;border-radius:50%;background:#3ADB7C;box-shadow:0 0 0 3px rgba(58,219,124,.22);animation:pulse 2.2s ease-in-out infinite}
+@media(max-width:700px){.tk-live span{display:none}.tk-live{padding-right:10px}}
+
+@media (prefers-reduced-motion:reduce){
+  .tk-track{animation:none}
+  .ticker{overflow-x:auto;scrollbar-width:none}
+  .ticker::-webkit-scrollbar{display:none}
+}
+
 /* ---------- sobre mi ---------- */
 .about{background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 .about-grid{display:grid;gap:30px;align-items:start}
@@ -705,6 +760,12 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
       </div>
     </div>
   </div>
+</section>
+
+<!-- ===== CARTEL DE MERCADO ===== -->
+<section class="ticker" id="mercado" aria-label="Datos del mercado inmobiliario">
+  <span class="tk-live"><i></i><span>En vivo</span></span>
+  <div class="tk-track" id="tkTrack"><div class="tk-set"></div><div class="tk-set"></div></div>
 </section>
 
 <!-- ===== SOBRE MI ===== -->
@@ -1328,6 +1389,79 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
   }
   addEventListener("scroll",function(){ if(!ticking){ requestAnimationFrame(alScrollear); ticking=true; } },{passive:true});
   alScrollear();
+
+/* ---- cartel de mercado: dolar en vivo + datos de informes ---- */
+  (function(){
+    var track=document.getElementById("tkTrack");
+    if(!track) return;
+
+    /* valores de respaldo: si falla todo, el cartel igual muestra algo cierto */
+    var RESPALDO=[
+      {lb:"Dólar BNA venta", vl:"$ 1.535", pr:"16 oct 2026"},
+      {lb:"Escrituras CABA", vl:"6.055", dl:-4.9, pr:"ago 2026"},
+      {lb:"m² CABA · cierre", vl:"US$ 2.150", dl:1.81, pr:"ago 2026"}
+    ];
+
+    function nodo(it){
+      var d=document.createElement("div"); d.className="tk-item";
+      var h='<span class="lb">'+it.lb+'</span><span class="vl">'+it.vl+'</span>';
+      if(it.dl!==undefined && it.dl!==null){
+        var up=it.dl>=0;
+        h+='<span class="dl '+(up?"up":"down")+'">'+(up?"▲":"▼")+" "+Math.abs(it.dl).toFixed(2).replace(".",",")+'%</span>';
+      }
+      if(it.pr) h+='<span class="pr">'+it.pr+'</span>';
+      d.innerHTML=h;
+      return d;
+    }
+
+    function pintar(items){
+      var sets=track.querySelectorAll(".tk-set");
+      sets.forEach(function(set){
+        set.innerHTML="";
+        items.forEach(function(it){
+          set.appendChild(nodo(it));
+          var sep=document.createElement("span"); sep.className="tk-sep"; set.appendChild(sep);
+        });
+      });
+      /* la velocidad se ajusta al largo real, asi siempre va parejo */
+      var ancho=track.scrollWidth/2;
+      track.style.setProperty("--vel", Math.max(28, Math.round(ancho/55))+"s");
+    }
+
+    function fecha(iso){
+      try{
+        var d=new Date(iso), m=["ene","feb","mar","abr","may","jun","jul","ago","sep","oct","nov","dic"];
+        return d.getDate()+" "+m[d.getMonth()]+" "+d.getFullYear();
+      }catch(e){ return ""; }
+    }
+
+    pintar(RESPALDO);
+
+    Promise.allSettled([
+      fetch("https://dolarapi.com/v1/dolares/oficial").then(function(r){ return r.json(); }),
+      fetch("datos-mercado.json",{cache:"no-cache"}).then(function(r){ return r.json(); })
+    ]).then(function(res){
+      var items=[];
+
+      if(res[0].status==="fulfilled" && res[0].value && res[0].value.venta){
+        var d=res[0].value;
+        items.push({lb:"Dólar BNA venta", vl:"$ "+Number(d.venta).toLocaleString("es-AR"), pr:fecha(d.fechaActualizacion)});
+        items.push({lb:"Dólar BNA compra", vl:"$ "+Number(d.compra).toLocaleString("es-AR"), pr:fecha(d.fechaActualizacion)});
+      } else {
+        items.push(RESPALDO[0]);
+      }
+
+      if(res[1].status==="fulfilled" && res[1].value && res[1].value.items){
+        res[1].value.items.forEach(function(x){
+          items.push({lb:x.label, vl:x.valor, dl:x.delta, pr:x.periodo});
+        });
+      } else {
+        items.push(RESPALDO[1]); items.push(RESPALDO[2]);
+      }
+
+      if(items.length) pintar(items);
+    });
+  })();
 
   /* sticky dock: show after the hero */
   var dock=document.getElementById("dock"), hero=document.getElementById("top");

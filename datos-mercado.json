@@ -1,0 +1,36 @@
+{
+  "_nota": "Datos que no tienen API y se actualizan a mano. El dolar se trae solo. Cambiar 'valor', 'periodo' y 'delta' cuando salga cada informe nuevo.",
+  "actualizado": "2026-10-18",
+  "items": [
+    {
+      "label": "Escrituras CABA",
+      "valor": "6.055",
+      "unidad": "operaciones",
+      "periodo": "ago 2026",
+      "delta": -4.9,
+      "deltaNota": "interanual",
+      "fuente": "Colegio de Escribanos CABA",
+      "url": "https://www.colegio-escribanos.org.ar/category/estadisticas-de-escrituras/"
+    },
+    {
+      "label": "m² CABA · precio de cierre",
+      "valor": "US$ 2.150",
+      "unidad": "por m²",
+      "periodo": "ago 2026",
+      "delta": 1.81,
+      "deltaNota": "mensual",
+      "fuente": "Índice M2 Real · RE/MAX + UCEMA",
+      "url": "https://ucema.edu.ar/indices-y-bases-de-datos/m2-082026"
+    },
+    {
+      "label": "Monto promedio por operación",
+      "valor": "US$ 119.270",
+      "unidad": "",
+      "periodo": "ago 2026",
+      "delta": null,
+      "deltaNota": "",
+      "fuente": "Colegio de Escribanos CABA",
+      "url": "https://www.colegio-escribanos.org.ar/category/estadisticas-de-escrituras/"
+    }
+  ]
+}
