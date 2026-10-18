@@ -34,7 +34,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700;800&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
 
 <style>
 :root{
@@ -278,28 +278,67 @@ select option{background:#0F1F42;color:#fff}
   #prog{display:none}
 }
 
-/* ---------- clientes ---------- */
-.clientes{background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+/* ---------- clientes: polaroids ---------- */
+.clientes{
+  position:relative;border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  background:#F3EDE3;
+}
+/* papel: una trama muy tenue para que no sea un plano liso */
+.clientes::before{
+  content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.055'/%3E%3C/svg%3E");
+}
+.clientes .wrap{position:relative;z-index:1}
+
 .cli-reel{
-  display:grid;grid-auto-flow:column;grid-auto-columns:min(440px,92vw);gap:14px;
-  overflow-x:auto;padding:4px var(--pad) 10px;margin-inline:calc(var(--pad) * -1);
+  display:grid;grid-auto-flow:column;grid-auto-columns:min(410px,86vw);gap:26px;
+  overflow-x:auto;padding:24px var(--pad) 28px;margin-inline:calc(var(--pad) * -1);
   scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch;
 }
 .cli-reel::-webkit-scrollbar{display:none}
+
+/* la polaroid: marco blanco, mas grueso abajo, apenas torcida */
 .cli{
-  margin:0;scroll-snap-align:start;position:relative;border-radius:var(--r);overflow:hidden;
-  align-self:start;
-  box-shadow:var(--sh-sm);border:1px solid var(--line);background:var(--navy);
-  transition:transform .25s cubic-bezier(.2,.7,.3,1),box-shadow .25s;
+  margin:0;scroll-snap-align:center;position:relative;align-self:start;
+  background:#FFFDF8;padding:13px 13px 8px;border-radius:3px;
+  box-shadow:0 1px 2px rgba(60,42,22,.14),0 10px 26px rgba(60,42,22,.17);
+  transition:rotate .3s cubic-bezier(.2,.7,.3,1),translate .3s cubic-bezier(.2,.7,.3,1),scale .3s,box-shadow .3s;
 }
-.cli:hover{transform:translateY(-4px);box-shadow:var(--sh)}
-.cli img{width:100%;height:auto;aspect-ratio:2.3/1;object-fit:cover;display:block}
+/* uso la propiedad 'rotate' y no 'transform': la animacion de aparicion
+   maneja transform y pisaria la inclinacion */
+.cli:nth-child(4n+1){rotate:-1.8deg}
+.cli:nth-child(4n+2){rotate:1.4deg}
+.cli:nth-child(4n+3){rotate:-.9deg}
+.cli:nth-child(4n+4){rotate:2deg}
+/* al pasar el cursor se endereza, como si la levantaras para mirarla */
+.cli:hover{rotate:0deg;translate:0 -6px;scale:1.015;box-shadow:0 4px 8px rgba(60,42,22,.16),0 22px 46px rgba(60,42,22,.24);z-index:2}
+
+/* cinta de papel en un par de ellas */
+.cli:nth-child(odd)::before{
+  content:"";position:absolute;top:-11px;left:50%;width:84px;height:23px;
+  transform:translateX(-50%) rotate(-2.5deg);
+  background:linear-gradient(180deg,rgba(226,206,160,.82),rgba(206,184,135,.72));
+  box-shadow:0 1px 2px rgba(60,42,22,.14);
+}
+.cli:nth-child(even)::before{
+  content:"";position:absolute;top:-9px;right:16px;width:66px;height:21px;
+  transform:rotate(7deg);
+  background:linear-gradient(180deg,rgba(226,206,160,.78),rgba(206,184,135,.68));
+  box-shadow:0 1px 2px rgba(60,42,22,.12);
+}
+
+.cli img{
+  width:100%;height:auto;aspect-ratio:2.3/1;object-fit:cover;display:block;
+  border-radius:1px;filter:saturate(.94) contrast(1.03);
+}
+/* la leyenda, escrita a mano sobre el margen blanco */
 .cli figcaption{
-  position:absolute;left:0;right:0;bottom:0;padding:22px 16px 12px;
-  background:linear-gradient(to top,rgba(10,23,51,.92),rgba(10,23,51,.55) 55%,transparent);
-  color:#fff;font-size:12px;font-weight:700;letter-spacing:.17em;text-transform:uppercase;
+  position:static;padding:11px 6px 9px;background:none;text-align:center;
+  font-family:Caveat,cursive;font-size:1.32rem;font-weight:700;letter-spacing:.01em;
+  text-transform:none;color:#3A2E22;line-height:1.1;
 }
-@media(min-width:900px){.cli-reel{grid-auto-columns:calc((100% - 16px) / 2)}}
+@media(min-width:900px){.cli-reel{grid-auto-columns:calc((100% - 26px) / 2)}}
+@media (prefers-reduced-motion:reduce){.cli,.cli:hover{rotate:0deg;translate:none;scale:1}}
 
 /* ---------- preguntas frecuentes ---------- */
 .faq-list{display:grid;gap:10px;max-width:760px}
@@ -1107,7 +1146,7 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
 <section class="clientes" id="clientes">
   <div class="wrap">
     <div class="sec-head rv">
-      <span class="kicker">Gente, no propiedades</span>
+      <span class="kicker">El álbum</span>
       <h2>Detrás de cada venta hay una familia.</h2>
       <p>Momentos reales de entregas, firmas y mudanzas. Esto es lo que queda cuando la operación sale bien.</p>
     </div>
