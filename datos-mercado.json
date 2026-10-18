@@ -30,12 +30,21 @@
       "url": "https://www.colegio-escribanos.org.ar/2026/09/22/cantidad-de-escrituras-de-compraventa-realizadas-en-agosto-2026/"
     },
     {
-      "label": "m² CABA · Índice M2 Real",
-      "valor": "+1,81%",
+      "label": "m² CABA · precio de cierre",
+      "valor": "US$ 2.150",
+      "periodo": "ago 2026",
+      "delta": 1.81,
+      "deltaNota": "mensual",
+      "fuente": "Índice M2 Real · RE/MAX + UCEMA",
+      "url": "https://ucema.edu.ar/indices-y-bases-de-datos/m2-082026"
+    },
+    {
+      "label": "Se cierra por debajo del publicado",
+      "valor": "-4,79%",
       "periodo": "ago 2026",
       "delta": null,
-      "deltaNota": "mensual",
-      "fuente": "RE/MAX + UCEMA",
+      "deltaNota": "vs. precio publicado",
+      "fuente": "Índice M2 Real · RE/MAX + UCEMA",
       "url": "https://ucema.edu.ar/indices-y-bases-de-datos/m2-082026"
     }
   ]

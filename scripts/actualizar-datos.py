@@ -8,14 +8,16 @@ Todo lo que publica el cartel se trae solo:
   - Variacion del m2 CABA: del indice M2 Real (REMAX + UCEMA), que publica el
     porcentaje en el HTML de su pagina.
 
-No se publica el valor absoluto en US$/m2: vive en un PDF de 30 paginas con
-decenas de series parecidas (por barrio, por tipologia) sin etiquetas que
-permitan identificar la general con certeza. Antes que mostrar un numero
-dudoso, ese dato no va.
+El valor en US$/m2 y la brecha entre precio publicado y de cierre salen del PDF
+del informe, de la pagina titulada "PRECIOS GENERALIZADOS DE DEPARTAMENTOS CABA":
+es la unica tabla con los meses rotulados, asi que se puede ubicar sin ambiguedad.
 
 Si una fuente falla, se conserva el valor anterior. Nunca deja el archivo vacio.
 """
-import json, re, sys, urllib.request, datetime, pathlib
+import json, re, sys, urllib.request, datetime, pathlib, logging
+
+# pypdf avisa por cada fuente Gotham del informe; es ruido, no afecta la lectura
+logging.getLogger("pypdf").setLevel(logging.ERROR)
 
 RAIZ = pathlib.Path(__file__).resolve().parent.parent
 ARCHIVO = RAIZ / "datos-mercado.json"
@@ -87,29 +89,82 @@ def escrituras():
     return out
 
 
-def m2_variacion():
-    """Indice M2 Real (REMAX + UCEMA): busca el informe mas reciente publicado."""
-    hoy = datetime.date.today()
-    for atras in range(0, 7):
-        mes = hoy.month - atras
-        anio = hoy.year
-        while mes <= 0:
-            mes += 12
-            anio -= 1
-        url = "https://ucema.edu.ar/indices-y-bases-de-datos/m2-%02d%d" % (mes, anio)
+ULTIMO_INFORME = "https://ucema.edu.ar/novedad/ultimo-informe-indice-metro-cuadrado-real"
+
+
+def m2():
+    """Indice M2 Real (REMAX + UCEMA).
+
+    Arranca de la pagina de "ultimo informe", que es fija y siempre apunta al
+    PDF mas nuevo: asi no hay que adivinar el mes. Del PDF salen el valor en
+    US$/m2 y la brecha contra el precio publicado, de la pagina titulada
+    "PRECIOS GENERALIZADOS DE DEPARTAMENTOS CABA" (la unica con los meses
+    rotulados; las demas son cortes por barrio o tipologia). La variacion
+    mensual se toma de la pagina del mes, que la publica en el HTML.
+    """
+    portada = bajar(ULTIMO_INFORME)
+    m = re.search(r'href="([^"]*Informe_M2[^"]*\.pdf)"', portada, re.I)
+    if not m:
+        raise RuntimeError("no encontre el PDF en la pagina de ultimo informe")
+    pdf_url = m.group(1)
+    if pdf_url.startswith("/"):
+        pdf_url = "https://ucema.edu.ar" + pdf_url
+
+    # del nombre del archivo sale el mes del informe
+    fm = re.search(r"Informe_M2_Real_([A-Za-zÁÉÍÓÚáéíóú]+)_(\d{4})", pdf_url)
+    mes_nom = fm.group(1).lower() if fm else ""
+    anio = int(fm.group(2)) if fm else datetime.date.today().year
+    mes_num = MESES.index(mes_nom) + 1 if mes_nom in MESES else 0
+    periodo = "%s %d" % (ABREV.get(mes_nom, mes_nom[:3]), anio)
+
+    from pypdf import PdfReader
+    import io as _io
+    crudo = urllib.request.urlopen(urllib.request.Request(pdf_url, headers=UA), timeout=60).read()
+    lector = PdfReader(_io.BytesIO(crudo))
+
+    valor = brecha = None
+    for pag in lector.pages:
         try:
-            html = bajar(url, timeout=30)
+            txt = re.sub(r"\s+", " ", pag.extract_text() or "")
         except Exception:
             continue
-        pcts = re.findall(r"(-?\d{1,2},\d{1,2})\s*%", sin_tags(html))
-        if not pcts:
+        if "GENERALIZADOS DE DEPARTAMENTOS CABA" not in txt.upper():
             continue
-        return {
-            "delta": float(pcts[0].replace(",", ".")),
-            "periodo": "%s %d" % (ABREV[MESES[mes - 1]], anio),
-            "url": url,
-        }
-    raise RuntimeError("no encontre informe M2 reciente")
+        mm = re.search(r"Mes\s+((?:[A-ZÁÉÍÓÚÑ]{4,10}\s*){3,13}?)Valor\s*M2\(USD\)\s*((?:\d{3,4}\s*){3,13})", txt)
+        if not mm:
+            continue
+        meses, valores = mm.group(1).split(), mm.group(2).split()
+        n = min(len(meses), len(valores))
+        if n < 3:
+            continue
+        v = int(valores[n - 1])
+        if not (900 < v < 5000):          # cordura: un m2 de CABA esta en ese rango
+            raise RuntimeError("valor fuera de rango: %s" % v)
+        valor = "US$ " + "{:,}".format(v).replace(",", ".")
+        mb = re.search(r"Publicado\s*\(%\)\s*((?:-?\d{1,2},\d{1,2}\s*){3,13})", txt)
+        if mb:
+            br = mb.group(1).split()
+            if len(br) >= n:
+                brecha = float(br[n - 1].replace(",", "."))
+        break
+
+    if valor is None:
+        raise RuntimeError("no encontre la tabla de precios generalizados en el PDF")
+
+    # variacion mensual: la publica la pagina del mes
+    delta = None
+    pagina = ULTIMO_INFORME
+    if mes_num:
+        pagina = "https://ucema.edu.ar/indices-y-bases-de-datos/m2-%02d%d" % (mes_num, anio)
+        try:
+            pcts = re.findall(r"(-?\d{1,2},\d{1,2})\s*%", sin_tags(bajar(pagina, timeout=30)))
+            if pcts:
+                delta = float(pcts[0].replace(",", "."))
+        except Exception:
+            pagina = ULTIMO_INFORME
+
+    return {"valor": valor, "brecha": brecha, "delta": delta,
+            "periodo": periodo, "url": pagina, "pdf": pdf_url}
 
 
 def main():
@@ -143,12 +198,15 @@ def main():
         print("FALLO escrituras, conservo lo anterior: %s" % ex, file=sys.stderr)
 
     try:
-        m = m2_variacion()
-        signo = "+" if m["delta"] >= 0 else "−"
-        set_("m² CABA · Índice M2 Real",
-             "%s%s%%" % (signo, ("%.2f" % abs(m["delta"])).replace(".", ",")),
-             None, m["periodo"], m["url"])
-        print("OK m2: %s%% (%s)" % (m["delta"], m["periodo"]))
+        m = m2()
+        set_("m² CABA · precio de cierre", m["valor"], m["delta"], m["periodo"], m["url"])
+        if m["brecha"] is not None:
+            signo = "" if m["brecha"] < 0 else "+"
+            set_("Se cierra por debajo del publicado",
+                 "%s%s%%" % (signo, ("%.2f" % m["brecha"]).replace(".", ",")),
+                 None, m["periodo"], m["url"])
+        print("OK m2: %s (%s) | variacion %s%% | brecha %s%%" %
+              (m["valor"], m["periodo"], m["delta"], m["brecha"]))
     except Exception as ex:
         print("FALLO m2, conservo lo anterior: %s" % ex, file=sys.stderr)
 
