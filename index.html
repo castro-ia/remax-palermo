@@ -842,15 +842,24 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
               <input id="m2" name="m2" type="text" inputmode="numeric" placeholder="Ej: 68">
             </div>
           </div>
-          <div>
-            <label for="nombre">Tu nombre</label>
-            <input id="nombre" name="nombre" type="text" placeholder="Cómo te llamo" autocomplete="given-name">
+          <div class="f2">
+            <div>
+              <label for="nombre">Tu nombre</label>
+              <input id="nombre" name="nombre" type="text" placeholder="Cómo te llamo" autocomplete="given-name">
+            </div>
+            <div>
+              <label for="contacto">Teléfono o email</label>
+              <input id="contacto" name="contacto" type="text" placeholder="Por si se corta WhatsApp" autocomplete="tel">
+            </div>
           </div>
           <button class="btn btn-wa" type="submit">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.2-1.8-.9-2.1-1-.3-.1-.5-.2-.7.1-.2.3-.8 1-1 1.2-.2.2-.4.3-.7.1-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.2-.2.4-.5.6-.7.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5 0-.2-.7-1.7-.9-2.3-.2-.5-.4-.5-.6-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4 0 1.4 1 2.8 1.2 3 .1.2 1.9 3 4.7 4.1 2.3.9 2.8.8 3.3.7.5-.1 1.6-.7 1.9-1.3.2-.7.2-1.2.2-1.3-.1-.2-.2-.2-.3-.3zM12 2a10 10 0 0 0-8.5 15.3L2 22l4.8-1.4A10 10 0 1 0 12 2z"/></svg>
             Enviar por WhatsApp
           </button>
-          <p class="form-note">No se guarda nada en esta web. Tus datos viajan solo en el mensaje de WhatsApp que vos enviás.</p>
+          <button class="btn btn-ghost" type="button" id="btnLlamame" style="font-size:15px;padding:14px 20px">
+            Prefiero que me contactes vos
+          </button>
+          <p class="form-note" id="formNota">Guardo tu consulta para poder responderte. No la comparto con nadie.</p>
         </form>
       </div>
     </div>
@@ -1704,6 +1713,48 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
     gtag("event","generate_lead",{method:"whatsapp",origen:(a.innerText||"link").trim().slice(0,40)});
   });
 
+  /* ---- el lead se guarda aunque despues no manden el WhatsApp ----
+     Va a un Formulario de Google del propio Fernando: los datos quedan en una
+     planilla suya, no en un servicio de terceros. Se envia a ciegas (no-cors):
+     no podemos leer la respuesta, pero el envio llega igual. */
+  var FORM_URL="https://docs.google.com/forms/d/e/1FAIpQLSdHKp-3i-PZqqLcy7Q5CnJan9J2IVAJo3F2wgYOt4pywwS0Zw/formResponse";
+  var CAMPOS={nombre:"entry.1855154588", contacto:"entry.1090753585",
+              propiedad:"entry.1861135030", zona:"entry.243091861", origen:"entry.50569390"};
+
+  function guardarLead(origen){
+    try{
+      var v=function(id){ var e=document.getElementById(id); return e?e.value.trim():""; };
+      var prop=v("tipo")+" de "+v("amb")+(v("m2")?" · "+v("m2")+" m²":"");
+      var datos=new FormData();
+      datos.append(CAMPOS.nombre, v("nombre"));
+      datos.append(CAMPOS.contacto, v("contacto"));
+      datos.append(CAMPOS.propiedad, prop);
+      datos.append(CAMPOS.zona, v("barrio"));
+      datos.append(CAMPOS.origen, origen+" · "+location.hostname);
+      fetch(FORM_URL,{method:"POST",mode:"no-cors",body:datos});
+    }catch(e){ /* si falla, no bloqueamos al visitante */ }
+  }
+
+  /* el que no quiere escribir ahora: deja sus datos y Fernando lo llama */
+  var btnLl=document.getElementById("btnLlamame");
+  if(btnLl){
+    btnLl.addEventListener("click",function(){
+      var cont=document.getElementById("contacto");
+      if(!cont || !cont.value.trim()){
+        cont && cont.focus();
+        var n=document.getElementById("formNota");
+        if(n){ n.textContent="Dejame un teléfono o email y te escribo yo."; n.style.color="#FFC53D"; }
+        return;
+      }
+      guardarLead("pidio que lo contacten");
+      if(typeof gtag==="function") gtag("event","generate_lead",{method:"formulario",origen:"pidio contacto"});
+      var n2=document.getElementById("formNota");
+      if(n2){ n2.textContent="¡Listo! Te contacto dentro de las próximas horas."; n2.style.color="#3ADB7C"; }
+      btnLl.textContent="Consulta enviada";
+      btnLl.disabled=true; btnLl.style.opacity=".65";
+    });
+  }
+
   /* valuation form -> prefilled whatsapp message */
   var form=document.getElementById("valForm");
   if(form){
@@ -1718,6 +1769,7 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
       if(m2) parts.push("Superficie: "+m2+" m²");
       parts.push("","¿Cuánto vale hoy?");
       if(typeof gtag==="function") gtag("event","generate_lead",{method:"whatsapp",origen:"formulario tasacion"});
+      guardarLead("abrio WhatsApp");
       window.open("https://wa.me/5491150379426?text="+encodeURIComponent(parts.join("\n")),"_blank","noopener");
     });
   }
