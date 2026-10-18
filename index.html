@@ -34,7 +34,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
 :root{
@@ -61,7 +61,8 @@ body{
 img{max-width:100%;display:block}
 a{color:inherit;text-decoration:none}
 button{font:inherit}
-h1,h2,h3{font-family:Fraunces,Georgia,serif;font-weight:600;line-height:1.08;letter-spacing:-.025em;margin:0}
+h1,h2,h3{font-family:Montserrat,Inter,system-ui,sans-serif;font-weight:800;line-height:1.07;letter-spacing:-.032em;margin:0}
+h1{font-weight:900;letter-spacing:-.04em}
 p{margin:0}
 .wrap{width:100%;max-width:var(--max);margin-inline:auto;padding-inline:var(--pad)}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
@@ -117,7 +118,7 @@ p{margin:0}
 .eyebrow .dot{width:6px;height:6px;border-radius:50%;background:#3ADB7C;box-shadow:0 0 0 3px rgba(58,219,124,.25);animation:pulse 2.4s ease-in-out infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.45}}
 
-h1{font-size:clamp(2.35rem,8.4vw,4.4rem);margin:18px 0 0;color:#fff}
+h1{font-size:clamp(2.02rem,7.9vw,4.15rem);margin:18px 0 0;color:#fff}
 h1 em{font-style:normal;display:block;background:linear-gradient(100deg,#fff 10%,#9FC0FF 55%,#FF7D96 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
 .lede{margin-top:16px;font-size:clamp(1.02rem,3.9vw,1.2rem);color:rgba(255,255,255,.80);max-width:46ch;line-height:1.56}
 .lede strong{color:#fff;font-weight:600}
@@ -162,7 +163,7 @@ a.chip:hover{background:rgba(255,255,255,.15);transform:translateY(-1px)}
   position:absolute;left:-10px;bottom:16px;background:var(--paper);color:var(--ink);
   border-radius:14px;padding:11px 14px;box-shadow:var(--sh);display:flex;align-items:center;gap:10px;
 }
-.badge-float .n{font-family:Fraunces,serif;font-size:21px;font-weight:700;line-height:1;color:var(--red)}
+.badge-float .n{font-family:Montserrat,Inter,sans-serif;font-size:21px;font-weight:700;line-height:1;color:var(--red)}
 .badge-float .t{font-size:10.5px;font-weight:600;line-height:1.25;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
 .hof{
   position:absolute;right:-8px;top:14px;background:linear-gradient(140deg,#F2D98B,#C9A227);
@@ -180,7 +181,7 @@ a.chip:hover{background:rgba(255,255,255,.15);transform:translateY(-1px)}
 .stat{padding:20px 14px;text-align:center;border-right:1px solid rgba(255,255,255,.10);border-bottom:1px solid rgba(255,255,255,.10)}
 .stat:nth-child(2n){border-right:0}
 .stat:nth-child(n+3){border-bottom:0}
-.stat b{display:block;font-family:Fraunces,serif;font-size:clamp(1.6rem,6vw,2.1rem);font-weight:700;color:#fff;line-height:1}
+.stat b{display:block;font-family:Montserrat,Inter,sans-serif;font-size:clamp(1.6rem,6vw,2.1rem);font-weight:800;letter-spacing:-.03em;color:#fff;line-height:1}
 .stat span{display:block;margin-top:6px;font-size:11px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:rgba(255,255,255,.60)}
 
 @media(min-width:860px){
@@ -196,8 +197,8 @@ a.chip:hover{background:rgba(255,255,255,.15);transform:translateY(-1px)}
 /* ---------- sections ---------- */
 section{padding:62px 0}
 .sec-head{max-width:620px;margin-bottom:34px}
-.kicker{display:inline-block;font-size:11.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--red);margin-bottom:12px}
-.sec-head h2{font-size:clamp(1.75rem,6.2vw,2.7rem)}
+.kicker{display:inline-block;font-family:Montserrat,Inter,sans-serif;font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--red);margin-bottom:12px}
+.sec-head h2{font-size:clamp(1.62rem,5.8vw,2.5rem)}
 .sec-head p{margin-top:14px;color:var(--muted);font-size:1.03rem;line-height:1.62}
 
 /* ---------- tasación form ---------- */
@@ -287,7 +288,7 @@ select option{background:#0F1F42;color:#fff}
   box-shadow:var(--sh-sm);border:3px solid var(--paper);outline:1px solid var(--line);
 }
 .about-photo .sig{font-size:12.5px;font-weight:500;color:var(--muted);line-height:1.4}
-.about-photo .sig b{display:block;font-family:Fraunces,serif;font-size:17px;font-weight:700;color:var(--ink);letter-spacing:-.015em}
+.about-photo .sig b{display:block;font-family:Montserrat,Inter,sans-serif;font-size:17px;font-weight:700;color:var(--ink);letter-spacing:-.015em}
 .about p + p{margin-top:14px}
 .about p{color:var(--muted);font-size:1.02rem;line-height:1.68}
 .about strong{color:var(--ink);font-weight:600}
@@ -295,10 +296,10 @@ select option{background:#0F1F42;color:#fff}
   margin:22px 0;padding:18px 20px;border-left:3px solid var(--red);
   background:#FBF7F7;border-radius:0 14px 14px 0;
 }
-.pull q{font-family:Fraunces,serif;font-size:1.14rem;line-height:1.45;letter-spacing:-.015em;color:var(--ink)}
+.pull q{font-family:Montserrat,Inter,sans-serif;font-weight:600;font-size:1.08rem;line-height:1.5;letter-spacing:-.015em;color:var(--ink)}
 .tl{margin-top:26px;display:grid;gap:0;border-top:1px solid var(--line)}
 .tl-item{display:grid;grid-template-columns:76px 1fr;gap:16px;padding:14px 0;border-bottom:1px solid var(--line);align-items:baseline}
-.tl-item b{font-family:Fraunces,serif;font-size:1rem;font-weight:700;color:var(--red);letter-spacing:.01em}
+.tl-item b{font-family:Montserrat,Inter,sans-serif;font-size:1rem;font-weight:700;color:var(--red);letter-spacing:.01em}
 .tl-item span{font-size:14.8px;color:var(--muted);line-height:1.5}
 .tl-item span i{font-style:normal;color:var(--ink);font-weight:600}
 @media(min-width:860px){
@@ -322,7 +323,7 @@ select option{background:#0F1F42;color:#fff}
 .step:hover{transform:translateY(-3px);box-shadow:var(--sh)}
 .step::before{
   counter-increment:s;content:counter(s,decimal-leading-zero);
-  font-family:Fraunces,serif;font-size:13px;font-weight:700;color:var(--red);
+  font-family:Montserrat,Inter,sans-serif;font-size:13px;font-weight:700;color:var(--red);
   display:block;margin-bottom:12px;letter-spacing:.1em;
 }
 .step h3{font-size:1.18rem;margin-bottom:9px}
@@ -374,7 +375,7 @@ select option{background:#0F1F42;color:#fff}
   box-shadow:var(--sh-sm);display:flex;flex-direction:column;gap:14px;
 }
 .rev .stars{color:#FFC53D;font-size:15px;letter-spacing:1px}
-.rev q{font-family:Fraunces,serif;font-size:1.08rem;line-height:1.5;quotes:"“" "”";letter-spacing:-.015em}
+.rev q{font-family:Montserrat,Inter,sans-serif;font-weight:500;font-size:1.03rem;line-height:1.55;quotes:"“" "”";letter-spacing:-.015em}
 .rev .via{margin-top:auto;font-size:12.5px;color:var(--muted);display:flex;align-items:center;gap:7px;font-weight:500}
 .gbadges{display:grid;gap:13px;margin-top:22px}
 .gbadge{
@@ -382,7 +383,7 @@ select option{background:#0F1F42;color:#fff}
   border-radius:var(--r);padding:17px 20px;box-shadow:var(--sh-sm);transition:transform .22s,box-shadow .22s;
 }
 .gbadge:hover{transform:translateY(-3px);box-shadow:var(--sh)}
-.gbadge .score{font-family:Fraunces,serif;font-size:2rem;font-weight:700;line-height:1;color:var(--navy)}
+.gbadge .score{font-family:Montserrat,Inter,sans-serif;font-size:2rem;font-weight:800;letter-spacing:-.03em;line-height:1;color:var(--navy)}
 .gbadge .meta b{display:block;font-size:15px;font-weight:700;letter-spacing:-.015em}
 .gbadge .meta span{font-size:13px;color:var(--muted)}
 .gbadge .arrow{margin-left:auto;color:var(--muted);flex:none}
@@ -936,8 +937,23 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
   } else {
     items.forEach(function(el){ el.classList.add("in"); });
   }
-  /* safety net: never leave content hidden, whatever happens above */
-  setTimeout(function(){ items.forEach(function(el){ el.classList.add("in"); }); },2500);
+  /* red de seguridad: nada puede quedar invisible.
+     Las animaciones CSS se pausan en pestanas en segundo plano, asi que si
+     dependieramos solo de ellas el texto podria no aparecer nunca. */
+  setTimeout(function(){
+    items.forEach(function(el){ el.classList.add("in"); });
+    document.querySelectorAll("h1 .w, .lede, .rating-row, .cta-row, .eyebrow").forEach(function(el){
+      el.style.opacity="1"; el.style.transform="none";
+    });
+  },2600);
+  /* y si la pestana estaba oculta, al volver a ella forzamos lo mismo */
+  document.addEventListener("visibilitychange",function(){
+    if(!document.hidden) setTimeout(function(){
+      document.querySelectorAll("h1 .w, .lede, .rating-row, .cta-row, .eyebrow").forEach(function(el){
+        if(getComputedStyle(el).opacity==="0"){ el.style.opacity="1"; el.style.transform="none"; }
+      });
+    },1800);
+  });
 
 /* ---- numeros que cuentan al aparecer ---- */
   var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion:reduce)").matches;
@@ -984,16 +1000,10 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
         });
         h1.replaceChild(frag,nodo);
       } else if(nodo.nodeType===1){
-        [].slice.call(nodo.childNodes).forEach(function(hijo){
-          if(hijo.nodeType!==3) return;
-          var frag=document.createDocumentFragment();
-          hijo.textContent.split(/(\s+)/).forEach(function(pal){
-            if(!pal.trim()){ frag.appendChild(document.createTextNode(pal)); return; }
-            var sp=document.createElement("span"); sp.className="w"; sp.textContent=pal;
-            sp.style.animationDelay=(i++*0.075+0.1)+"s"; frag.appendChild(sp);
-          });
-          nodo.replaceChild(frag,hijo);
-        });
+        /* la linea con degradado lo recorta sobre el texto: si la parto en
+           palabras, los hijos pierden el recorte y quedan invisibles. Va entera. */
+        nodo.classList.add("w");
+        nodo.style.animationDelay=(i++*0.075+0.18)+"s";
       }
     });
   }
