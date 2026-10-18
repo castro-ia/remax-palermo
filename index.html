@@ -1717,20 +1717,20 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
      Va a un Formulario de Google del propio Fernando: los datos quedan en una
      planilla suya, no en un servicio de terceros. Se envia a ciegas (no-cors):
      no podemos leer la respuesta, pero el envio llega igual. */
-  var FORM_URL="https://docs.google.com/forms/d/e/1FAIpQLSdHKp-3i-PZqqLcy7Q5CnJan9J2IVAJo3F2wgYOt4pywwS0Zw/formResponse";
-  var CAMPOS={nombre:"entry.1855154588", contacto:"entry.1090753585",
-              propiedad:"entry.1861135030", zona:"entry.243091861", origen:"entry.50569390"};
+  var FORM_URL="https://docs.google.com/forms/d/e/1FAIpQLScAPjPvjehKn1JTQk25CrQFYBzbhqGcQWh4WtW4bzaQ6KnQlg/formResponse";
+  var CAMPOS={nombre:"entry.1778791016", contacto:"entry.1825076174", detalle:"entry.1281496687"};
 
   function guardarLead(origen){
     try{
       var v=function(id){ var e=document.getElementById(id); return e?e.value.trim():""; };
-      var prop=v("tipo")+" de "+v("amb")+(v("m2")?" · "+v("m2")+" m²":"");
+      var detalle=[v("tipo")+" de "+v("amb"),
+                   v("barrio") ? "Zona: "+v("barrio") : "",
+                   v("m2") ? "Superficie: "+v("m2")+" m²" : "",
+                   "Origen: "+origen].filter(Boolean).join(" · ");
       var datos=new FormData();
       datos.append(CAMPOS.nombre, v("nombre"));
       datos.append(CAMPOS.contacto, v("contacto"));
-      datos.append(CAMPOS.propiedad, prop);
-      datos.append(CAMPOS.zona, v("barrio"));
-      datos.append(CAMPOS.origen, origen+" · "+location.hostname);
+      datos.append(CAMPOS.detalle, detalle);
       fetch(FORM_URL,{method:"POST",mode:"no-cors",body:datos});
     }catch(e){ /* si falla, no bloqueamos al visitante */ }
   }
