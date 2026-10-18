@@ -444,26 +444,69 @@ select option{background:#0F1F42;color:#fff}
 }
 .aw.top{background:linear-gradient(140deg,#F2D98B,#C9A227);color:#3A2C00;border-color:transparent;box-shadow:0 6px 20px rgba(201,162,39,.3)}
 
-/* ---------- zonas / links ---------- */
-.linkgrid{display:grid;gap:13px}
-.lk{
-  display:flex;align-items:center;gap:15px;background:var(--paper);border:1px solid var(--line);
-  border-radius:var(--r);padding:17px 19px;box-shadow:var(--sh-sm);
-  transition:transform .22s cubic-bezier(.2,.7,.3,1),box-shadow .22s,border-color .22s;
+/* ---------- enlaces ---------- */
+.links{background:var(--navy);color:#fff;position:relative;overflow:hidden}
+.links::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(760px 420px at 85% -10%,rgba(46,107,230,.26),transparent 62%),
+             radial-gradient(560px 360px at 0% 110%,rgba(228,0,43,.20),transparent 66%);
 }
-.lk:hover{transform:translateY(-3px);box-shadow:var(--sh);border-color:#D4D9E8}
-.lk .ic{flex:none;width:44px;height:44px;border-radius:13px;display:grid;place-items:center;background:#F0F3FA;color:var(--navy);border:1px solid #E1E7F5}
-.lk .ic.ig{background:linear-gradient(135deg,#F9CE34,#EE2A7B 55%,#6228D7);color:#fff;border-color:transparent}
-.lk .ic.yt{background:#FF0033;color:#fff;border-color:transparent}
-.lk .ic.li{background:#0A66C2;color:#fff;border-color:transparent}
-.lk .ic.rx{background:var(--navy);color:#fff;border-color:transparent}
-.lk .ic.mp{background:#1A73E8;color:#fff;border-color:transparent}
+.links .wrap{position:relative;z-index:1}
+.links .sec-head h2{color:#fff}
+.links .sec-head p{color:rgba(255,255,255,.66)}
+
+.lk-grid{display:grid;gap:12px}
+.lk{
+  position:relative;display:flex;align-items:center;gap:15px;overflow:hidden;
+  background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.12);
+  border-radius:var(--r);padding:17px 19px;color:#fff;
+  transition:transform .26s cubic-bezier(.2,.7,.3,1),background .26s,border-color .26s;
+}
+/* un halo del color de cada marca que aparece al pasar el cursor */
+.lk::after{
+  content:"";position:absolute;inset:-1px;border-radius:inherit;opacity:0;
+  transition:opacity .3s;pointer-events:none;
+  background:radial-gradient(420px 150px at 12% 50%,var(--halo,rgba(46,107,230,.5)),transparent 70%);
+}
+.lk:hover{transform:translateY(-3px);background:rgba(255,255,255,.10);border-color:rgba(255,255,255,.26)}
+.lk:hover::after{opacity:.5}
+.lk > *{position:relative;z-index:1}
+
+.lk .ic{
+  flex:none;width:46px;height:46px;border-radius:14px;display:grid;place-items:center;
+  background:rgba(255,255,255,.10);color:#fff;border:1px solid rgba(255,255,255,.16);
+  transition:transform .26s cubic-bezier(.2,.7,.3,1);
+}
+.lk:hover .ic{transform:scale(1.07) rotate(-3deg)}
+.lk .ic.ig{background:linear-gradient(135deg,#F9CE34,#EE2A7B 55%,#6228D7);border-color:transparent}
+.lk .ic.yt{background:#FF0033;border-color:transparent}
+.lk .ic.li{background:#0A66C2;border-color:transparent}
+.lk .ic.rx{background:linear-gradient(140deg,#E4002B,#003DA5);border-color:transparent}
+.lk .ic.mp{background:#1A73E8;border-color:transparent}
 .lk .tx{min-width:0}
-.lk .tx b{display:block;font-size:15.2px;font-weight:700;letter-spacing:-.015em}
-.lk .tx span{display:block;font-size:13px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.lk .arrow{margin-left:auto;color:#A8B0C2;flex:none;transition:transform .22s,color .22s}
-.lk:hover .arrow{transform:translateX(3px);color:var(--navy)}
-@media(min-width:760px){.linkgrid{grid-template-columns:1fr 1fr}}
+.lk .tx b{display:block;font-size:15.4px;font-weight:700;letter-spacing:-.018em}
+.lk .tx span{display:block;font-size:13px;color:rgba(255,255,255,.60);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lk .arrow{margin-left:auto;color:rgba(255,255,255,.45);flex:none;transition:transform .26s,color .26s}
+.lk:hover .arrow{transform:translateX(4px);color:#fff}
+
+/* la tarjeta destacada: es el enlace que genera negocio */
+.lk-hero{
+  grid-column:1/-1;flex-direction:column;align-items:flex-start;gap:0;
+  padding:26px 24px;background:linear-gradient(135deg,rgba(228,0,43,.22),rgba(0,61,165,.26));
+  border-color:rgba(255,255,255,.2);
+}
+.lk-hero::after{background:radial-gradient(600px 220px at 20% 50%,rgba(228,0,43,.5),transparent 70%)}
+.lk-hero .ic{width:54px;height:54px;border-radius:16px;margin-bottom:16px}
+.lk-hero .tx b{font-size:1.45rem;letter-spacing:-.03em;line-height:1.15}
+.lk-hero .tx span{font-size:14.5px;color:rgba(255,255,255,.72);white-space:normal;margin-top:6px}
+.lk-hero .arrow{position:absolute;right:22px;top:28px;margin:0;width:22px;height:22px}
+
+@media(min-width:720px){
+  .lk-grid{grid-template-columns:repeat(3,1fr)}
+  .lk-hero{flex-direction:row;align-items:center;gap:20px;padding:24px 26px}
+  .lk-hero .ic{margin-bottom:0}
+  .lk-hero .arrow{position:static;margin-left:auto;width:20px;height:20px}
+}
 
 /* ---------- final CTA ---------- */
 .final{background:var(--red);color:#fff;text-align:center;position:relative;overflow:hidden}
@@ -863,46 +906,46 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
 </section>
 
 <!-- ===== LINKS / PROPIEDADES ===== -->
-<section id="propiedades">
+<section class="links" id="propiedades">
   <div class="wrap">
     <div class="sec-head rv">
       <span class="kicker">Todo en un lugar</span>
       <h2>Propiedades, redes y oficina.</h2>
       <p>Mirá lo que tengo publicado hoy o seguime donde más te guste.</p>
     </div>
-    <div class="linkgrid">
-      <a class="lk rv" href="https://fcastro.remax.com.ar/" target="_blank" rel="noopener">
-        <span class="ic rx"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/><path d="M9.5 21v-7h5v7"/></svg></span>
-        <span class="tx"><b>Propiedades disponibles</b><span>Mi cartera actualizada en RE/MAX</span></span>
+    <div class="lk-grid">
+      <a class="lk lk-hero rv" href="https://fcastro.remax.com.ar/" target="_blank" rel="noopener" style="--halo:rgba(228,0,43,.5)">
+        <span class="ic rx"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/><path d="M9.5 21v-7h5v7"/></svg></span>
+        <span class="tx"><b>Propiedades disponibles</b><span>Mi cartera actualizada en RE/MAX, con fotos, precios y planos.</span></span>
         <svg class="arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
       </a>
-      <a class="lk rv" href="https://instagram.com/fcastro.remax" target="_blank" rel="noopener">
+      <a class="lk  rv" href="https://instagram.com/fcastro.remax" target="_blank" rel="noopener" style="--halo:rgba(238,42,123,.55)">
         <span class="ic ig"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="5.2"/><circle cx="12" cy="12" r="4.1"/><circle cx="17.3" cy="6.7" r="1.1" fill="currentColor" stroke="none"/></svg></span>
-        <span class="tx"><b>Instagram</b><span>@fcastro.remax · 4.4K seguidores</span></span>
+        <span class="tx"><b>Instagram</b><span>@fcastro.remax · 4.4K</span></span>
         <svg class="arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
       </a>
-      <a class="lk rv" href="https://www.youtube.com/@fcastro.remax1" target="_blank" rel="noopener">
+      <a class="lk  rv" href="https://www.youtube.com/@fcastro.remax1" target="_blank" rel="noopener" style="--halo:rgba(255,0,51,.45)">
         <span class="ic yt"><svg width="21" height="21" viewBox="0 0 24 24" fill="currentColor"><path d="M21.6 7.2s-.2-1.4-.8-2c-.8-.8-1.6-.8-2-.9C16.2 4.1 12 4.1 12 4.1h0s-4.2 0-6.8.2c-.4.1-1.2.1-2 .9-.6.6-.8 2-.8 2S2.2 8.8 2.2 10.5v1.6c0 1.7.2 3.3.2 3.3s.2 1.4.8 2c.8.8 1.8.8 2.2.9 1.6.1 6.6.2 6.6.2s4.2 0 6.8-.2c.4-.1 1.2-.1 2-.9.6-.6.8-2 .8-2s.2-1.6.2-3.3v-1.6c0-1.7-.2-3.3-.2-3.3zM9.9 14.4V8.7l5.4 2.9z"/></svg></span>
         <span class="tx"><b>YouTube</b><span>Recorridos y testimonios</span></span>
         <svg class="arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
       </a>
-      <a class="lk rv" href="https://www.linkedin.com/in/fcastroremax/" target="_blank" rel="noopener">
+      <a class="lk  rv" href="https://www.linkedin.com/in/fcastroremax/" target="_blank" rel="noopener" style="--halo:rgba(10,102,194,.55)">
         <span class="ic li"><svg width="21" height="21" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.1c.5-1 1.8-2 3.7-2 4 0 4.4 2.5 4.4 5.8V21h-4v-5.7c0-1.4 0-3.1-1.9-3.1s-2.2 1.5-2.2 3V21H9z"/></svg></span>
         <span class="tx"><b>LinkedIn</b><span>Perfil profesional</span></span>
         <svg class="arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
       </a>
-      <a class="lk rv" href="https://maps.google.com/?q=Dorrego+3550,+Palermo,+CABA" target="_blank" rel="noopener">
+      <a class="lk  rv" href="https://maps.google.com/?q=Dorrego+3550,+Palermo,+CABA" target="_blank" rel="noopener" style="--halo:rgba(26,115,232,.5)">
         <span class="ic mp"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M12 21s7-5.6 7-11a7 7 0 1 0-14 0c0 5.4 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg></span>
         <span class="tx"><b>Dónde nos encontrás</b><span>OLA Palermo · Dorrego 3550</span></span>
         <svg class="arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
       </a>
-      <a class="lk rv" href="https://www.remax.com.ar/premium" target="_blank" rel="noopener">
-        <span class="ic mp"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M12 21s7-5.6 7-11a7 7 0 1 0-14 0c0 5.4 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg></span>
+      <a class="lk  rv" href="https://www.remax.com.ar/premium" target="_blank" rel="noopener" style="--halo:rgba(0,61,165,.5)">
+        <span class="ic rx"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/><path d="M9.5 21v-7h5v7"/></svg></span>
         <span class="tx"><b>RE/MAX Premium 1</b><span>Sitio oficial de la oficina</span></span>
         <svg class="arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
       </a>
-      <a class="lk rv" href="mailto:fcastro@remax.com.ar">
-        <span class="ic"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><rect x="3" y="5" width="18" height="14" rx="2.4"/><path d="m3.5 7 8.5 6 8.5-6"/></svg></span>
+      <a class="lk  rv" href="mailto:fcastro@remax.com.ar" style="--halo:rgba(140,160,200,.45)">
+        <span class="ic em"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><rect x="3" y="5" width="18" height="14" rx="2.4"/><path d="m3.5 7 8.5 6 8.5-6"/></svg></span>
         <span class="tx"><b>Email</b><span>fcastro@remax.com.ar</span></span>
         <svg class="arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
       </a>
