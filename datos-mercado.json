@@ -1,11 +1,10 @@
 {
-  "_nota": "Lo actualiza solo el workflow 'Actualizar datos del mercado' (ver .github/workflows). Trae de las fuentes oficiales la cantidad de escrituras y la variacion del m2. El valor absoluto en US$/m2 vive en un PDF que no se puede parsear con certeza: ese campo se edita a mano cuando sale cada informe.",
+  "_nota": "Lo actualiza solo el workflow 'Actualizar datos del mercado'. Todos estos datos se leen de fuentes oficiales; no se edita a mano.",
   "actualizado": "2026-10-18",
   "items": [
     {
       "label": "Escrituras CABA",
       "valor": "6.055",
-      "unidad": "operaciones",
       "periodo": "ago 2026",
       "delta": -4.9,
       "deltaNota": "interanual",
@@ -13,24 +12,31 @@
       "url": "https://www.colegio-escribanos.org.ar/2026/09/22/cantidad-de-escrituras-de-compraventa-realizadas-en-agosto-2026/"
     },
     {
-      "label": "m² CABA · precio de cierre",
-      "valor": "US$ 2.150",
-      "unidad": "por m²",
+      "label": "Con hipoteca",
+      "valor": "1.059",
       "periodo": "ago 2026",
-      "delta": 1.81,
-      "deltaNota": "mensual",
-      "fuente": "Índice M2 Real · RE/MAX + UCEMA",
-      "url": "https://ucema.edu.ar/indices-y-bases-de-datos/m2-082026"
+      "delta": -20.8,
+      "deltaNota": "interanual",
+      "fuente": "Colegio de Escribanos CABA",
+      "url": "https://www.colegio-escribanos.org.ar/2026/09/22/cantidad-de-escrituras-de-compraventa-realizadas-en-agosto-2026/"
     },
     {
-      "label": "Monto promedio por operación",
+      "label": "Monto medio por operación",
       "valor": "US$ 119.270",
-      "unidad": "",
+      "periodo": "ago 2026",
+      "delta": -2.7,
+      "deltaNota": "interanual en USD",
+      "fuente": "Colegio de Escribanos CABA",
+      "url": "https://www.colegio-escribanos.org.ar/2026/09/22/cantidad-de-escrituras-de-compraventa-realizadas-en-agosto-2026/"
+    },
+    {
+      "label": "m² CABA · Índice M2 Real",
+      "valor": "+1,81%",
       "periodo": "ago 2026",
       "delta": null,
-      "deltaNota": "",
-      "fuente": "Colegio de Escribanos CABA",
-      "url": "https://www.colegio-escribanos.org.ar/category/estadisticas-de-escrituras/"
+      "deltaNota": "mensual",
+      "fuente": "RE/MAX + UCEMA",
+      "url": "https://ucema.edu.ar/indices-y-bases-de-datos/m2-082026"
     }
   ]
 }

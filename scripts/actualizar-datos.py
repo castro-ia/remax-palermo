@@ -1,17 +1,17 @@
 #!/usr/bin/env python3
 """
-Actualiza datos-mercado.json con las fuentes que se pueden leer de forma confiable.
+Actualiza datos-mercado.json leyendo las fuentes oficiales.
 
-Que trae automaticamente:
-  - Escrituras de compraventa en CABA: del post mensual del Colegio de Escribanos.
+Todo lo que publica el cartel se trae solo:
+  - Escrituras de compraventa en CABA, hipotecas y monto medio por operacion:
+    del post mensual del Colegio de Escribanos.
   - Variacion del m2 CABA: del indice M2 Real (REMAX + UCEMA), que publica el
     porcentaje en el HTML de su pagina.
 
-Que NO trae y por que:
-  - El valor absoluto en US$/m2 vive en un PDF de 30 paginas con decenas de series
-    parecidas (por barrio, por tipologia) y sin etiquetas que permitan distinguir
-    la general con certeza. Antes que publicar un numero posiblemente equivocado,
-    ese campo se mantiene como estaba y se edita a mano.
+No se publica el valor absoluto en US$/m2: vive en un PDF de 30 paginas con
+decenas de series parecidas (por barrio, por tipologia) sin etiquetas que
+permitan identificar la general con certeza. Antes que mostrar un numero
+dudoso, ese dato no va.
 
 Si una fuente falla, se conserva el valor anterior. Nunca deja el archivo vacio.
 """
@@ -39,7 +39,7 @@ def sin_tags(html):
 
 
 def escrituras():
-    """Ultimo informe mensual del Colegio de Escribanos de CABA."""
+    """Ultimo informe mensual del Colegio de Escribanos: trae los tres numeros."""
     cat = bajar("https://www.colegio-escribanos.org.ar/category/estadisticas-de-escrituras/")
     posts = re.findall(
         r'href="(https://www\.colegio-escribanos\.org\.ar/(\d{4})/(\d{2})/(\d{2})/cantidad-de-escrituras[^"]*)"',
@@ -47,28 +47,44 @@ def escrituras():
     if not posts:
         raise RuntimeError("no encontre posts de escrituras")
     url = sorted(set(posts), key=lambda p: (p[1], p[2], p[3]), reverse=True)[0][0]
-
     txt = sin_tags(bajar(url))
+
+    out = {"url": url}
+
+    slug = url.rstrip("/").split("/")[-1]
+    mm = re.search(r"realizadas-en-([a-zñ]+)-(\d{4})", slug)
+    out["periodo"] = "%s %s" % (ABREV[mm.group(1)], mm.group(2)) if mm and mm.group(1) in ABREV else ""
+
     m = re.search(r"\b(\d{1,2}\.\d{3})\s+escrituras", txt)
     if not m:
         raise RuntimeError("no encontre la cantidad de escrituras")
-    cantidad = m.group(1)
+    out["escrituras"] = m.group(1)
 
-    # mes y año del propio slug del post
-    slug = url.rstrip("/").split("/")[-1]
-    mm = re.search(r"realizadas-en-([a-zñ]+)-(\d{4})", slug)
-    periodo = ""
-    if mm and mm.group(1) in ABREV:
-        periodo = "%s %s" % (ABREV[mm.group(1)], mm.group(2))
-
-    # variacion interanual, con su signo
-    delta = None
     v = re.search(r"(ca[ií]d\w+|baja|descens\w+|aument\w+|sub\w+|crecimient\w+)[^.]{0,80}?(\d{1,2},\d)\s*%", txt, re.I)
     if v:
         n = float(v.group(2).replace(",", "."))
-        delta = -n if re.match(r"ca[ií]|baj|descens", v.group(1), re.I) else n
+        out["escrituras_delta"] = -n if re.match(r"ca[ií]|baj|descens", v.group(1), re.I) else n
 
-    return {"valor": cantidad, "periodo": periodo, "delta": delta, "url": url}
+    # "El monto medio ... fue de $X ( 119.270 dolares ...): crecio 10,3% ... bajo un 2,7%"
+    md = re.search(r"monto medio[\s\S]{0,170}?\(\s*([\d.]+)\s*d[oó]lares", txt, re.I)
+    if md:
+        out["monto"] = "US$ " + md.group(1)
+        mv = re.search(r"moneda estadounidense\s+(baj\w+|subi\w+|creci\w+|aument\w+)[\s\S]{0,40}?(\d{1,2},\d)\s*%", txt, re.I)
+        if mv:
+            n = float(mv.group(2).replace(",", "."))
+            out["monto_delta"] = -n if re.match(r"baj", mv.group(1), re.I) else n
+
+    # "hubo 1059 escrituras formalizadas con hipoteca ... la baja ... es del 20,8%"
+    hp = re.search(r"(\d{1,2}[.]?\d{3})\s+escrituras\s+formalizadas\s+con\s+hipoteca", txt, re.I)
+    if hp:
+        n = hp.group(1)
+        out["hipotecas"] = n if "." in n else "{:,}".format(int(n)).replace(",", ".")
+        hv = re.search(r"con hipoteca[\s\S]{0,180}?(baja|suba|aument\w+|ca[ií]d\w+)[\s\S]{0,50}?(\d{1,2},\d)\s*%", txt, re.I)
+        if hv:
+            n2 = float(hv.group(2).replace(",", "."))
+            out["hipotecas_delta"] = -n2 if re.match(r"baj|ca[ií]", hv.group(1), re.I) else n2
+
+    return out
 
 
 def m2_variacion():
@@ -98,29 +114,40 @@ def m2_variacion():
 
 def main():
     datos = json.loads(ARCHIVO.read_text(encoding="utf-8"))
-    porEtiqueta = {it["label"]: it for it in datos["items"]}
+    por = {it["label"]: it for it in datos["items"]}
     cambios = []
+
+    def set_(label, valor=None, delta=None, periodo=None, url=None):
+        it = por.get(label)
+        if not it:
+            return
+        if valor is not None and it.get("valor") != valor:
+            cambios.append("%s: %s -> %s" % (label, it.get("valor"), valor))
+        if valor is not None:
+            it["valor"] = valor
+        if delta is not None:
+            it["delta"] = delta
+        if periodo:
+            it["periodo"] = periodo
+        if url:
+            it["url"] = url
 
     try:
         e = escrituras()
-        it = porEtiqueta.get("Escrituras CABA")
-        if it and (it["valor"] != e["valor"] or it["periodo"] != e["periodo"]):
-            cambios.append("escrituras %s -> %s (%s)" % (it["valor"], e["valor"], e["periodo"]))
-        if it:
-            it["valor"], it["periodo"], it["url"] = e["valor"], e["periodo"], e["url"]
-            if e["delta"] is not None:
-                it["delta"] = e["delta"]
-        print("OK escrituras: %s (%s, %s%%)" % (e["valor"], e["periodo"], e["delta"]))
+        set_("Escrituras CABA", e.get("escrituras"), e.get("escrituras_delta"), e["periodo"], e["url"])
+        set_("Con hipoteca", e.get("hipotecas"), e.get("hipotecas_delta"), e["periodo"], e["url"])
+        set_("Monto medio por operación", e.get("monto"), e.get("monto_delta"), e["periodo"], e["url"])
+        print("OK escrituras: %s | hipotecas: %s | monto: %s (%s)" %
+              (e.get("escrituras"), e.get("hipotecas"), e.get("monto"), e["periodo"]))
     except Exception as ex:
         print("FALLO escrituras, conservo lo anterior: %s" % ex, file=sys.stderr)
 
     try:
         m = m2_variacion()
-        it = porEtiqueta.get("m² CABA · precio de cierre")
-        if it and it["periodo"] != m["periodo"]:
-            cambios.append("m2 periodo %s -> %s" % (it["periodo"], m["periodo"]))
-        if it:
-            it["delta"], it["periodo"], it["url"] = m["delta"], m["periodo"], m["url"]
+        signo = "+" if m["delta"] >= 0 else "−"
+        set_("m² CABA · Índice M2 Real",
+             "%s%s%%" % (signo, ("%.2f" % abs(m["delta"])).replace(".", ",")),
+             None, m["periodo"], m["url"])
         print("OK m2: %s%% (%s)" % (m["delta"], m["periodo"]))
     except Exception as ex:
         print("FALLO m2, conservo lo anterior: %s" % ex, file=sys.stderr)
