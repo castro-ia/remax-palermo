@@ -3,6 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1E0MPZ6PHR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag("js", new Date());
+  gtag("config", "G-1E0MPZ6PHR");
+</script>
 <title>RE/MAX Palermo · Fernando Castro | Tasación sin cargo en 48hs</title>
 <meta name="description" content="Fernando Castro, agente inmobiliario RE/MAX Premium 1 en Palermo. 260+ operaciones cerradas, 8 años de experiencia, 5,0★ en Google. Te digo el precio real de tu propiedad, sin cargo y en 48hs.">
 <meta name="author" content="Fernando Castro">
@@ -817,6 +826,14 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
     });
   });
 
+
+  /* mide cada clic a WhatsApp como oportunidad de venta en Analytics */
+  document.addEventListener("click",function(e){
+    var a=e.target.closest&&e.target.closest('a[href*="wa.me"]');
+    if(!a||typeof gtag!=="function")return;
+    gtag("event","generate_lead",{method:"whatsapp",origen:(a.innerText||"link").trim().slice(0,40)});
+  });
+
   /* valuation form -> prefilled whatsapp message */
   var form=document.getElementById("valForm");
   if(form){
@@ -830,6 +847,7 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
       if(barrio) parts.push("Zona: "+barrio);
       if(m2) parts.push("Superficie: "+m2+" m²");
       parts.push("","¿Cuánto vale hoy?");
+      if(typeof gtag==="function") gtag("event","generate_lead",{method:"whatsapp",origen:"formulario tasacion"});
       window.open("https://wa.me/5491150379426?text="+encodeURIComponent(parts.join("\n")),"_blank","noopener");
     });
   }
