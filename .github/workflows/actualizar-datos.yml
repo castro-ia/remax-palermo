@@ -1,0 +1,41 @@
+name: Actualizar datos del mercado
+
+on:
+  schedule:
+    # 11:00 UTC = 8 de la mañana en Argentina, todos los días.
+    # El Colegio publica alrededor del 22 y UCEMA a mitad de mes,
+    # así que un chequeo diario los toma el mismo día que salen.
+    - cron: "0 11 * * *"
+  workflow_dispatch:        # permite correrlo a mano desde la pestaña Actions
+
+permissions:
+  contents: write
+
+jobs:
+  actualizar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Leer las fuentes y actualizar el JSON
+        run: python scripts/actualizar-datos.py
+
+      - name: Commitear solo si algo cambió
+        run: |
+          if git diff --quiet -- datos-mercado.json; then
+            echo "Sin cambios en los datos."
+            exit 0
+          fi
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add datos-mercado.json
+          git commit -m "Actualiza datos del mercado
+
+          Cambios tomados de las fuentes oficiales por el script programado.
+
+          Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>"
+          git push

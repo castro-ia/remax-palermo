@@ -1,5 +1,5 @@
 {
-  "_nota": "Datos que no tienen API y se actualizan a mano. El dolar se trae solo. Cambiar 'valor', 'periodo' y 'delta' cuando salga cada informe nuevo.",
+  "_nota": "Lo actualiza solo el workflow 'Actualizar datos del mercado' (ver .github/workflows). Trae de las fuentes oficiales la cantidad de escrituras y la variacion del m2. El valor absoluto en US$/m2 vive en un PDF que no se puede parsear con certeza: ese campo se edita a mano cuando sale cada informe.",
   "actualizado": "2026-10-18",
   "items": [
     {
@@ -10,7 +10,7 @@
       "delta": -4.9,
       "deltaNota": "interanual",
       "fuente": "Colegio de Escribanos CABA",
-      "url": "https://www.colegio-escribanos.org.ar/category/estadisticas-de-escrituras/"
+      "url": "https://www.colegio-escribanos.org.ar/2026/09/22/cantidad-de-escrituras-de-compraventa-realizadas-en-agosto-2026/"
     },
     {
       "label": "m² CABA · precio de cierre",
