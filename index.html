@@ -284,8 +284,14 @@ select option{background:#0F1F42;color:#fff}
 .reel-hint{font-size:12.5px;color:rgba(255,255,255,.5);margin-top:2px;display:flex;align-items:center;gap:7px}
 
 /* ---------- testimonios ---------- */
-.revs{display:grid;gap:16px}
+.revs{
+  display:grid;grid-auto-flow:column;grid-auto-columns:min(330px,84vw);gap:16px;
+  overflow-x:auto;padding:4px var(--pad) 10px;margin-inline:calc(var(--pad) * -1);
+  scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch;
+}
+.revs::-webkit-scrollbar{display:none}
 .rev{
+  scroll-snap-align:start;min-height:252px;
   background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:24px 22px;
   box-shadow:var(--sh-sm);display:flex;flex-direction:column;gap:14px;
 }
@@ -302,7 +308,10 @@ select option{background:#0F1F42;color:#fff}
 .gbadge .meta b{display:block;font-size:15px;font-weight:700;letter-spacing:-.015em}
 .gbadge .meta span{font-size:13px;color:var(--muted)}
 .gbadge .arrow{margin-left:auto;color:var(--muted);flex:none}
-@media(min-width:820px){.revs{grid-template-columns:repeat(3,1fr)}.gbadges{grid-template-columns:1fr 1fr}}
+@media(min-width:820px){
+  .revs{grid-auto-columns:calc((100% - 32px) / 3)}
+  .gbadges{grid-template-columns:1fr 1fr}
+}
 
 /* ---------- premios ---------- */
 .awards{background:linear-gradient(170deg,#0F1F42,#0A1733);color:#fff;text-align:center}
@@ -597,13 +606,13 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
       </article>
       <article class="rev rv">
         <span class="stars" aria-label="5 de 5 estrellas">★★★★★</span>
-        <q>Trabaja con mucha seriedad y profesionalismo. Hizo todas las gestiones, desde la inmobiliaria y luego junto a la escribanía, hasta tomar posesión de la propiedad. No duden en iniciar el trámite de compra-venta con él.</q>
-        <span class="via"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M23 12.2c0-.8-.1-1.6-.2-2.3H12v4.4h6.2A5.3 5.3 0 0 1 12 18.5v3h.1c3.2 0 5.9-1.1 7.9-3a11 11 0 0 0 3-8.3z"/><path fill="#34A853" d="M12 23c3 0 5.5-1 7.3-2.7l-3.5-2.7A6.9 6.9 0 0 1 5.3 14l-3.6 2.8A11 11 0 0 0 12 23z"/><path fill="#FBBC05" d="M5.3 14a6.6 6.6 0 0 1 0-4.2L1.7 7A11 11 0 0 0 1.7 17z"/><path fill="#EA4335" d="M12 4.7c1.7 0 3.2.6 4.4 1.7l3.2-3.2A11 11 0 0 0 1.7 7l3.6 2.8A6.6 6.6 0 0 1 12 4.7z"/></svg> Juan Manuel A. · hace 1 semana</span>
+        <q>Hace todo lo posible para que se logre el objetivo. Comunicación permanente, y certeza de que con él lo lográs. Te cambia la mirada con respecto a las inmobiliarias.</q>
+        <span class="via"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M23 12.2c0-.8-.1-1.6-.2-2.3H12v4.4h6.2A5.3 5.3 0 0 1 12 18.5v3h.1c3.2 0 5.9-1.1 7.9-3a11 11 0 0 0 3-8.3z"/><path fill="#34A853" d="M12 23c3 0 5.5-1 7.3-2.7l-3.5-2.7A6.9 6.9 0 0 1 5.3 14l-3.6 2.8A11 11 0 0 0 12 23z"/><path fill="#FBBC05" d="M5.3 14a6.6 6.6 0 0 1 0-4.2L1.7 7A11 11 0 0 0 1.7 17z"/><path fill="#EA4335" d="M12 4.7c1.7 0 3.2.6 4.4 1.7l3.2-3.2A11 11 0 0 0 1.7 7l3.6 2.8A6.6 6.6 0 0 1 12 4.7z"/></svg> Laura S. · hace 2 semanas</span>
       </article>
       <article class="rev rv">
         <span class="stars" aria-label="5 de 5 estrellas">★★★★★</span>
-        <q>Hace todo lo posible para que se logre el objetivo. Comunicación permanente, y certeza de que con él lo lográs. Te cambia la mirada con respecto a las inmobiliarias.</q>
-        <span class="via"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M23 12.2c0-.8-.1-1.6-.2-2.3H12v4.4h6.2A5.3 5.3 0 0 1 12 18.5v3h.1c3.2 0 5.9-1.1 7.9-3a11 11 0 0 0 3-8.3z"/><path fill="#34A853" d="M12 23c3 0 5.5-1 7.3-2.7l-3.5-2.7A6.9 6.9 0 0 1 5.3 14l-3.6 2.8A11 11 0 0 0 12 23z"/><path fill="#FBBC05" d="M5.3 14a6.6 6.6 0 0 1 0-4.2L1.7 7A11 11 0 0 0 1.7 17z"/><path fill="#EA4335" d="M12 4.7c1.7 0 3.2.6 4.4 1.7l3.2-3.2A11 11 0 0 0 1.7 7l3.6 2.8A6.6 6.6 0 0 1 12 4.7z"/></svg> Laura S. · hace 2 semanas</span>
+        <q>Trabaja con mucha seriedad y profesionalismo. Hizo todas las gestiones, desde la inmobiliaria y luego junto a la escribanía, hasta tomar posesión de la propiedad. No duden en iniciar el trámite de compra-venta con él.</q>
+        <span class="via"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M23 12.2c0-.8-.1-1.6-.2-2.3H12v4.4h6.2A5.3 5.3 0 0 1 12 18.5v3h.1c3.2 0 5.9-1.1 7.9-3a11 11 0 0 0 3-8.3z"/><path fill="#34A853" d="M12 23c3 0 5.5-1 7.3-2.7l-3.5-2.7A6.9 6.9 0 0 1 5.3 14l-3.6 2.8A11 11 0 0 0 12 23z"/><path fill="#FBBC05" d="M5.3 14a6.6 6.6 0 0 1 0-4.2L1.7 7A11 11 0 0 0 1.7 17z"/><path fill="#EA4335" d="M12 4.7c1.7 0 3.2.6 4.4 1.7l3.2-3.2A11 11 0 0 0 1.7 7l3.6 2.8A6.6 6.6 0 0 1 12 4.7z"/></svg> Juan Manuel A. · hace 1 semana</span>
       </article>
       <article class="rev rv">
         <span class="stars" aria-label="5 de 5 estrellas">★★★★★</span>
@@ -612,15 +621,14 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
       </article>
       <article class="rev rv">
         <span class="stars" aria-label="5 de 5 estrellas">★★★★★</span>
-        <q>Gracias Fer por vender la casa de mi abuela en 23 días, sos un crack!</q>
-        <span class="via"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M23 12.2c0-.8-.1-1.6-.2-2.3H12v4.4h6.2A5.3 5.3 0 0 1 12 18.5v3h.1c3.2 0 5.9-1.1 7.9-3a11 11 0 0 0 3-8.3z"/><path fill="#34A853" d="M12 23c3 0 5.5-1 7.3-2.7l-3.5-2.7A6.9 6.9 0 0 1 5.3 14l-3.6 2.8A11 11 0 0 0 12 23z"/><path fill="#FBBC05" d="M5.3 14a6.6 6.6 0 0 1 0-4.2L1.7 7A11 11 0 0 0 1.7 17z"/><path fill="#EA4335" d="M12 4.7c1.7 0 3.2.6 4.4 1.7l3.2-3.2A11 11 0 0 0 1.7 7l3.6 2.8A6.6 6.6 0 0 1 12 4.7z"/></svg> Reseña en Google</span>
-      </article>
-      <article class="rev rv">
-        <span class="stars" aria-label="5 de 5 estrellas">★★★★★</span>
         <q>Excelente servicio. Muy amable y atento a todas nuestras inquietudes. Se mantuvo en constante contacto informándonos de la evolución de la operación.</q>
         <span class="via"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M23 12.2c0-.8-.1-1.6-.2-2.3H12v4.4h6.2A5.3 5.3 0 0 1 12 18.5v3h.1c3.2 0 5.9-1.1 7.9-3a11 11 0 0 0 3-8.3z"/><path fill="#34A853" d="M12 23c3 0 5.5-1 7.3-2.7l-3.5-2.7A6.9 6.9 0 0 1 5.3 14l-3.6 2.8A11 11 0 0 0 12 23z"/><path fill="#FBBC05" d="M5.3 14a6.6 6.6 0 0 1 0-4.2L1.7 7A11 11 0 0 0 1.7 17z"/><path fill="#EA4335" d="M12 4.7c1.7 0 3.2.6 4.4 1.7l3.2-3.2A11 11 0 0 0 1.7 7l3.6 2.8A6.6 6.6 0 0 1 12 4.7z"/></svg> Stella Maris S. · hace 5 meses</span>
       </article>
     </div>
+    <p class="reel-hint" style="color:var(--muted);margin-top:4px">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      Deslizá para ver más · <a href="https://share.google/ayJGn7dHlrtmHFuXk" target="_blank" rel="noopener" style="text-decoration:underline">todas en Google</a>
+    </p>
 
     <div class="gbadges">
       <a class="gbadge rv" href="https://share.google/ayJGn7dHlrtmHFuXk" target="_blank" rel="noopener">
