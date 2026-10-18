@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-label="RE/MAX">
+  <defs>
+    <clipPath id="p">
+      <path d="M6 19.5 A18 18 0 0 1 42 19.5 C42 29.4 33.4 39.2 24 47 C14.6 39.2 6 29.4 6 19.5 Z"/>
+    </clipPath>
+  </defs>
+  <g clip-path="url(#p)">
+    <rect x="0" y="0" width="48" height="14.7" fill="#EE3B24"/>
+    <rect x="0" y="0" width="24" height="14.7" fill="#5A1410"/>
+    <rect x="0" y="14.7" width="48" height="10.9" fill="#F7F3EC"/>
+    <rect x="0" y="25.6" width="48" height="22.4" fill="#1E3FD8"/>
+    <rect x="0" y="25.6" width="24" height="22.4" fill="#0B1034"/>
+  </g>
+</svg>
