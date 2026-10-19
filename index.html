@@ -291,7 +291,7 @@ select option{background:#0F1F42;color:#fff}
 .clientes .wrap{position:relative;z-index:1}
 
 .cli-reel{
-  display:grid;grid-auto-flow:column;grid-auto-columns:min(410px,86vw);gap:26px;
+  display:grid;grid-auto-flow:column;grid-auto-columns:min(360px,80vw);gap:26px;align-items:start;
   overflow-x:auto;padding:24px var(--pad) 28px;margin-inline:calc(var(--pad) * -1);
   scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch;
 }
@@ -328,7 +328,7 @@ select option{background:#0F1F42;color:#fff}
 }
 
 .cli img{
-  width:100%;height:auto;aspect-ratio:2.3/1;object-fit:cover;display:block;
+  width:100%;height:auto;aspect-ratio:var(--ar,1/1);object-fit:cover;display:block;
   border-radius:1px;filter:saturate(.94) contrast(1.03);
 }
 /* la leyenda, escrita a mano sobre el margen blanco */
@@ -337,7 +337,7 @@ select option{background:#0F1F42;color:#fff}
   font-family:Caveat,cursive;font-size:1.32rem;font-weight:700;letter-spacing:.01em;
   text-transform:none;color:#3A2E22;line-height:1.1;
 }
-@media(min-width:900px){.cli-reel{grid-auto-columns:calc((100% - 26px) / 2)}}
+@media(min-width:900px){.cli-reel{grid-auto-columns:340px}}
 @media (prefers-reduced-motion:reduce){.cli,.cli:hover{rotate:0deg;translate:none;scale:1}}
 
 /* ---------- preguntas frecuentes ---------- */
@@ -1151,21 +1151,45 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
       <p>Momentos reales de entregas, firmas y mudanzas. Esto es lo que queda cuando la operación sale bien.</p>
     </div>
     <div class="cli-reel">
-      <figure class="cli rv">
-        <img src="img/cliente-confianza.webp" width="900" height="390" alt="Fernando Castro con un cliente" loading="lazy">
+      <figure class="cli rv" style="--ar:900/775">
+        <img src="img/cliente-equipo.webp" alt="Fernando Castro con clientes en la oficina tras cerrar una operación" loading="lazy">
+        <figcaption>Cerramos esta semana</figcaption>
+      </figure>
+      <figure class="cli rv" style="--ar:2.3/1">
+        <img src="img/cliente-confianza.webp" alt="Fernando Castro con un cliente" loading="lazy">
         <figcaption>Confianza</figcaption>
       </figure>
-      <figure class="cli rv">
-        <img src="img/cliente-historias.webp" width="900" height="390" alt="Fernando Castro con clientes tras cerrar una operación" loading="lazy">
+      <figure class="cli rv" style="--ar:2.3/1">
+        <img src="img/cliente-historias.webp" alt="Fernando Castro con clientes tras cerrar una operación" loading="lazy">
         <figcaption>Historias reales</figcaption>
       </figure>
-      <figure class="cli rv">
-        <img src="img/cliente-acompanamiento.webp" width="900" height="390" alt="Fernando Castro acompañando a una pareja de clientes" loading="lazy">
+      <figure class="cli rv" style="--ar:1/1">
+        <img src="img/cliente-llaves.webp" alt="Fernando Castro con una pareja de clientes en la oficina" loading="lazy">
+        <figcaption>Gracias por confiar</figcaption>
+      </figure>
+      <figure class="cli rv" style="--ar:2.26/1">
+        <img src="img/cliente-acompanamiento.webp" alt="Fernando Castro acompañando a una pareja de clientes" loading="lazy">
         <figcaption>Acompañamiento</figcaption>
       </figure>
-      <figure class="cli rv">
-        <img src="img/cliente-resultados.webp" width="900" height="390" alt="Fernando Castro con clientas tras la firma" loading="lazy">
+      <figure class="cli rv" style="--ar:1/1">
+        <img src="img/cliente-firma.webp" alt="Fernando Castro con clientes el día de la firma" loading="lazy">
+        <figcaption>Después de firmar</figcaption>
+      </figure>
+      <figure class="cli rv" style="--ar:1/1">
+        <img src="img/cliente-escritura.webp" alt="Fernando Castro con clientes tras la escritura" loading="lazy">
+        <figcaption>Otro cierre feliz</figcaption>
+      </figure>
+      <figure class="cli rv" style="--ar:2.26/1">
+        <img src="img/cliente-resultados.webp" alt="Fernando Castro con clientas tras la firma" loading="lazy">
         <figcaption>Resultados</figcaption>
+      </figure>
+      <figure class="cli rv" style="--ar:4/5">
+        <img src="img/cliente-abrazo.webp" alt="Fernando Castro con un cliente" loading="lazy">
+        <figcaption>Un abrazo al cierre</figcaption>
+      </figure>
+      <figure class="cli rv" style="--ar:4/3">
+        <img src="img/cliente-familia.webp" alt="Fernando Castro con una familia en su casa" loading="lazy">
+        <figcaption>Así termina cada operación</figcaption>
       </figure>
     </div>
     <p class="reel-hint" style="color:var(--muted);margin-top:4px">
