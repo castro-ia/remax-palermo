@@ -515,20 +515,39 @@ select option{background:#0F1F42;color:#fff}
 .videos .sec-head p{color:rgba(255,255,255,.68)}
 .videos .kicker{color:#FF6B86}
 .reel{
-  display:grid;grid-auto-flow:column;grid-auto-columns:min(216px,62vw);gap:14px;
+  display:grid;grid-auto-flow:column;grid-auto-columns:min(244px,66vw);gap:16px;
   overflow-x:auto;padding:4px var(--pad) 18px;margin-inline:calc(var(--pad) * -1);
-  scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch;
+  scroll-snap-type:x mandatory;scroll-padding-inline:var(--pad);
+  scrollbar-width:none;-webkit-overflow-scrolling:touch;
 }
 .reel::-webkit-scrollbar{display:none}
+
+/* cada video es un fotograma de 35mm: el negro del negativo, los margenes
+   anchos a los costados y las perforaciones corriendo por el borde */
 .vid{
-  scroll-snap-align:start;position:relative;aspect-ratio:9/16;border-radius:var(--r);
-  overflow:hidden;background:#0A1733;border:1px solid rgba(255,255,255,.14);cursor:pointer;
-  box-shadow:0 10px 30px rgba(0,0,0,.3);transition:transform .25s,border-color .25s;
+  scroll-snap-align:start;position:relative;cursor:pointer;
+  background:#0B0B0D;padding:15px 17px;border-radius:3px;
+  box-shadow:0 1px 0 rgba(255,255,255,.07) inset,0 12px 32px rgba(0,0,0,.45);
+  transition:transform .25s,box-shadow .25s;
 }
-.vid:hover{transform:translateY(-4px);border-color:rgba(255,255,255,.32)}
+/* las perforaciones: un unico diente dibujado en SVG que se repite a lo alto.
+   Van claras para que se lean como agujeros contra el negro del negativo */
+.vid::before,.vid::after{
+  content:"";position:absolute;top:7px;bottom:7px;width:9px;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='9' height='23'%3E%3Crect x='0' y='5' width='9' height='13' rx='2.6' fill='%23EFECE4'/%3E%3C/svg%3E");
+  background-repeat:repeat-y;background-position:center top;opacity:.88;
+}
+.vid::before{left:3px}
+.vid::after{right:3px}
+/* la ventanilla por donde se ve la imagen */
+.gate{
+  display:block;position:relative;aspect-ratio:9/16;overflow:hidden;
+  background:#070A14;border-radius:1px;box-shadow:0 0 0 1px rgba(0,0,0,.6);
+}
+.vid:hover{transform:translateY(-5px);box-shadow:0 1px 0 rgba(255,255,255,.1) inset,0 20px 44px rgba(0,0,0,.55)}
 .vid img{width:100%;height:100%;object-fit:cover;transition:transform .5s,opacity .3s}
 .vid:hover img{transform:scale(1.05)}
-.vid iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.gate iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 .play{
   position:absolute;inset:0;display:grid;place-items:center;
   background:linear-gradient(180deg,rgba(10,23,51,.1) 0%,rgba(10,23,51,.55) 100%);
@@ -1071,14 +1090,14 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
       <p>Nuestra oficina, recorridos de propiedades y lo que nadie te cuenta del mercado de Palermo.</p>
     </div>
     <div class="reel" id="reel">
-      <div class="vid" data-yt="Vjs_4bdZzKE" role="button" tabindex="0" aria-label="Reproducir video de la oficina"><img src="https://i.ytimg.com/vi/Vjs_4bdZzKE/hq720.jpg" loading="lazy" alt="Nuestra oficina de RE/MAX Premium en OLA Palermo"><span class="play"><i></i></span></div>
-      <div class="vid" data-yt="IVuzFk_MHXY" role="button" tabindex="0" aria-label="Reproducir video"><img src="https://i.ytimg.com/vi/IVuzFk_MHXY/hq720.jpg" loading="lazy" alt="Video de Fernando Castro"><span class="play"><i></i></span></div>
-      <div class="vid" data-yt="OINF_mueMbA" role="button" tabindex="0" aria-label="Reproducir video"><img src="https://i.ytimg.com/vi/OINF_mueMbA/hq720.jpg" loading="lazy" alt="Agente inmobiliario RE/MAX Premium 1 en Palermo"><span class="play"><i></i></span></div>
-      <div class="vid" data-yt="YJKg9fQ8iMU" role="button" tabindex="0" aria-label="Reproducir video"><img src="https://i.ytimg.com/vi/YJKg9fQ8iMU/hq720.jpg" loading="lazy" alt="Testimonio de cliente"><span class="play"><i></i></span></div>
-      <div class="vid" data-yt="_33quGHQ6eA" role="button" tabindex="0" aria-label="Reproducir video"><img src="https://i.ytimg.com/vi/_33quGHQ6eA/hq720.jpg" loading="lazy" alt="Recorrido de propiedad"><span class="play"><i></i></span></div>
-      <div class="vid" data-yt="Zvw17KlRGfA" role="button" tabindex="0" aria-label="Reproducir video"><img src="https://i.ytimg.com/vi/Zvw17KlRGfA/hq720.jpg" loading="lazy" alt="Propiedad en Belgrano"><span class="play"><i></i></span></div>
-      <div class="vid" data-yt="4PeSOdvvi5E" role="button" tabindex="0" aria-label="Reproducir video"><img src="https://i.ytimg.com/vi/4PeSOdvvi5E/hq720.jpg" loading="lazy" alt="Consejos para vender tu propiedad"><span class="play"><i></i></span></div>
-      <div class="vid" data-yt="gNhsnD0lwII" role="button" tabindex="0" aria-label="Reproducir video"><img src="https://i.ytimg.com/vi/gNhsnD0lwII/hq720.jpg" loading="lazy" alt="Mercado inmobiliario Palermo"><span class="play"><i></i></span></div>
+      <div class="vid" data-yt="Vjs_4bdZzKE" role="button" tabindex="0" aria-label="Reproducir video de la oficina"><span class="gate"><img src="https://i.ytimg.com/vi/Vjs_4bdZzKE/hq720.jpg" loading="lazy" alt="Nuestra oficina de RE/MAX Premium en OLA Palermo"><span class="play"><i></i></span></span></div>
+      <div class="vid" data-yt="IVuzFk_MHXY" role="button" tabindex="0" aria-label="Reproducir video"><span class="gate"><img src="https://i.ytimg.com/vi/IVuzFk_MHXY/hq720.jpg" loading="lazy" alt="Video de Fernando Castro"><span class="play"><i></i></span></span></div>
+      <div class="vid" data-yt="OINF_mueMbA" role="button" tabindex="0" aria-label="Reproducir video"><span class="gate"><img src="https://i.ytimg.com/vi/OINF_mueMbA/hq720.jpg" loading="lazy" alt="Agente inmobiliario RE/MAX Premium 1 en Palermo"><span class="play"><i></i></span></span></div>
+      <div class="vid" data-yt="YJKg9fQ8iMU" role="button" tabindex="0" aria-label="Reproducir video"><span class="gate"><img src="https://i.ytimg.com/vi/YJKg9fQ8iMU/hq720.jpg" loading="lazy" alt="Testimonio de cliente"><span class="play"><i></i></span></span></div>
+      <div class="vid" data-yt="_33quGHQ6eA" role="button" tabindex="0" aria-label="Reproducir video"><span class="gate"><img src="https://i.ytimg.com/vi/_33quGHQ6eA/hq720.jpg" loading="lazy" alt="Recorrido de propiedad"><span class="play"><i></i></span></span></div>
+      <div class="vid" data-yt="Zvw17KlRGfA" role="button" tabindex="0" aria-label="Reproducir video"><span class="gate"><img src="https://i.ytimg.com/vi/Zvw17KlRGfA/hq720.jpg" loading="lazy" alt="Propiedad en Belgrano"><span class="play"><i></i></span></span></div>
+      <div class="vid" data-yt="4PeSOdvvi5E" role="button" tabindex="0" aria-label="Reproducir video"><span class="gate"><img src="https://i.ytimg.com/vi/4PeSOdvvi5E/hq720.jpg" loading="lazy" alt="Consejos para vender tu propiedad"><span class="play"><i></i></span></span></div>
+      <div class="vid" data-yt="gNhsnD0lwII" role="button" tabindex="0" aria-label="Reproducir video"><span class="gate"><img src="https://i.ytimg.com/vi/gNhsnD0lwII/hq720.jpg" loading="lazy" alt="Mercado inmobiliario Palermo"><span class="play"><i></i></span></span></div>
     </div>
     <p class="reel-hint">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
@@ -1758,8 +1777,10 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
     f.title="Video de Fernando Castro";
     f.allow="accelerometer; autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share";
     f.allowFullscreen=true;
-    box.innerHTML="";
-    box.appendChild(f);
+    /* el iframe entra en la ventanilla, no en el marco: las perforaciones quedan */
+    var gate=box.querySelector(".gate")||box;
+    gate.innerHTML="";
+    gate.appendChild(f);
   }
   document.querySelectorAll(".vid").forEach(function(box){
     box.addEventListener("click",function(){ playVideo(box); });
