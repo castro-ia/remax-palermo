@@ -1,33 +1,33 @@
 {
   "_nota": "Lo actualiza solo el workflow 'Actualizar datos del mercado'. Todos estos datos se leen de fuentes oficiales; no se edita a mano.",
-  "actualizado": "2026-10-21",
+  "actualizado": "2026-10-22",
   "items": [
     {
       "label": "Escrituras CABA",
-      "valor": "6.055",
-      "periodo": "ago 2026",
-      "delta": -4.9,
+      "valor": "6.612",
+      "periodo": "sep 2026",
+      "delta": -5.5,
       "deltaNota": "interanual",
       "fuente": "Colegio de Escribanos CABA",
-      "url": "https://www.colegio-escribanos.org.ar/2026/09/22/cantidad-de-escrituras-de-compraventa-realizadas-en-agosto-2026/"
+      "url": "https://www.colegio-escribanos.org.ar/2026/10/22/cantidad-de-escrituras-de-compraventa-realizadas-en-septiembre-2026/"
     },
     {
       "label": "Con hipoteca",
-      "valor": "1.059",
-      "periodo": "ago 2026",
-      "delta": -20.8,
+      "valor": "1.256",
+      "periodo": "sep 2026",
+      "delta": -15.5,
       "deltaNota": "interanual",
       "fuente": "Colegio de Escribanos CABA",
-      "url": "https://www.colegio-escribanos.org.ar/2026/09/22/cantidad-de-escrituras-de-compraventa-realizadas-en-agosto-2026/"
+      "url": "https://www.colegio-escribanos.org.ar/2026/10/22/cantidad-de-escrituras-de-compraventa-realizadas-en-septiembre-2026/"
     },
     {
       "label": "Monto medio por operación",
-      "valor": "US$ 119.270",
-      "periodo": "ago 2026",
+      "valor": "US$ 120.106",
+      "periodo": "sep 2026",
       "delta": -2.7,
       "deltaNota": "interanual en USD",
       "fuente": "Colegio de Escribanos CABA",
-      "url": "https://www.colegio-escribanos.org.ar/2026/09/22/cantidad-de-escrituras-de-compraventa-realizadas-en-agosto-2026/"
+      "url": "https://www.colegio-escribanos.org.ar/2026/10/22/cantidad-de-escrituras-de-compraventa-realizadas-en-septiembre-2026/"
     },
     {
       "label": "m² CABA · precio de cierre",
