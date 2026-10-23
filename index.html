@@ -12,6 +12,20 @@
   gtag("js", new Date());
   gtag("config", "G-1E0MPZ6PHR");
 </script>
+
+<!-- Pixel de Meta: mide la gente que llega desde los anuncios de Instagram
+     y Facebook. Solo manda el evento, nunca el nombre ni el mail del visitante. -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version="2.0";n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,"script","https://connect.facebook.net/en_US/fbevents.js");
+fbq("init","1324205362420362");
+fbq("track","PageView");
+</script>
+<noscript><img height="1" width="1" style="display:none" alt=""
+src="https://www.facebook.com/tr?id=1324205362420362&ev=PageView&noscript=1"></noscript>
 <title>Fernando Castro · Agente RE/MAX Palermo | Tasación sin cargo en 48hs</title>
 <meta name="description" content="Fernando Castro, agente inmobiliario RE/MAX Premium 1 en Palermo. 260+ operaciones cerradas, 8 años de experiencia, 5,0★ en Google. Te digo el precio real de tu propiedad, sin cargo y en 48hs.">
 <meta name="author" content="Fernando Castro">
@@ -1937,11 +1951,18 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
   });
 
 
-  /* mide cada clic a WhatsApp como oportunidad de venta en Analytics */
+  /* un solo lugar para avisarle a Analytics y a Meta que hubo una consulta.
+     A Meta le va solo el origen, nunca datos de la persona */
+  function marcarLead(metodo,origen){
+    if(typeof gtag==="function") gtag("event","generate_lead",{method:metodo,origen:origen});
+    if(typeof fbq==="function")  fbq("track","Lead",{content_name:origen});
+  }
+
+  /* mide cada clic a WhatsApp como oportunidad de venta */
   document.addEventListener("click",function(e){
     var a=e.target.closest&&e.target.closest('a[href*="wa.me"]');
-    if(!a||typeof gtag!=="function")return;
-    gtag("event","generate_lead",{method:"whatsapp",origen:(a.innerText||"link").trim().slice(0,40)});
+    if(!a)return;
+    marcarLead("whatsapp",(a.innerText||"link").trim().slice(0,40));
   });
 
   /* ---- el lead se guarda aunque despues no manden el WhatsApp ----
@@ -1982,7 +2003,7 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
         return;
       }
       guardarLead("pidio que lo contacten");
-      if(typeof gtag==="function") gtag("event","generate_lead",{method:"formulario",origen:"pidio contacto"});
+      marcarLead("formulario","pidio contacto");
       var n2=document.getElementById("formNota");
       if(n2){ n2.textContent="¡Listo! Te contacto dentro de las próximas horas."; n2.style.color="#3ADB7C"; }
       btnLl.textContent="Consulta enviada";
@@ -2007,7 +2028,7 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
       if(v("email")) parts.push("Mi email: "+v("email"));
       if(v("tel")) parts.push("Mi teléfono: "+v("tel"));
       parts.push("","¿Cuánto vale hoy?");
-      if(typeof gtag==="function") gtag("event","generate_lead",{method:"whatsapp",origen:"formulario tasacion"});
+      marcarLead("whatsapp","formulario tasacion");
       guardarLead("abrio WhatsApp");
       window.open("https://wa.me/5491150379426?text="+encodeURIComponent(parts.join("\n")),"_blank","noopener");
     });
