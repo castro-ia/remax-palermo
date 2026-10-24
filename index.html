@@ -233,8 +233,28 @@ a.chip:hover{background:rgba(255,255,255,.15);transform:translateY(-1px)}
 
 /* ---------- buscador ---------- */
 .buscador{background:var(--cream);border-bottom:1px solid var(--line);padding:26px 0}
-.bq{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);
-    box-shadow:var(--sh);padding:18px}
+/* Borde de neón. Con pseudo-elementos de z-index negativo el degradado tapaba toda la
+   tarjeta (un hijo con z-index negativo pinta POR ENCIMA del fondo del padre). Se hace
+   con dos fondos: el blanco recortado al padding-box y el degradado al border-box, así
+   el color queda solo en los 2px del borde. El resplandor va por box-shadow. */
+.bq{
+  position:relative;z-index:0;padding:18px;
+  border:2px solid transparent;border-radius:var(--r-lg);
+  background:
+    linear-gradient(#fff,#fff) padding-box,
+    linear-gradient(115deg,var(--blue),var(--blue-lt),var(--red),var(--blue-lt),var(--blue)) border-box;
+  background-size:auto, 280% 100%;
+  background-position:0 0, 0% 50%;
+  animation:bq-neon 7s linear infinite;
+  box-shadow:var(--sh), 0 0 13px rgba(46,107,230,.45), 0 0 30px rgba(228,0,43,.22);
+}
+@keyframes bq-neon{
+  from{background-position:0 0, 0% 50%}
+  to{background-position:0 0, 280% 50%}
+}
+@media(prefers-reduced-motion:reduce){
+  .bq{animation:none}
+}
 .bq-row{display:grid;gap:12px}
 .bq-field{display:block}
 .bq-field span{display:block;font-size:11.5px;font-weight:700;letter-spacing:.1em;
