@@ -261,6 +261,11 @@ a.chip:hover{background:rgba(255,255,255,.15);transform:translateY(-1px)}
     font-weight:700;font-size:14px;color:var(--muted);padding:9px 18px;border-radius:999px;transition:.18s}
 .bq-op.is-on{background:var(--blue);color:#fff;box-shadow:0 2px 10px rgba(0,61,165,.28)}
 .bq-row{display:grid;gap:12px}
+.bq-precio{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.bq-precio input{width:100%;min-width:0;font:inherit;font-size:16px;color:var(--ink);
+    background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 12px}
+.bq-precio input::placeholder{color:var(--muted);opacity:.7}
+.bq-precio input:focus{outline:0;border-color:var(--blue-lt);box-shadow:0 0 0 3px rgba(46,107,230,.16)}
 .bq-vender-tx{margin:0 0 14px;font-size:15px;line-height:1.5;color:var(--ink)}
 #bqComprar[hidden],#bqVender[hidden]{display:none}
 #bqVender .btn{width:100%}
@@ -1099,18 +1104,15 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
             </optgroup>
             </select>
           </label>
-          <label class="bq-field">
-            <span>Precio</span>
-            <select id="bqPrecio">
-              <option value="">Cualquiera</option>
-              <option value="0:100000">Hasta USD 100.000</option>
-              <option value="100000:150000">USD 100 a 150.000</option>
-              <option value="150000:200000">USD 150 a 200.000</option>
-              <option value="200000:300000">USD 200 a 300.000</option>
-              <option value="300000:500000">USD 300 a 500.000</option>
-              <option value="500000:99000000">Más de USD 500.000</option>
-            </select>
-          </label>
+          <div class="bq-field">
+            <span>Precio en USD</span>
+            <div class="bq-precio">
+              <input id="bqMin" type="text" inputmode="numeric" autocomplete="off"
+                     placeholder="Desde" aria-label="Precio desde, en dólares">
+              <input id="bqMax" type="text" inputmode="numeric" autocomplete="off"
+                     placeholder="Hasta" aria-label="Precio hasta, en dólares">
+            </div>
+          </div>
           <label class="bq-field">
             <span>Ambientes</span>
             <select id="bqAmb">
@@ -2282,29 +2284,55 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
     if (window.gtag) gtag('event', 'buscador_a_tasacion');
   });
 
+  // Los campos de precio se escriben con separador de miles mientras se tipea.
+  var minEl = document.getElementById('bqMin'), maxEl = document.getElementById('bqMax');
+  var soloNumeros = function(v){ return (v || '').replace(/\D/g, ''); };
+  [minEl, maxEl].forEach(function(el){
+    if (!el) return;
+    el.addEventListener('input', function(){
+      var n = soloNumeros(el.value);
+      el.value = n ? Number(n).toLocaleString('es-AR') : '';
+    });
+  });
+
+  // RE/MAX devuelve CERO resultados si el tope es un número enorme, así que cuando no
+  // se pone "Hasta" se usa 5.000.000, que en dólares cubre cualquier propiedad de acá.
+  var TOPE = 5000000;
+
   form.addEventListener('submit', function(e){
     e.preventDefault();
     var zona = document.getElementById('bqZona').value;
-    var precio = document.getElementById('bqPrecio').value;
     var amb = document.getElementById('bqAmb').value;
+    var min = parseInt(soloNumeros(minEl && minEl.value), 10);
+    var max = parseInt(soloNumeros(maxEl && maxEl.value), 10);
+    if (isNaN(min)) min = null;
+    if (isNaN(max)) max = null;
+    // Si los cargó al revés, se ordenan solos en vez de no devolver nada.
+    if (min !== null && max !== null && min > max) { var t = min; min = max; max = t; }
 
+    var hayPrecio = (min !== null || max !== null);
     var filtros = [];
-    if (precio) {
-      var r = precio.split(':');
-      filtros.push('pricein=1:' + r[0] + ':' + r[1], 'eq:currencyId=1');
+    if (hayPrecio) {
+      filtros.push('pricein=1:' + (min !== null ? min : 0) + ':' + (max !== null ? max : TOPE),
+                   'eq:currencyId=1');
     }
     if (amb) {
       var a = amb.split(':');
       filtros.push((a[0] === 'gte' ? 'gte:totalRooms=' : 'eq:totalRooms=') + a[1]);
     }
     // filterCount cuenta filtros para el usuario, no parámetros: precio va con currencyId.
-    var cuantos = (precio ? 1 : 0) + (amb ? 1 : 0);
+    var cuantos = (hayPrecio ? 1 : 0) + (amb ? 1 : 0);
     if (cuantos) filtros.push('filterCount=' + cuantos);
 
     var url = 'https://fcastro.remax.com.ar/listings/buy?landingPath=propiedades-en-venta-en-' + zona +
               (filtros.length ? '&' + filtros.join('&') : '');
 
-    if (window.gtag) gtag('event', 'buscar_propiedades', { zona: zona, precio: precio || 'cualquiera', ambientes: amb || 'cualquiera' });
+    if (window.gtag) gtag('event', 'buscar_propiedades', {
+      zona: zona,
+      precio_desde: min !== null ? min : 'sin tope',
+      precio_hasta: max !== null ? max : 'sin tope',
+      ambientes: amb || 'cualquiera'
+    });
     window.open(url, '_blank', 'noopener');
   });
 })();
