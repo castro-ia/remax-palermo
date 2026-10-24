@@ -1,4 +1,4 @@
-name: Actualizar datos del mercado
+name: Actualizar datos del mercado y reseñas
 
 on:
   schedule:
@@ -27,16 +27,23 @@ jobs:
       - name: Leer las fuentes y actualizar el JSON
         run: python scripts/actualizar-datos.py
 
+      # Si el secret GOOGLE_PLACES_API_KEY no está cargado, el script no hace nada
+      # y la página sigue mostrando los números que tiene en datos-resenas.json.
+      - name: Actualizar las reseñas de Google
+        env:
+          GOOGLE_PLACES_API_KEY: ${{ secrets.GOOGLE_PLACES_API_KEY }}
+        run: python scripts/actualizar-resenas.py
+
       - name: Commitear solo si algo cambió
         run: |
-          if git diff --quiet -- datos-mercado.json; then
+          if git diff --quiet -- datos-mercado.json datos-resenas.json; then
             echo "Sin cambios en los datos."
             exit 0
           fi
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add datos-mercado.json
-          git commit -m "Actualiza datos del mercado
+          git add datos-mercado.json datos-resenas.json
+          git commit -m "Actualiza datos del mercado y reseñas
 
           Cambios tomados de las fuentes oficiales por el script programado.
 

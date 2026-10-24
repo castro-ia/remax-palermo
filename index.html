@@ -255,7 +255,15 @@ a.chip:hover{background:rgba(255,255,255,.15);transform:translateY(-1px)}
 @media(prefers-reduced-motion:reduce){
   .bq{animation:none}
 }
+.bq-ops{display:inline-flex;gap:4px;background:var(--cream);border:1px solid var(--line);
+    border-radius:999px;padding:4px;margin-bottom:14px}
+.bq-op{appearance:none;border:0;background:transparent;cursor:pointer;font:inherit;
+    font-weight:700;font-size:14px;color:var(--muted);padding:9px 18px;border-radius:999px;transition:.18s}
+.bq-op.is-on{background:var(--blue);color:#fff;box-shadow:0 2px 10px rgba(0,61,165,.28)}
 .bq-row{display:grid;gap:12px}
+.bq-vender-tx{margin:0 0 14px;font-size:15px;line-height:1.5;color:var(--ink)}
+#bqComprar[hidden],#bqVender[hidden]{display:none}
+#bqVender .btn{width:100%}
 .bq-field{display:block}
 .bq-field span{display:block;font-size:11.5px;font-weight:700;letter-spacing:.1em;
     text-transform:uppercase;color:var(--muted);margin-bottom:7px}
@@ -270,9 +278,14 @@ a.chip:hover{background:rgba(255,255,255,.15);transform:translateY(-1px)}
 @media(min-width:720px){
   .buscador{padding:30px 0}
   .bq{padding:20px 22px}
-  .bq-row{grid-template-columns:1fr auto;align-items:end;gap:14px}
-  .btn-buscar{width:auto;padding-inline:30px}
+  /* Zona manda sobre precio y ambientes: es lo primero que define la búsqueda. */
+  .bq-row{grid-template-columns:1.5fr 1fr 1fr auto;align-items:end;gap:12px}
+  .btn-buscar{width:auto;padding-inline:26px}
   .bq-nota{margin-top:13px}
+  #bqVender{display:grid;grid-template-columns:1fr auto;align-items:center;gap:20px}
+  #bqVender .bq-vender-tx{margin:0;grid-column:1}
+  #bqVender .btn{width:auto;padding-inline:26px;grid-column:2;grid-row:1}
+  #bqVender .bq-nota{grid-column:1/-1;margin:0}
 }
 
 /* ---------- sections ---------- */
@@ -970,8 +983,8 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
         <p class="lede">Soy <strong>Fernando Castro</strong>, agente inmobiliario de <strong>RE/MAX Premium 1</strong>. Estoy de la mañana a la noche, todos los días, y te digo el precio real de tu propiedad —no el que querés escuchar—. <strong>Tasación sin cargo en 48hs.</strong></p>
 
         <div class="rating-row">
-          <a class="chip" href="https://share.google/ayJGn7dHlrtmHFuXk" target="_blank" rel="noopener"><span class="stars">★★★★★</span> 5,0 Palermo · 96 reseñas</a>
-          <a class="chip" href="https://www.google.com/maps?cid=6989701403040711240" target="_blank" rel="noopener"><span class="stars">★★★★★</span> 4,9 San Justo · 161 reseñas</a>
+          <a class="chip" href="https://share.google/ayJGn7dHlrtmHFuXk" target="_blank" rel="noopener"><span class="stars">★★★★★</span> <span data-rs="chip-palermo">5,0 Palermo · 96 reseñas</span></a>
+          <a class="chip" href="https://www.google.com/maps?cid=6989701403040711240" target="_blank" rel="noopener"><span class="stars">★★★★★</span> <span data-rs="chip-sanjusto">4,9 San Justo · 161 reseñas</span></a>
         </div>
 
         <div class="cta-row">
@@ -1001,7 +1014,7 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
       <div class="stats-grid">
         <div class="stat"><b data-count="260" data-suf="+">260+</b><span>Operaciones</span></div>
         <div class="stat"><b data-count="8" data-suf=" años">8 años</b><span>En el mercado</span></div>
-        <div class="stat"><b data-count="257">257</b><span>Reseñas Google</span></div>
+        <div class="stat"><b data-count="257" data-rs="total-stat">257</b><span>Reseñas Google</span></div>
         <div class="stat"><b data-count="48" data-suf="hs">48hs</b><span>Tasación lista</span></div>
       </div>
     </div>
@@ -1012,10 +1025,16 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
 <section class="buscador" id="buscar" aria-label="Buscar propiedades">
   <div class="wrap">
     <form class="bq rv" id="bqForm">
-      <div class="bq-row">
-        <label class="bq-field">
-          <span>¿En qué zona?</span>
-          <select id="bqZona">
+      <div class="bq-ops" role="group" aria-label="Qué querés hacer">
+        <button type="button" class="bq-op is-on" data-modo="comprar" aria-pressed="true">Quiero comprar</button>
+        <button type="button" class="bq-op" data-modo="vender" aria-pressed="false">Quiero vender</button>
+      </div>
+
+      <div class="bq-panel" id="bqComprar">
+        <div class="bq-row">
+          <label class="bq-field bq-zona">
+            <span>¿En qué zona?</span>
+            <select id="bqZona">
             <optgroup label="Capital Federal">
               <option value="agronomia-capital-federal">Agronomía</option>
               <option value="almagro-capital-federal">Almagro</option>
@@ -1078,14 +1097,50 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
               <option value="caseros-tresde-febrero-buenos-aires">Caseros</option>
               <option value="merlo-merlo-buenos-aires">Merlo</option>
             </optgroup>
-          </select>
-        </label>
-        <button class="btn btn-buscar" type="submit">
-          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-          Ver propiedades en venta
-        </button>
+            </select>
+          </label>
+          <label class="bq-field">
+            <span>Precio</span>
+            <select id="bqPrecio">
+              <option value="">Cualquiera</option>
+              <option value="0:100000">Hasta USD 100.000</option>
+              <option value="100000:150000">USD 100 a 150.000</option>
+              <option value="150000:200000">USD 150 a 200.000</option>
+              <option value="200000:300000">USD 200 a 300.000</option>
+              <option value="300000:500000">USD 300 a 500.000</option>
+              <option value="500000:99000000">Más de USD 500.000</option>
+            </select>
+          </label>
+          <label class="bq-field">
+            <span>Ambientes</span>
+            <select id="bqAmb">
+              <option value="">Cualquiera</option>
+              <option value="eq:1">1 ambiente</option>
+              <option value="eq:2">2 ambientes</option>
+              <option value="eq:3">3 ambientes</option>
+              <option value="eq:4">4 ambientes</option>
+              <option value="gte:5">5 o más</option>
+            </select>
+          </label>
+          <button class="btn btn-buscar" type="submit">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+            Ver propiedades
+          </button>
+        </div>
+        <p class="bq-nota">Abre mi buscador en RE/MAX. En todas las propiedades el contacto soy yo.</p>
       </div>
-      <p class="bq-nota">Abre mi buscador en RE/MAX. En todas las propiedades el contacto soy yo.</p>
+
+      <div class="bq-panel" id="bqVender" hidden>
+        <p class="bq-vender-tx">
+          Te digo el precio real de tu propiedad en 48hs, sin cargo y sin compromiso. Un análisis
+          comparativo de verdad: a cuánto cerraron las ventas de tu cuadra, no a cuánto se publican.
+        </p>
+        <a class="btn btn-wa" href="#tasacion" id="bqIrTasacion">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/><path d="M9.5 21v-7h5v7"/></svg>
+          Cuánto vale mi propiedad
+        </a>
+        <p class="bq-nota">Tasación sin cargo · Respuesta en 24 a 48hs por WhatsApp.</p>
+      </div>
     </form>
   </div>
 </section>
@@ -1428,7 +1483,7 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
 <section id="resenas">
   <div class="wrap">
     <div class="sec-head rv">
-      <span class="kicker">257 reseñas · 5,0 ★</span>
+      <span class="kicker" data-rs="kicker">257 reseñas · 5,0 ★</span>
       <h2>Lo que dicen los que ya vendieron conmigo.</h2>
       <p>Reseñas verificadas en Google, de propietarios reales de Palermo y Zona Oeste.</p>
     </div>
@@ -1466,13 +1521,13 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
 
     <div class="gbadges">
       <a class="gbadge rv" href="https://share.google/ayJGn7dHlrtmHFuXk" target="_blank" rel="noopener">
-        <span class="score" data-count="5" data-dec="1">5,0</span>
-        <span class="meta"><b>Palermo · CABA</b><span>96 reseñas en Google</span></span>
+        <span class="score" data-count="5" data-dec="1" data-rs="score-palermo">5,0</span>
+        <span class="meta"><b>Palermo · CABA</b><span data-rs="meta-palermo">96 reseñas en Google</span></span>
         <svg class="arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
       </a>
       <a class="gbadge rv" href="https://www.google.com/maps?cid=6989701403040711240" target="_blank" rel="noopener">
-        <span class="score" data-count="4.9" data-dec="1">4,9</span>
-        <span class="meta"><b>RE/MAX San Justo</b><span>161 reseñas en Google</span></span>
+        <span class="score" data-count="4.9" data-dec="1" data-rs="score-sanjusto">4,9</span>
+        <span class="meta"><b>RE/MAX San Justo</b><span data-rs="meta-sanjusto">161 reseñas en Google</span></span>
         <svg class="arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
       </a>
     </div>
@@ -1664,7 +1719,7 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
     </div>
 
     <div class="final-proof">
-      <span><span class="st">★★★★★</span> 5,0 en Google · 257 reseñas</span>
+      <span><span class="st">★★★★★</span> <span data-rs="linea-total">5,0 en Google · 257 reseñas</span></span>
       <span>260+ operaciones cerradas</span>
       <span>Respuesta en 24 a 48hs</span>
     </div>
@@ -2193,19 +2248,63 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
 })();
 </script>
 <script>
-/* Buscador: arma la URL del buscador de RE/MAX de Fernando. El patrón
-   (/listings/buy + landingPath=propiedades-en-venta-en-SLUG) está verificado contra
-   el sitio; si RE/MAX lo cambia, hay que revisar acá. Solo venta: alquiler se sacó
-   a pedido de Fernando. */
+/* Buscador. Dos modos: comprar (manda al buscador de RE/MAX ya filtrado) y vender
+   (lleva al formulario de tasación, que es el negocio principal).
+
+   Parámetros de RE/MAX verificados uno por uno contra el sitio:
+     landingPath=propiedades-en-venta-en-SLUG   la zona
+     pricein=1:MIN:MAX  +  eq:currencyId=1      el precio en USD
+     eq:totalRooms=N                            ambientes exactos
+     gte:totalRooms=N                           N o más ambientes
+     filterCount=N                              cuántos filtros hay puestos
+   Ojo: un landingPath inválido NO da error, muestra las 65.000 del país entero. */
 (function(){
   var form = document.getElementById('bqForm');
   if (!form) return;
+  var paneles = { comprar: document.getElementById('bqComprar'), vender: document.getElementById('bqVender') };
+
+  form.querySelectorAll('.bq-op').forEach(function(b){
+    b.addEventListener('click', function(){
+      form.querySelectorAll('.bq-op').forEach(function(o){
+        var on = o === b;
+        o.classList.toggle('is-on', on);
+        o.setAttribute('aria-pressed', on ? 'true' : 'false');
+      });
+      Object.keys(paneles).forEach(function(k){
+        if (paneles[k]) paneles[k].hidden = (k !== b.dataset.modo);
+      });
+      if (window.gtag) gtag('event', 'buscador_modo', { modo: b.dataset.modo });
+    });
+  });
+
+  var irTasacion = document.getElementById('bqIrTasacion');
+  if (irTasacion) irTasacion.addEventListener('click', function(){
+    if (window.gtag) gtag('event', 'buscador_a_tasacion');
+  });
+
   form.addEventListener('submit', function(e){
     e.preventDefault();
     var zona = document.getElementById('bqZona').value;
-    var url = 'https://fcastro.remax.com.ar/listings/buy' +
-              '?landingPath=propiedades-en-venta-en-' + zona;
-    if (window.gtag) gtag('event', 'buscar_propiedades', { zona: zona });
+    var precio = document.getElementById('bqPrecio').value;
+    var amb = document.getElementById('bqAmb').value;
+
+    var filtros = [];
+    if (precio) {
+      var r = precio.split(':');
+      filtros.push('pricein=1:' + r[0] + ':' + r[1], 'eq:currencyId=1');
+    }
+    if (amb) {
+      var a = amb.split(':');
+      filtros.push((a[0] === 'gte' ? 'gte:totalRooms=' : 'eq:totalRooms=') + a[1]);
+    }
+    // filterCount cuenta filtros para el usuario, no parámetros: precio va con currencyId.
+    var cuantos = (precio ? 1 : 0) + (amb ? 1 : 0);
+    if (cuantos) filtros.push('filterCount=' + cuantos);
+
+    var url = 'https://fcastro.remax.com.ar/listings/buy?landingPath=propiedades-en-venta-en-' + zona +
+              (filtros.length ? '&' + filtros.join('&') : '');
+
+    if (window.gtag) gtag('event', 'buscar_propiedades', { zona: zona, precio: precio || 'cualquiera', ambientes: amb || 'cualquiera' });
     window.open(url, '_blank', 'noopener');
   });
 })();
@@ -2234,5 +2333,55 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
   }).catch(function(){});
 })();
 </script>
+<script>
+/* Reseñas de Google. Los números están escritos en el HTML para que la página se vea
+   bien aunque el JSON no cargue, y acá se pisan con los de datos-resenas.json, que
+   actualiza el workflow todos los días (o se edita a mano si no hay clave de API).
+   Así se cambia en un solo lugar y no en los nueve donde aparecen. */
+(function(){
+  var nodos = document.querySelectorAll('[data-rs]');
+  if (!nodos.length) return;
+
+  fetch('datos-resenas.json', { cache: 'no-cache' })
+    .then(function(r){ return r.json(); })
+    .then(function(d){
+      var f = {};
+      (d.fichas || []).forEach(function(x){ f[x.id] = x; });
+      var pal = f['palermo'], sj = f['san-justo'];
+      if (!pal || !sj) return;
+
+      var total = pal.resenas + sj.resenas;
+      // Promedio ponderado por cantidad: con 96 y 161 reseñas no pesan igual.
+      var prom = (pal.puntaje * pal.resenas + sj.puntaje * sj.resenas) / total;
+      var coma = function(n){ return n.toFixed(1).replace('.', ','); };
+      var miles = function(n){ return n.toLocaleString('es-AR'); };
+
+      var textos = {
+        'chip-palermo':   coma(pal.puntaje) + ' ' + pal.nombreCorto + ' · ' + miles(pal.resenas) + ' reseñas',
+        'chip-sanjusto':  coma(sj.puntaje) + ' ' + sj.nombreCorto + ' · ' + miles(sj.resenas) + ' reseñas',
+        'total-stat':     miles(total),
+        'kicker':         miles(total) + ' reseñas · ' + coma(prom) + ' ★',
+        'score-palermo':  coma(pal.puntaje),
+        'score-sanjusto': coma(sj.puntaje),
+        'meta-palermo':   miles(pal.resenas) + ' reseñas en Google',
+        'meta-sanjusto':  miles(sj.resenas) + ' reseñas en Google',
+        'linea-total':    coma(prom) + ' en Google · ' + miles(total) + ' reseñas'
+      };
+
+      nodos.forEach(function(n){
+        var t = textos[n.dataset.rs];
+        if (t === undefined) return;
+        n.textContent = t;
+        // El contador animado lee data-count, así que también hay que corregirlo.
+        if (n.hasAttribute('data-count')) {
+          n.setAttribute('data-count', n.dataset.rs === 'total-stat' ? total
+            : (n.dataset.rs === 'score-palermo' ? pal.puntaje : sj.puntaje));
+        }
+      });
+    })
+    .catch(function(){ /* si falla, quedan los números del HTML */ });
+})();
+</script>
+
 </body>
 </html>
