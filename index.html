@@ -231,6 +231,30 @@ a.chip:hover{background:rgba(255,255,255,.15);transform:translateY(-1px)}
   .cta-row{flex-direction:row}
 }
 
+/* ---------- buscador ---------- */
+.buscador{background:var(--cream);border-bottom:1px solid var(--line);padding:26px 0}
+.bq{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);
+    box-shadow:var(--sh);padding:18px}
+.bq-row{display:grid;gap:12px}
+.bq-field{display:block}
+.bq-field span{display:block;font-size:11.5px;font-weight:700;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--muted);margin-bottom:7px}
+.bq-field select{width:100%;appearance:none;font:inherit;font-size:16px;color:var(--ink);
+    background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='none' stroke='%235A6479' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='M5 8l5 5 5-5'/%3E%3C/svg%3E") no-repeat right 14px center;
+    border:1px solid var(--line);border-radius:14px;padding:14px 44px 14px 16px;cursor:pointer}
+.bq-field select:focus{outline:0;border-color:var(--blue-lt);box-shadow:0 0 0 3px rgba(46,107,230,.16)}
+.btn-buscar{background:var(--blue);color:#fff;width:100%;
+    box-shadow:0 4px 16px rgba(0,61,165,.34)}
+.btn-buscar:hover{background:#00318a;transform:translateY(-2px);box-shadow:0 10px 28px rgba(0,61,165,.42)}
+.bq-nota{margin:12px 0 0;font-size:12.5px;color:var(--muted)}
+@media(min-width:720px){
+  .buscador{padding:30px 0}
+  .bq{padding:20px 22px}
+  .bq-row{grid-template-columns:1fr auto;align-items:end;gap:14px}
+  .btn-buscar{width:auto;padding-inline:30px}
+  .bq-nota{margin-top:13px}
+}
+
 /* ---------- sections ---------- */
 section{padding:62px 0}
 .sec-head{max-width:620px;margin-bottom:34px}
@@ -963,6 +987,88 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
     </div>
   </div>
 </header>
+
+<!-- ===== BUSCADOR ===== -->
+<section class="buscador" id="buscar" aria-label="Buscar propiedades">
+  <div class="wrap">
+    <form class="bq rv" id="bqForm">
+      <div class="bq-row">
+        <label class="bq-field">
+          <span>¿En qué zona?</span>
+          <select id="bqZona">
+            <optgroup label="Capital Federal">
+              <option value="agronomia-capital-federal">Agronomía</option>
+              <option value="almagro-capital-federal">Almagro</option>
+              <option value="balvanera-capital-federal">Balvanera</option>
+              <option value="barracas-capital-federal">Barracas</option>
+              <option value="belgrano-capital-federal">Belgrano</option>
+              <option value="boedo-capital-federal">Boedo</option>
+              <option value="caballito-capital-federal">Caballito</option>
+              <option value="chacarita-capital-federal">Chacarita</option>
+              <option value="coghlan-capital-federal">Coghlan</option>
+              <option value="colegiales-capital-federal">Colegiales</option>
+              <option value="constitucion-capital-federal">Constitución</option>
+              <option value="flores-capital-federal">Flores</option>
+              <option value="floresta-capital-federal">Floresta</option>
+              <option value="la-boca-capital-federal">La Boca</option>
+              <option value="la-paternal-capital-federal">La Paternal</option>
+              <option value="liniers-capital-federal">Liniers</option>
+              <option value="mataderos-capital-federal">Mataderos</option>
+              <option value="monserrat-capital-federal">Monserrat</option>
+              <option value="monte-castro-capital-federal">Monte Castro</option>
+              <option value="nueva-pompeya-capital-federal">Nueva Pompeya</option>
+              <option value="nunez-capital-federal">Núñez</option>
+              <option value="palermo-capital-federal" selected>Palermo</option>
+              <option value="parque-avellaneda-capital-federal">Parque Avellaneda</option>
+              <option value="parque-chacabuco-capital-federal">Parque Chacabuco</option>
+              <option value="parque-chas-capital-federal">Parque Chas</option>
+              <option value="parque-patricios-capital-federal">Parque Patricios</option>
+              <option value="puerto-madero-capital-federal">Puerto Madero</option>
+              <option value="recoleta-capital-federal">Recoleta</option>
+              <option value="retiro-capital-federal">Retiro</option>
+              <option value="saavedra-capital-federal">Saavedra</option>
+              <option value="san-cristobal-capital-federal">San Cristóbal</option>
+              <option value="san-nicolas-capital-federal">San Nicolás</option>
+              <option value="san-telmo-capital-federal">San Telmo</option>
+              <option value="velez-sarsfield-capital-federal">Vélez Sársfield</option>
+              <option value="versalles-capital-federal">Versalles</option>
+              <option value="villa-crespo-capital-federal">Villa Crespo</option>
+              <option value="villa-del-parque-capital-federal">Villa del Parque</option>
+              <option value="villa-devoto-capital-federal">Villa Devoto</option>
+              <option value="villa-general-mitre-capital-federal">Villa General Mitre</option>
+              <option value="villa-lugano-capital-federal">Villa Lugano</option>
+              <option value="villa-luro-capital-federal">Villa Luro</option>
+              <option value="villa-ortuzar-capital-federal">Villa Ortúzar</option>
+              <option value="villa-pueyrredon-capital-federal">Villa Pueyrredón</option>
+              <option value="villa-real-capital-federal">Villa Real</option>
+              <option value="villa-riachuelo-capital-federal">Villa Riachuelo</option>
+              <option value="villa-santa-rita-capital-federal">Villa Santa Rita</option>
+              <option value="villa-soldati-capital-federal">Villa Soldati</option>
+              <option value="villa-urquiza-capital-federal">Villa Urquiza</option>
+            </optgroup>
+            <optgroup label="Zona Oeste y alrededores">
+              <option value="ramos-mejia-la-matanza-buenos-aires">Ramos Mejía</option>
+              <option value="san-justo-la-matanza-buenos-aires">San Justo</option>
+              <option value="villa-luzuriaga-la-matanza-buenos-aires">Villa Luzuriaga</option>
+              <option value="lomas-del-mirador-la-matanza-buenos-aires">Lomas del Mirador</option>
+              <option value="haedo-moron-buenos-aires">Haedo</option>
+              <option value="moron-moron-buenos-aires">Morón</option>
+              <option value="castelar-moron-buenos-aires">Castelar</option>
+              <option value="ituzaingo-ituzaingo-buenos-aires">Ituzaingó</option>
+              <option value="caseros-tresde-febrero-buenos-aires">Caseros</option>
+              <option value="merlo-merlo-buenos-aires">Merlo</option>
+            </optgroup>
+          </select>
+        </label>
+        <button class="btn btn-buscar" type="submit">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          Ver propiedades en venta
+        </button>
+      </div>
+      <p class="bq-nota">Abre mi buscador en RE/MAX. En todas las propiedades el contacto soy yo.</p>
+    </form>
+  </div>
+</section>
 
 <!-- ===== TASACIÓN ===== -->
 <section class="valuation" id="tasacion">
@@ -2066,6 +2172,25 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
   }
 })();
 </script>
+<script>
+/* Buscador: arma la URL del buscador de RE/MAX de Fernando. El patrón
+   (/listings/buy + landingPath=propiedades-en-venta-en-SLUG) está verificado contra
+   el sitio; si RE/MAX lo cambia, hay que revisar acá. Solo venta: alquiler se sacó
+   a pedido de Fernando. */
+(function(){
+  var form = document.getElementById('bqForm');
+  if (!form) return;
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var zona = document.getElementById('bqZona').value;
+    var url = 'https://fcastro.remax.com.ar/listings/buy' +
+              '?landingPath=propiedades-en-venta-en-' + zona;
+    if (window.gtag) gtag('event', 'buscar_propiedades', { zona: zona });
+    window.open(url, '_blank', 'noopener');
+  });
+})();
+</script>
+
 <script>
 /* El video del hero se carga solo si la pantalla es grande y el visitante no pidió
    menos movimiento. En celular el <source> queda sin src, así que no se descarga nada
