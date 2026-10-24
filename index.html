@@ -1483,7 +1483,7 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
 <section id="resenas">
   <div class="wrap">
     <div class="sec-head rv">
-      <span class="kicker" data-rs="kicker">257 reseñas · 5,0 ★</span>
+      <span class="kicker" data-rs="kicker">257 reseñas · 5,0 en Palermo</span>
       <h2>Lo que dicen los que ya vendieron conmigo.</h2>
       <p>Reseñas verificadas en Google, de propietarios reales de Palermo y Zona Oeste.</p>
     </div>
@@ -1719,7 +1719,7 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
     </div>
 
     <div class="final-proof">
-      <span><span class="st">★★★★★</span> <span data-rs="linea-total">5,0 en Google · 257 reseñas</span></span>
+      <span><span class="st">★★★★★</span> <span data-rs="linea-total">5,0 en Palermo · 257 reseñas en Google</span></span>
       <span>260+ operaciones cerradas</span>
       <span>Respuesta en 24 a 48hs</span>
     </div>
@@ -2351,8 +2351,6 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
       if (!pal || !sj) return;
 
       var total = pal.resenas + sj.resenas;
-      // Promedio ponderado por cantidad: con 96 y 161 reseñas no pesan igual.
-      var prom = (pal.puntaje * pal.resenas + sj.puntaje * sj.resenas) / total;
       var coma = function(n){ return n.toFixed(1).replace('.', ','); };
       var miles = function(n){ return n.toLocaleString('es-AR'); };
 
@@ -2360,12 +2358,12 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
         'chip-palermo':   coma(pal.puntaje) + ' ' + pal.nombreCorto + ' · ' + miles(pal.resenas) + ' reseñas',
         'chip-sanjusto':  coma(sj.puntaje) + ' ' + sj.nombreCorto + ' · ' + miles(sj.resenas) + ' reseñas',
         'total-stat':     miles(total),
-        'kicker':         miles(total) + ' reseñas · ' + coma(prom) + ' ★',
+        'kicker':         miles(total) + ' reseñas · ' + coma(pal.puntaje) + ' en Palermo',
         'score-palermo':  coma(pal.puntaje),
         'score-sanjusto': coma(sj.puntaje),
         'meta-palermo':   miles(pal.resenas) + ' reseñas en Google',
         'meta-sanjusto':  miles(sj.resenas) + ' reseñas en Google',
-        'linea-total':    coma(prom) + ' en Google · ' + miles(total) + ' reseñas'
+        'linea-total':    coma(pal.puntaje) + ' en Palermo · ' + miles(total) + ' reseñas en Google'
       };
 
       nodos.forEach(function(n){
