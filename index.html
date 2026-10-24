@@ -121,6 +121,29 @@ p{margin:0}
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 .hero .wrap{position:relative;z-index:2}
+
+/* --- fondo de video del hero --- */
+.hero-video{display:none}
+@media(min-width:860px){
+  .hero-video{
+    display:block;position:absolute;inset:0;width:100%;height:100%;
+    object-fit:cover;z-index:0;pointer-events:none;
+    /* En la toma original Fernando está a la izquierda, justo debajo del texto. Se
+       agranda y se corre a la derecha para que la entrega quede en la mitad libre. */
+    transform:scale(1.26) translateX(13%);
+    transform-origin:center center;
+  }
+  /* Capa oscura: sin esto el texto blanco no se lee sobre la toma, que es clara. */
+  .hero-overlay{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+    background:linear-gradient(90deg,rgba(6,18,38,.92) 0%,rgba(6,18,38,.78) 46%,rgba(6,18,38,.45) 100%);}
+  .hero::before,.hero::after{z-index:1}
+  /* Con video de fondo el retrato sobra: el texto ocupa el ancho, como en el referente. */
+  .hero.has-video .portrait-wrap{display:none}
+  .hero.has-video .hero-grid{grid-template-columns:1fr;max-width:760px}
+}
+@media(prefers-reduced-motion:reduce){
+  .hero-video{display:none}
+}
 .hero-grid{display:grid;gap:30px;align-items:center}
 
 .eyebrow{
@@ -887,6 +910,14 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
 
 <!-- ===== HERO ===== -->
 <header class="hero" id="top">
+  <!-- Fondo de video: solo en pantallas grandes. En el celular no se carga ni un byte
+       (el <source> arranca sin src y el JS lo completa solo si corresponde), y queda
+       el hero de siempre con la foto. -->
+  <video class="hero-video" id="heroVideo" muted loop playsinline preload="none"
+         data-poster="img/hero-poster.jpg" aria-hidden="true" tabindex="-1">
+    <source data-src="video/hero-llaves.mp4" type="video/mp4">
+  </video>
+  <div class="hero-overlay" aria-hidden="true"></div>
   <div class="wrap">
     <div class="hero-grid">
       <div>
@@ -2033,6 +2064,29 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
       window.open("https://wa.me/5491150379426?text="+encodeURIComponent(parts.join("\n")),"_blank","noopener");
     });
   }
+})();
+</script>
+<script>
+/* El video del hero se carga solo si la pantalla es grande y el visitante no pidió
+   menos movimiento. En celular el <source> queda sin src, así que no se descarga nada
+   y el hero se ve como siempre. */
+(function(){
+  var v = document.getElementById('heroVideo');
+  if (!v) return;
+  var chica = window.matchMedia('(max-width:859px)').matches;
+  var quietud = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  if (chica || quietud) return;
+
+  // El poster también se asigna acá: como atributo fijo, el navegador lo descargaba
+  // incluso con el video en display:none.
+  v.poster = v.dataset.poster;
+  var src = v.querySelector('source');
+  src.src = src.dataset.src;
+  v.load();
+  // Si el navegador bloquea la reproducción, queda el poster: no se rompe nada.
+  v.play().then(function(){
+    document.getElementById('top').classList.add('has-video');
+  }).catch(function(){});
 })();
 </script>
 </body>
