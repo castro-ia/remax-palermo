@@ -1480,8 +1480,8 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
     </div>
 
     <div class="ba rv" id="ba" style="--pos:50%">
-      <img id="ba-despues" src="img/terraza-despues.jpg" width="1080" height="720" alt="La misma terraza amueblada virtualmente, con parrilla, mesa y jardín vertical" loading="lazy" decoding="async">
-      <img id="ba-antes" class="ba-antes" src="img/terraza-antes.jpg" width="1080" height="720" alt="La terraza vacía, antes del amueblamiento virtual" loading="lazy" decoding="async">
+      <img id="ba-despues" src="img/terraza-despues.jpg?v=2" width="1080" height="720" alt="La misma terraza amueblada virtualmente, con parrilla, mesa y jardín vertical" loading="lazy" decoding="async">
+      <img id="ba-antes" class="ba-antes" src="img/terraza-antes.jpg?v=2" width="1080" height="720" alt="La terraza vacía, antes del amueblamiento virtual" loading="lazy" decoding="async">
       <span class="ba-tag izq">Antes · vacío</span>
       <span class="ba-tag der">Después · amueblado</span>
       <input type="range" id="ba-rango" min="0" max="100" value="50" step="0.5" aria-label="Deslizá para comparar el ambiente vacío con el amueblado">
@@ -1553,9 +1553,9 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
 
     <div class="drone-pantalla rv">
       <!-- si todavia no existe video/drone.mp4, queda el poster y el HUD encima -->
-      <video id="droneVid" poster="img/drone-poster.jpg" autoplay muted loop playsinline preload="none"
+      <video id="droneVid" poster="img/drone-poster.jpg?v=2" autoplay muted loop playsinline preload="none"
              aria-label="Vuelo de drone sobre el barrio">
-        <source src="video/drone.mp4" type="video/mp4">
+        <source src="video/drone.mp4?v=2" type="video/mp4">
       </video>
       <span class="hud hud-si"><span class="hud-rec"></span>REC 00:<span id="droneSeg">00</span></span>
       <span class="hud hud-sd">4K · 30 FPS</span>
@@ -2500,9 +2500,9 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
 
     /* cambio de ambiente. Precargo el otro par para que no parpadee */
     var ambientes={
-      terraza:{antes:"img/terraza-antes.jpg", despues:"img/terraza-despues.jpg", nombre:"terraza"},
-      living: {antes:"img/living-antes.jpg",  despues:"img/living-despues.jpg",  nombre:"living comedor"},
-      dorm:   {antes:"img/dorm-antes.jpg",    despues:"img/dorm-despues.jpg",    nombre:"dormitorio"}
+      terraza:{antes:"img/terraza-antes.jpg?v=2", despues:"img/terraza-despues.jpg?v=2", nombre:"terraza"},
+      living: {antes:"img/living-antes.jpg?v=2",  despues:"img/living-despues.jpg?v=2",  nombre:"living comedor"},
+      dorm:   {antes:"img/dorm-antes.jpg?v=2",    despues:"img/dorm-despues.jpg?v=2",    nombre:"dormitorio"}
     };
     Object.keys(ambientes).forEach(function(k){
       [ambientes[k].antes, ambientes[k].despues].forEach(function(u){ new Image().src=u; });
