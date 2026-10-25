@@ -775,6 +775,35 @@ select option{background:#0F1F42;color:#fff}
   .prod-cta .btn{margin-inline:0}
 }
 
+/* ---------- compactacion del bloque de servicios ----------
+   Son cuatro secciones seguidas: con el aire de siempre empujan las ventas y
+   las resenas demasiado abajo. Aca van mas juntas que el resto de la pagina. */
+#amueblamiento,#propuesta,#drone,#produccion{padding:46px 0}
+#amueblamiento .sec-head,#propuesta .sec-head,#drone .sec-head,#produccion .sec-head{margin-bottom:24px}
+#amueblamiento .sec-head p,#propuesta .sec-head p,#drone .sec-head p{margin-top:10px;font-size:.98rem}
+.amu-ben{gap:20px;margin-top:26px}
+.pv-grid{gap:14px}
+.pv-card{padding:18px}
+.drone-tomas{gap:14px;margin-top:20px}
+.drone-toma{padding:15px}
+.prod-pasos{gap:18px}
+.prod-cta{margin-top:28px;padding:26px 22px}
+@media(max-width:760px){
+  #amueblamiento,#propuesta,#drone,#produccion{padding:36px 0}
+  /* en el celular las tarjetas de la propuesta van de a dos: apiladas eran
+     cinco pantallazos de scroll para la misma informacion */
+  .pv-grid{grid-template-columns:1fr 1fr;gap:12px}
+  .pv-card{padding:15px}
+  .pv-card h3{font-size:1rem}
+  .pv-card p{font-size:13px;line-height:1.5}
+  .pv-card .pv-ey{font-size:9.5px;letter-spacing:.12em;margin-bottom:7px}
+  .pv-card.pv-star{grid-column:1 / -1;min-height:0;padding:20px}
+  .amu-ben{gap:16px;margin-top:22px}
+  .drone-tomas{gap:12px}
+  .prod-pasos{gap:16px}
+  .prod-pasos li::before{font-size:1.6rem}
+}
+
 /* ---------- vendidas ---------- */
 .vendidas{background:var(--cream)}
 .vd-top{display:grid;gap:12px;margin-bottom:26px}
@@ -1147,7 +1176,7 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
         <span class="eyebrow"><span class="dot"></span>Respondo hoy · Palermo &amp; Zona Oeste</span>
         <h1>Amo este trabajo<em>y vas a notarlo.</em></h1>
         <p class="hero-sub">Vendé tu propiedad en Palermo con Fernando Castro · RE/MAX Premium 1.</p>
-        <p class="lede">Soy <strong>Fernando Castro</strong>, agente inmobiliario de <strong>RE/MAX Premium 1</strong>. Estoy de la mañana a la noche, todos los días, y te ayudo a definir un precio realista para vender bien, con datos concretos del mercado. <strong>Tasación sin cargo en 48hs.</strong></p>
+        <p class="lede">Estoy de la mañana a la noche, todos los días, y te ayudo a poner un precio realista con datos del mercado. <strong>Tasación sin cargo en 48hs.</strong></p>
 
         <div class="rating-row">
           <a class="chip" href="https://share.google/ayJGn7dHlrtmHFuXk" target="_blank" rel="noopener"><span class="stars">★★★★★</span> <span data-rs="chip-palermo">5,0 Palermo · 96 reseñas</span></a>
@@ -1464,140 +1493,6 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
   </div>
 </section>
 
-<!-- ===== AMUEBLAMIENTO VIRTUAL ===== -->
-<section class="amu" id="amueblamiento">
-  <div class="wrap">
-    <div class="sec-head rv">
-      <span class="kicker">Amueblamiento virtual</span>
-      <h2>Deslizá y mirá la diferencia.</h2>
-      <p>Un ambiente vacío se ve chico y frío. Amueblado, el comprador entiende las medidas y se proyecta. Sin mudanzas, sin costo de decoración para vos.</p>
-    </div>
-
-    <div class="amu-tabs rv" role="tablist" aria-label="Elegí el ambiente">
-      <button class="amu-tab" type="button" role="tab" aria-selected="true" data-amb="terraza">Terraza</button>
-      <button class="amu-tab" type="button" role="tab" aria-selected="false" data-amb="living">Living comedor</button>
-      <button class="amu-tab" type="button" role="tab" aria-selected="false" data-amb="dorm">Dormitorio</button>
-    </div>
-
-    <div class="ba rv" id="ba" style="--pos:50%">
-      <img id="ba-despues" src="img/terraza-despues.jpg?v=2" width="1080" height="720" alt="La misma terraza amueblada virtualmente, con parrilla, mesa y jardín vertical" loading="lazy" decoding="async">
-      <img id="ba-antes" class="ba-antes" src="img/terraza-antes.jpg?v=2" width="1080" height="720" alt="La terraza vacía, antes del amueblamiento virtual" loading="lazy" decoding="async">
-      <span class="ba-tag izq">Antes · vacío</span>
-      <span class="ba-tag der">Después · amueblado</span>
-      <input type="range" id="ba-rango" min="0" max="100" value="50" step="0.5" aria-label="Deslizá para comparar el ambiente vacío con el amueblado">
-      <div class="ba-div">
-        <div class="ba-knob">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#0A1733" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6"/></svg>
-        </div>
-      </div>
-    </div>
-    <p class="amu-pie">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6"/></svg>
-      Arrastrá la barra, o usá las flechas del teclado.
-    </p>
-
-    <div class="amu-ben rv">
-      <div><h3>Frenan el scroll</h3><p>En los portales, la primera foto define si entran o pasan de largo. Un ambiente con vida gana el clic.</p></div>
-      <div><h3>Muestran el potencial</h3><p>El comprador ve dónde va el sillón, la mesa y la cama. Deja de dudar si “entra todo”.</p></div>
-      <div><h3>Traen visitas calificadas</h3><p>Llegan sabiendo cómo es la propiedad. Menos visitas de curiosos, más ofertas concretas.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== PROPUESTA DE VALOR ===== -->
-<section class="pv" id="propuesta">
-  <div class="wrap">
-    <div class="sec-head rv">
-      <span class="kicker">Cómo publico tu propiedad</span>
-      <h2>Tu propiedad, en primera fila. Siempre.</h2>
-      <p>Mientras otras publicaciones se pierden en la página 5, la tuya aparece arriba, con la mejor imagen y lista para que la recorran sin moverse de su casa.</p>
-    </div>
-    <div class="pv-grid">
-      <article class="pv-card pv-star rv">
-        <span class="pv-ey">Máxima exposición</span>
-        <h3>Zonaprop Anunciante Premier + Superdestacado</h3>
-        <p>Tu aviso sale en los primeros lugares de búsqueda, con más tamaño y más fotos. Más vistas, más consultas, más rápido.</p>
-      </article>
-      <article class="pv-card rv">
-        <span class="pv-ey">Primera impresión</span>
-        <h3>Fotos profesionales</h3>
-        <p>Fotógrafo con equipo gran angular y luz cuidada. Cada ambiente en su mejor versión.</p>
-      </article>
-      <article class="pv-card rv">
-        <span class="pv-ey">Visitas desde el sillón</span>
-        <h3>Tour virtual 360°</h3>
-        <p>El comprador recorre toda la propiedad online. Llega a la visita ya convencido.</p>
-      </article>
-      <article class="pv-card rv">
-        <span class="pv-ey">Potencial a la vista</span>
-        <h3>Amueblamiento virtual</h3>
-        <p>Ambientes vacíos transformados en espacios que dan ganas de vivir.</p>
-      </article>
-      <article class="pv-card rv">
-        <span class="pv-ey">El barrio, desde arriba</span>
-        <h3>Video con drone 4K</h3>
-        <p>Fachada, entorno y amenities en un video listo para portales y Reels.</p>
-      </article>
-    </div>
-  </div>
-</section>
-
-<!-- ===== VIDEO CON DRONE ===== -->
-<section class="drone" id="drone">
-  <div class="wrap">
-    <div class="sec-head rv">
-      <span class="kicker">Video con drone</span>
-      <h2>Vendemos la propiedad y también el barrio.</h2>
-      <p>Tomas aéreas en 4K de la fachada, la cuadra y todo lo que tenés cerca: plazas, subte, avenidas. El comprador entiende la ubicación en 10 segundos.</p>
-    </div>
-
-    <div class="drone-pantalla rv">
-      <!-- si todavia no existe video/drone.mp4, queda el poster y el HUD encima -->
-      <video id="droneVid" poster="img/drone-poster.jpg?v=2" autoplay muted loop playsinline preload="none"
-             aria-label="Vuelo de drone sobre el barrio">
-        <source src="video/drone.mp4?v=2" type="video/mp4">
-      </video>
-      <span class="hud hud-si"><span class="hud-rec"></span>REC 00:<span id="droneSeg">00</span></span>
-      <span class="hud hud-sd">4K · 30 FPS</span>
-      <span class="hud hud-ii">ALT 60 m<br>VEL 4 m/s</span>
-      <span class="hud hud-id">34°35′S 58°25′O<br>PALERMO</span>
-    </div>
-
-    <div class="drone-tomas rv">
-      <div class="drone-toma"><span class="pv-ey">Toma 1</span><h3>Fachada y acceso</h3><p>Ascenso frontal que muestra el edificio entero y su entrada.</p></div>
-      <div class="drone-toma"><span class="pv-ey">Toma 2</span><h3>Entorno y servicios</h3><p>Paneo de 360° marcando plazas, colegios, transporte y comercios.</p></div>
-      <div class="drone-toma"><span class="pv-ey">Toma 3</span><h3>Terraza y amenities</h3><p>Vuelo bajo sobre pileta, parrilla y vistas abiertas.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== PRODUCCIÓN EN 7 DÍAS ===== -->
-<section class="prod" id="produccion">
-  <div class="wrap">
-    <div class="sec-head rv">
-      <span class="kicker">De la captación a la publicación</span>
-      <h2>De la captación a la publicación en 7 días.</h2>
-    </div>
-    <ol class="prod-pasos rv">
-      <li><h3>Visita y tasación</h3><p>Conozco la propiedad y definimos juntos un precio realista, con datos del barrio.</p></li>
-      <li><h3>Fotos + tour 360°</h3><p>Fotos profesionales y recorrido virtual de cada ambiente.</p></li>
-      <li><h3>Amueblado + drone</h3><p>Amueblo virtualmente los ambientes vacíos y filmo la fachada y el entorno desde el aire.</p></li>
-      <li><h3>Difusión premium</h3><p>Zonaprop Premier con Superdestacado, Instagram, Reels y mi base de compradores.</p></li>
-    </ol>
-
-    <div class="prod-cta rv">
-      <div>
-        <h3>¿Querés que tu propiedad se vea así?</h3>
-        <p>Coordinamos la visita y te muestro cómo quedaría amueblada antes de publicarla. La tasación no tiene costo.</p>
-      </div>
-      <a class="btn btn-wa" href="https://wa.me/5491150379426?text=Hola%20Fernando%2C%20quiero%20una%20tasaci%C3%B3n%20y%20ver%20c%C3%B3mo%20quedar%C3%ADa%20mi%20propiedad%20con%20amueblamiento%20virtual%20y%20video%20con%20drone" target="_blank" rel="noopener">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.2-1.8-.9-2.1-1-.3-.1-.5-.2-.7.1-.2.3-.8 1-1 1.2-.2.2-.4.3-.7.1-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.2-.2.4-.5.6-.7.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5 0-.2-.7-1.7-.9-2.3-.2-.5-.4-.5-.6-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4 0 1.4 1 2.8 1.2 3 .1.2 1.9 3 4.7 4.1 2.3.9 2.8.8 3.3.7.5-.1 1.6-.7 1.9-1.3.2-.7.2-1.2.2-1.3-.1-.2-.2-.2-.3-.3zM12 2a10 10 0 0 0-8.5 15.3L2 22l4.8-1.4A10 10 0 1 0 12 2z"/></svg>
-        Pedir tasación por WhatsApp
-      </a>
-    </div>
-  </div>
-</section>
-
 <!-- ===== VENDIDAS ===== -->
 <section class="vendidas" id="vendidas">
   <div class="wrap">
@@ -1746,36 +1641,6 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
   </div>
 </section>
 
-<!-- ===== VIDEOS ===== -->
-<section class="videos" id="videos">
-  <div class="wrap">
-    <div class="sec-head rv">
-      <span class="kicker">Recorridos y testimonios</span>
-      <h2>Cómo mostramos las propiedades, y qué dicen los clientes.</h2>
-      <p>Recorridos reales de departamentos en venta y propietarios contando cómo fue vender conmigo. Sin actores y sin guion.</p>
-    </div>
-    <div class="reel" id="reel">
-      <div class="vid" data-yt="lircPuAWMZ0" role="button" tabindex="0" aria-label="Reproducir: Recorrido de una propiedad en Haedo publicada en USD 159.000"><span class="gate"><img src="https://i.ytimg.com/vi/lircPuAWMZ0/hq720.jpg" loading="lazy" alt="Recorrido de una propiedad en Haedo publicada en USD 159.000"><span class="play"><i></i></span></span></div>
-      <div class="vid" data-yt="5tnFIsGmgkY" role="button" tabindex="0" aria-label="Reproducir: Recorrido de un cuatro ambientes en Belgrano, a dos cuadras del subte D"><span class="gate"><img src="https://i.ytimg.com/vi/5tnFIsGmgkY/hq720.jpg" loading="lazy" alt="Recorrido de un cuatro ambientes en Belgrano, a dos cuadras del subte D"><span class="play"><i></i></span></span></div>
-      <div class="vid" data-yt="YJKg9fQ8iMU" role="button" tabindex="0" aria-label="Reproducir: Testimonios de vendedores de Palermo que operaron con RE/MAX Premium"><span class="gate"><img src="https://i.ytimg.com/vi/YJKg9fQ8iMU/hq720.jpg" loading="lazy" alt="Testimonios de vendedores de Palermo que operaron con RE/MAX Premium"><span class="play"><i></i></span></span></div>
-      <div class="vid" data-yt="Cuhe2_IvKOo" role="button" tabindex="0" aria-label="Reproducir: Recorrido de un departamento apto crédito en Boedo"><span class="gate"><img src="https://i.ytimg.com/vi/Cuhe2_IvKOo/hq720.jpg" loading="lazy" alt="Recorrido de un departamento apto crédito en Boedo"><span class="play"><i></i></span></span></div>
-      <div class="vid" data-yt="Vjs_4bdZzKE" role="button" tabindex="0" aria-label="Reproducir: Así se vive una nueva reserva en nuestra oficina de Palermo"><span class="gate"><img src="https://i.ytimg.com/vi/Vjs_4bdZzKE/hq720.jpg" loading="lazy" alt="Así se vive una nueva reserva en nuestra oficina de Palermo"><span class="play"><i></i></span></span></div>
-      <div class="vid" data-yt="Zvw17KlRGfA" role="button" tabindex="0" aria-label="Reproducir: Testimonios de propietarios que vendieron en Palermo"><span class="gate"><img src="https://i.ytimg.com/vi/Zvw17KlRGfA/hq720.jpg" loading="lazy" alt="Testimonios de propietarios que vendieron en Palermo"><span class="play"><i></i></span></span></div>
-      <div class="vid" data-yt="EZ0nv0asmJw" role="button" tabindex="0" aria-label="Reproducir: El mayor error al comprar una propiedad: no ver el potencial"><span class="gate"><img src="https://i.ytimg.com/vi/EZ0nv0asmJw/hq720.jpg" loading="lazy" alt="El mayor error al comprar una propiedad: no ver el potencial"><span class="play"><i></i></span></span></div>
-      <div class="vid" data-yt="IVuzFk_MHXY" role="button" tabindex="0" aria-label="Reproducir: Un edificio en Palermo con cancha de tenis"><span class="gate"><img src="https://i.ytimg.com/vi/IVuzFk_MHXY/hq720.jpg" loading="lazy" alt="Un edificio en Palermo con cancha de tenis"><span class="play"><i></i></span></span></div>
-      <div class="vid" data-yt="_33quGHQ6eA" role="button" tabindex="0" aria-label="Reproducir: Testimonio de una familia que vendió su casa en San Justo"><span class="gate"><img src="https://i.ytimg.com/vi/_33quGHQ6eA/hq720.jpg" loading="lazy" alt="Testimonio de una familia que vendió su casa en San Justo"><span class="play"><i></i></span></span></div>
-      <div class="vid" data-yt="gNhsnD0lwII" role="button" tabindex="0" aria-label="Reproducir: Un departamento en Belgrano que no se parece a ninguno"><span class="gate"><img src="https://i.ytimg.com/vi/gNhsnD0lwII/hq720.jpg" loading="lazy" alt="Un departamento en Belgrano que no se parece a ninguno"><span class="play"><i></i></span></span></div>
-      <div class="vid" data-yt="4PeSOdvvi5E" role="button" tabindex="0" aria-label="Reproducir: Testimonio de clientes que vendieron su casa en Ramos Mejía"><span class="gate"><img src="https://i.ytimg.com/vi/4PeSOdvvi5E/hq720.jpg" loading="lazy" alt="Testimonio de clientes que vendieron su casa en Ramos Mejía"><span class="play"><i></i></span></span></div>
-      <div class="vid" data-yt="_a2iQjstI4U" role="button" tabindex="0" aria-label="Reproducir: Fernando Castro pone a prueba a ChatGPT con preguntas inmobiliarias"><span class="gate"><img src="https://i.ytimg.com/vi/_a2iQjstI4U/hq720.jpg" loading="lazy" alt="Fernando Castro pone a prueba a ChatGPT con preguntas inmobiliarias"><span class="play"><i></i></span></span></div>
-      <div class="vid" data-yt="OINF_mueMbA" role="button" tabindex="0" aria-label="Reproducir: Spot de televisión de Fernando Castro, agente inmobiliario"><span class="gate"><img src="https://i.ytimg.com/vi/OINF_mueMbA/hq720.jpg" loading="lazy" alt="Spot de televisión de Fernando Castro, agente inmobiliario"><span class="play"><i></i></span></span></div>
-    </div>
-    <p class="reel-hint">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-      Deslizá para ver más · <a href="https://www.youtube.com/@fcastro.remax1" target="_blank" rel="noopener" style="text-decoration:underline">canal completo</a>
-    </p>
-  </div>
-</section>
-
 <!-- ===== RESEÑAS ===== -->
 <section id="resenas">
   <div class="wrap">
@@ -1828,6 +1693,170 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
         <svg class="arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
       </a>
     </div>
+  </div>
+</section>
+
+<!-- ===== AMUEBLAMIENTO VIRTUAL ===== -->
+<section class="amu" id="amueblamiento">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="kicker">Amueblamiento virtual</span>
+      <h2>Deslizá y mirá la diferencia.</h2>
+      <p>Un ambiente vacío se ve chico y frío. Amueblado, el comprador entiende las medidas y se proyecta. Sin mudanzas, sin costo de decoración para vos.</p>
+    </div>
+
+    <div class="amu-tabs rv" role="tablist" aria-label="Elegí el ambiente">
+      <button class="amu-tab" type="button" role="tab" aria-selected="true" data-amb="terraza">Terraza</button>
+      <button class="amu-tab" type="button" role="tab" aria-selected="false" data-amb="living">Living comedor</button>
+      <button class="amu-tab" type="button" role="tab" aria-selected="false" data-amb="dorm">Dormitorio</button>
+    </div>
+
+    <div class="ba rv" id="ba" style="--pos:50%">
+      <img id="ba-despues" src="img/terraza-despues.jpg?v=2" width="1080" height="720" alt="La misma terraza amueblada virtualmente, con parrilla, mesa y jardín vertical" loading="lazy" decoding="async">
+      <img id="ba-antes" class="ba-antes" src="img/terraza-antes.jpg?v=2" width="1080" height="720" alt="La terraza vacía, antes del amueblamiento virtual" loading="lazy" decoding="async">
+      <span class="ba-tag izq">Antes · vacío</span>
+      <span class="ba-tag der">Después · amueblado</span>
+      <input type="range" id="ba-rango" min="0" max="100" value="50" step="0.5" aria-label="Deslizá para comparar el ambiente vacío con el amueblado">
+      <div class="ba-div">
+        <div class="ba-knob">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0A1733" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6"/></svg>
+        </div>
+      </div>
+    </div>
+    <p class="amu-pie">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6"/></svg>
+      Arrastrá la barra, o usá las flechas del teclado.
+    </p>
+
+    <div class="amu-ben rv">
+      <div><h3>Frenan el scroll</h3><p>En los portales, la primera foto define si entran o pasan de largo. Un ambiente con vida gana el clic.</p></div>
+      <div><h3>Muestran el potencial</h3><p>El comprador ve dónde va el sillón, la mesa y la cama. Deja de dudar si “entra todo”.</p></div>
+      <div><h3>Traen visitas calificadas</h3><p>Llegan sabiendo cómo es la propiedad. Menos visitas de curiosos, más ofertas concretas.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PROPUESTA DE VALOR ===== -->
+<section class="pv" id="propuesta">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="kicker">Cómo publico tu propiedad</span>
+      <h2>Tu propiedad, en primera fila. Siempre.</h2>
+      <p>Mientras otras publicaciones se pierden en la página 5, la tuya aparece arriba, con la mejor imagen y lista para que la recorran sin moverse de su casa.</p>
+    </div>
+    <div class="pv-grid">
+      <article class="pv-card pv-star rv">
+        <span class="pv-ey">Máxima exposición</span>
+        <h3>Zonaprop Anunciante Premier + Superdestacado</h3>
+        <p>Tu aviso sale en los primeros lugares de búsqueda, con más tamaño y más fotos. Más vistas, más consultas, más rápido.</p>
+      </article>
+      <article class="pv-card rv">
+        <span class="pv-ey">Primera impresión</span>
+        <h3>Fotos profesionales</h3>
+        <p>Fotógrafo con equipo gran angular y luz cuidada. Cada ambiente en su mejor versión.</p>
+      </article>
+      <article class="pv-card rv">
+        <span class="pv-ey">Visitas desde el sillón</span>
+        <h3>Tour virtual 360°</h3>
+        <p>El comprador recorre toda la propiedad online. Llega a la visita ya convencido.</p>
+      </article>
+      <article class="pv-card rv">
+        <span class="pv-ey">Potencial a la vista</span>
+        <h3>Amueblamiento virtual</h3>
+        <p>Ambientes vacíos transformados en espacios que dan ganas de vivir.</p>
+      </article>
+      <article class="pv-card rv">
+        <span class="pv-ey">El barrio, desde arriba</span>
+        <h3>Video con drone 4K</h3>
+        <p>Fachada, entorno y amenities en un video listo para portales y Reels.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===== VIDEO CON DRONE ===== -->
+<section class="drone" id="drone">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="kicker">Video con drone</span>
+      <h2>Vendemos la propiedad y también el barrio.</h2>
+      <p>Tomas aéreas en 4K de la fachada, la cuadra y todo lo que tenés cerca: plazas, subte, avenidas. El comprador entiende la ubicación en 10 segundos.</p>
+    </div>
+
+    <div class="drone-pantalla rv">
+      <!-- si todavia no existe video/drone.mp4, queda el poster y el HUD encima -->
+      <video id="droneVid" poster="img/drone-poster.jpg?v=2" autoplay muted loop playsinline preload="none"
+             aria-label="Vuelo de drone sobre el barrio">
+        <source src="video/drone.mp4?v=2" type="video/mp4">
+      </video>
+      <span class="hud hud-si"><span class="hud-rec"></span>REC 00:<span id="droneSeg">00</span></span>
+      <span class="hud hud-sd">4K · 30 FPS</span>
+      <span class="hud hud-ii">ALT 60 m<br>VEL 4 m/s</span>
+      <span class="hud hud-id">34°35′S 58°25′O<br>PALERMO</span>
+    </div>
+
+    <div class="drone-tomas rv">
+      <div class="drone-toma"><span class="pv-ey">Toma 1</span><h3>Fachada y acceso</h3><p>Ascenso frontal que muestra el edificio entero y su entrada.</p></div>
+      <div class="drone-toma"><span class="pv-ey">Toma 2</span><h3>Entorno y servicios</h3><p>Paneo de 360° marcando plazas, colegios, transporte y comercios.</p></div>
+      <div class="drone-toma"><span class="pv-ey">Toma 3</span><h3>Terraza y amenities</h3><p>Vuelo bajo sobre pileta, parrilla y vistas abiertas.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PRODUCCIÓN EN 7 DÍAS ===== -->
+<section class="prod" id="produccion">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="kicker">De la captación a la publicación</span>
+      <h2>De la captación a la publicación en 7 días.</h2>
+    </div>
+    <ol class="prod-pasos rv">
+      <li><h3>Visita y tasación</h3><p>Conozco la propiedad y definimos juntos un precio realista, con datos del barrio.</p></li>
+      <li><h3>Fotos + tour 360°</h3><p>Fotos profesionales y recorrido virtual de cada ambiente.</p></li>
+      <li><h3>Amueblado + drone</h3><p>Amueblo virtualmente los ambientes vacíos y filmo la fachada y el entorno desde el aire.</p></li>
+      <li><h3>Difusión premium</h3><p>Zonaprop Premier con Superdestacado, Instagram, Reels y mi base de compradores.</p></li>
+    </ol>
+
+    <div class="prod-cta rv">
+      <div>
+        <h3>¿Querés que tu propiedad se vea así?</h3>
+        <p>Coordinamos la visita y te muestro cómo quedaría amueblada antes de publicarla. La tasación no tiene costo.</p>
+      </div>
+      <a class="btn btn-wa" href="https://wa.me/5491150379426?text=Hola%20Fernando%2C%20quiero%20una%20tasaci%C3%B3n%20y%20ver%20c%C3%B3mo%20quedar%C3%ADa%20mi%20propiedad%20con%20amueblamiento%20virtual%20y%20video%20con%20drone" target="_blank" rel="noopener">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.2-1.8-.9-2.1-1-.3-.1-.5-.2-.7.1-.2.3-.8 1-1 1.2-.2.2-.4.3-.7.1-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.2-.2.4-.5.6-.7.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5 0-.2-.7-1.7-.9-2.3-.2-.5-.4-.5-.6-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4 0 1.4 1 2.8 1.2 3 .1.2 1.9 3 4.7 4.1 2.3.9 2.8.8 3.3.7.5-.1 1.6-.7 1.9-1.3.2-.7.2-1.2.2-1.3-.1-.2-.2-.2-.3-.3zM12 2a10 10 0 0 0-8.5 15.3L2 22l4.8-1.4A10 10 0 1 0 12 2z"/></svg>
+        Pedir tasación por WhatsApp
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== VIDEOS ===== -->
+<section class="videos" id="videos">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="kicker">Recorridos y testimonios</span>
+      <h2>Cómo mostramos las propiedades, y qué dicen los clientes.</h2>
+      <p>Recorridos reales de departamentos en venta y propietarios contando cómo fue vender conmigo. Sin actores y sin guion.</p>
+    </div>
+    <div class="reel" id="reel">
+      <div class="vid" data-yt="lircPuAWMZ0" role="button" tabindex="0" aria-label="Reproducir: Recorrido de una propiedad en Haedo publicada en USD 159.000"><span class="gate"><img src="https://i.ytimg.com/vi/lircPuAWMZ0/hq720.jpg" loading="lazy" alt="Recorrido de una propiedad en Haedo publicada en USD 159.000"><span class="play"><i></i></span></span></div>
+      <div class="vid" data-yt="5tnFIsGmgkY" role="button" tabindex="0" aria-label="Reproducir: Recorrido de un cuatro ambientes en Belgrano, a dos cuadras del subte D"><span class="gate"><img src="https://i.ytimg.com/vi/5tnFIsGmgkY/hq720.jpg" loading="lazy" alt="Recorrido de un cuatro ambientes en Belgrano, a dos cuadras del subte D"><span class="play"><i></i></span></span></div>
+      <div class="vid" data-yt="YJKg9fQ8iMU" role="button" tabindex="0" aria-label="Reproducir: Testimonios de vendedores de Palermo que operaron con RE/MAX Premium"><span class="gate"><img src="https://i.ytimg.com/vi/YJKg9fQ8iMU/hq720.jpg" loading="lazy" alt="Testimonios de vendedores de Palermo que operaron con RE/MAX Premium"><span class="play"><i></i></span></span></div>
+      <div class="vid" data-yt="Cuhe2_IvKOo" role="button" tabindex="0" aria-label="Reproducir: Recorrido de un departamento apto crédito en Boedo"><span class="gate"><img src="https://i.ytimg.com/vi/Cuhe2_IvKOo/hq720.jpg" loading="lazy" alt="Recorrido de un departamento apto crédito en Boedo"><span class="play"><i></i></span></span></div>
+      <div class="vid" data-yt="Vjs_4bdZzKE" role="button" tabindex="0" aria-label="Reproducir: Así se vive una nueva reserva en nuestra oficina de Palermo"><span class="gate"><img src="https://i.ytimg.com/vi/Vjs_4bdZzKE/hq720.jpg" loading="lazy" alt="Así se vive una nueva reserva en nuestra oficina de Palermo"><span class="play"><i></i></span></span></div>
+      <div class="vid" data-yt="Zvw17KlRGfA" role="button" tabindex="0" aria-label="Reproducir: Testimonios de propietarios que vendieron en Palermo"><span class="gate"><img src="https://i.ytimg.com/vi/Zvw17KlRGfA/hq720.jpg" loading="lazy" alt="Testimonios de propietarios que vendieron en Palermo"><span class="play"><i></i></span></span></div>
+      <div class="vid" data-yt="EZ0nv0asmJw" role="button" tabindex="0" aria-label="Reproducir: El mayor error al comprar una propiedad: no ver el potencial"><span class="gate"><img src="https://i.ytimg.com/vi/EZ0nv0asmJw/hq720.jpg" loading="lazy" alt="El mayor error al comprar una propiedad: no ver el potencial"><span class="play"><i></i></span></span></div>
+      <div class="vid" data-yt="IVuzFk_MHXY" role="button" tabindex="0" aria-label="Reproducir: Un edificio en Palermo con cancha de tenis"><span class="gate"><img src="https://i.ytimg.com/vi/IVuzFk_MHXY/hq720.jpg" loading="lazy" alt="Un edificio en Palermo con cancha de tenis"><span class="play"><i></i></span></span></div>
+      <div class="vid" data-yt="_33quGHQ6eA" role="button" tabindex="0" aria-label="Reproducir: Testimonio de una familia que vendió su casa en San Justo"><span class="gate"><img src="https://i.ytimg.com/vi/_33quGHQ6eA/hq720.jpg" loading="lazy" alt="Testimonio de una familia que vendió su casa en San Justo"><span class="play"><i></i></span></span></div>
+      <div class="vid" data-yt="gNhsnD0lwII" role="button" tabindex="0" aria-label="Reproducir: Un departamento en Belgrano que no se parece a ninguno"><span class="gate"><img src="https://i.ytimg.com/vi/gNhsnD0lwII/hq720.jpg" loading="lazy" alt="Un departamento en Belgrano que no se parece a ninguno"><span class="play"><i></i></span></span></div>
+      <div class="vid" data-yt="4PeSOdvvi5E" role="button" tabindex="0" aria-label="Reproducir: Testimonio de clientes que vendieron su casa en Ramos Mejía"><span class="gate"><img src="https://i.ytimg.com/vi/4PeSOdvvi5E/hq720.jpg" loading="lazy" alt="Testimonio de clientes que vendieron su casa en Ramos Mejía"><span class="play"><i></i></span></span></div>
+      <div class="vid" data-yt="_a2iQjstI4U" role="button" tabindex="0" aria-label="Reproducir: Fernando Castro pone a prueba a ChatGPT con preguntas inmobiliarias"><span class="gate"><img src="https://i.ytimg.com/vi/_a2iQjstI4U/hq720.jpg" loading="lazy" alt="Fernando Castro pone a prueba a ChatGPT con preguntas inmobiliarias"><span class="play"><i></i></span></span></div>
+      <div class="vid" data-yt="OINF_mueMbA" role="button" tabindex="0" aria-label="Reproducir: Spot de televisión de Fernando Castro, agente inmobiliario"><span class="gate"><img src="https://i.ytimg.com/vi/OINF_mueMbA/hq720.jpg" loading="lazy" alt="Spot de televisión de Fernando Castro, agente inmobiliario"><span class="play"><i></i></span></span></div>
+    </div>
+    <p class="reel-hint">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      Deslizá para ver más · <a href="https://www.youtube.com/@fcastro.remax1" target="_blank" rel="noopener" style="text-decoration:underline">canal completo</a>
+    </p>
   </div>
 </section>
 
