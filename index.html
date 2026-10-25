@@ -27,7 +27,7 @@ fbq("track","PageView");
 <noscript><img height="1" width="1" style="display:none" alt=""
 src="https://www.facebook.com/tr?id=1324205362420362&ev=PageView&noscript=1"></noscript>
 <title>Fernando Castro · Agente RE/MAX Palermo | Tasación sin cargo en 48hs</title>
-<meta name="description" content="Fernando Castro, agente inmobiliario RE/MAX Premium 1 en Palermo. 260+ operaciones cerradas, 8 años de experiencia, 5,0★ en Google. Te digo el precio real de tu propiedad, sin cargo y en 48hs.">
+<meta name="description" content="Vendé tu propiedad en Palermo con Fernando Castro, agente de RE/MAX Premium 1. 260+ operaciones cerradas, 8 años de experiencia, 5,0★ en Google. Tasación sin cargo en 48hs.">
 <meta name="author" content="Fernando Castro">
 <meta name="theme-color" content="#0A1733">
 <link rel="canonical" href="https://llamaloafer.com.ar/">
@@ -36,7 +36,7 @@ src="https://www.facebook.com/tr?id=1324205362420362&ev=PageView&noscript=1"></n
 <meta property="og:locale" content="es_AR">
 <meta property="og:site_name" content="RE/MAX Palermo · Fernando Castro">
 <meta property="og:title" content="RE/MAX Palermo · Fernando Castro | Tasación sin cargo en 48hs">
-<meta property="og:description" content="260+ operaciones cerradas · 8 años · 5,0★ en Google. Te digo el precio real, no el que querés escuchar.">
+<meta property="og:description" content="260+ operaciones cerradas · 8 años · 5,0★ en Google. Te ayudo a definir un precio realista para vender bien, con datos concretos del mercado.">
 <meta property="og:url" content="https://llamaloafer.com.ar/">
 <meta property="og:image" content="https://llamaloafer.com.ar/img/fernando.webp">
 <meta name="twitter:card" content="summary_large_image">
@@ -157,7 +157,13 @@ p{margin:0}
 
 h1{font-size:clamp(2.02rem,7.9vw,4.15rem);margin:18px 0 0;color:#fff}
 h1 em{font-style:normal;display:block;background:linear-gradient(100deg,#fff 10%,#9FC0FF 55%,#FF7D96 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
-.lede{margin-top:16px;font-size:clamp(1.02rem,3.9vw,1.2rem);color:rgba(255,255,255,.80);max-width:46ch;line-height:1.56}
+/* la bajada que dice de entrada que esto es Palermo */
+.hero-sub{
+  margin-top:14px;font-family:Montserrat,Inter,sans-serif;
+  font-size:clamp(1.02rem,3.4vw,1.22rem);font-weight:700;letter-spacing:-.02em;
+  line-height:1.3;color:#fff;max-width:30ch;
+}
+.lede{margin-top:12px;font-size:clamp(1.02rem,3.9vw,1.2rem);color:rgba(255,255,255,.80);max-width:46ch;line-height:1.56}
 .lede strong{color:#fff;font-weight:600}
 
 .rating-row{display:flex;flex-wrap:wrap;gap:9px;margin-top:22px}
@@ -614,6 +620,161 @@ select option{background:#0F1F42;color:#fff}
   .step:hover{transform:none}
 }
 
+/* ---------- amueblamiento virtual ---------- */
+.amu{background:var(--cream)}
+.amu-tabs{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:18px}
+.amu-tab{
+  font-family:Inter,sans-serif;font-size:14px;font-weight:700;letter-spacing:-.01em;
+  padding:10px 18px;border-radius:999px;border:1px solid var(--line);
+  background:var(--paper);color:var(--ink);cursor:pointer;
+  transition:background .2s,color .2s,border-color .2s,transform .2s;
+}
+.amu-tab:hover{transform:translateY(-1px)}
+.amu-tab[aria-selected="true"]{background:var(--navy);color:#fff;border-color:var(--navy)}
+
+/* el comparador: dos fotos superpuestas y un recorte que se mueve */
+.ba{
+  position:relative;width:100%;aspect-ratio:16/10;border-radius:var(--r);overflow:hidden;
+  background:var(--line);box-shadow:var(--sh);
+  user-select:none;-webkit-user-select:none;touch-action:pan-y;
+}
+.ba img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+/* la foto "antes" se recorta hasta donde esta la barra */
+.ba .ba-antes{clip-path:inset(0 calc(100% - var(--pos,50%)) 0 0)}
+.ba-div{
+  position:absolute;top:0;bottom:0;left:var(--pos,50%);width:3px;margin-left:-1.5px;
+  background:#fff;pointer-events:none;z-index:2;box-shadow:0 0 14px rgba(0,0,0,.45);
+}
+.ba-knob{
+  position:absolute;top:50%;left:50%;width:52px;height:52px;margin:-26px 0 0 -26px;
+  border-radius:50%;background:#fff;display:grid;place-items:center;
+  box-shadow:0 6px 22px rgba(0,0,0,.34);
+}
+.ba-knob svg{width:24px;height:24px}
+/* el control real: invisible y a pantalla completa, para dedo y teclado */
+.ba input[type=range]{position:absolute;inset:0;width:100%;height:100%;opacity:0;margin:0;cursor:ew-resize;z-index:3}
+.ba input[type=range]:focus-visible ~ .ba-div .ba-knob{outline:3px solid var(--red);outline-offset:3px}
+.ba-tag{
+  position:absolute;top:14px;z-index:2;pointer-events:none;
+  font-family:Montserrat,Inter,sans-serif;font-size:10.5px;font-weight:800;
+  letter-spacing:.12em;text-transform:uppercase;color:#fff;
+  padding:7px 12px;border-radius:999px;backdrop-filter:blur(4px);
+}
+.ba-tag.izq{left:14px;background:rgba(10,23,51,.8)}
+.ba-tag.der{right:14px;background:var(--red)}
+.amu-pie{margin-top:12px;font-size:13px;color:var(--muted);display:flex;align-items:center;gap:8px}
+.amu-ben{display:grid;gap:24px;margin-top:34px}
+.amu-ben div{padding-top:15px;border-top:2px solid var(--navy)}
+.amu-ben h3{font-size:1.05rem;margin-bottom:7px}
+.amu-ben p{font-size:14.5px;color:var(--muted);line-height:1.6}
+@media(min-width:780px){.amu-ben{grid-template-columns:repeat(3,1fr)}}
+
+/* ---------- propuesta de valor ---------- */
+.pv{background:var(--paper);border-top:1px solid var(--line)}
+.pv-grid{display:grid;gap:16px}
+.pv-card{
+  background:var(--cream);border:1px solid var(--line);border-radius:var(--r);padding:22px;
+  transition:transform .25s cubic-bezier(.2,.7,.3,1),box-shadow .25s;
+}
+.pv-card:hover{transform:translateY(-3px);box-shadow:var(--sh)}
+.pv-card .pv-ey{
+  display:block;font-family:Montserrat,Inter,sans-serif;font-size:10.5px;font-weight:800;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--red);margin-bottom:9px;
+}
+.pv-card h3{font-size:1.1rem;margin-bottom:7px;letter-spacing:-.015em}
+.pv-card p{font-size:14.5px;color:var(--muted);line-height:1.6}
+/* la tarjeta estrella: mas grande y en rojo */
+.pv-card.pv-star{
+  background:var(--red);border-color:var(--red);color:#fff;
+  display:flex;flex-direction:column;justify-content:flex-end;min-height:230px;
+  box-shadow:0 10px 30px rgba(228,0,43,.26);
+}
+.pv-card.pv-star .pv-ey{color:rgba(255,255,255,.82)}
+.pv-card.pv-star h3{font-size:clamp(1.3rem,3.2vw,1.75rem);line-height:1.15}
+.pv-card.pv-star p{color:rgba(255,255,255,.9)}
+.pv-card.pv-star:hover{box-shadow:0 18px 44px rgba(228,0,43,.34)}
+@media(min-width:780px){
+  .pv-grid{grid-template-columns:1.25fr 1fr 1fr}
+  .pv-card.pv-star{grid-row:span 2}
+}
+
+/* ---------- video con drone ---------- */
+.drone{position:relative;background:var(--navy);color:#fff;overflow:hidden}
+.drone::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(60% 50% at 12% 0%, rgba(0,61,165,.4), transparent 62%);
+}
+.drone .wrap{position:relative;z-index:1}
+.drone .sec-head h2{color:#fff}
+.drone .sec-head p{color:rgba(255,255,255,.68)}
+.drone .kicker{color:#7DE3A8}
+.drone-pantalla{
+  position:relative;width:100%;aspect-ratio:16/9;border-radius:var(--r);overflow:hidden;
+  background:#0A1018;border:1px solid rgba(255,255,255,.14);box-shadow:0 18px 44px rgba(0,0,0,.4);
+}
+.drone-pantalla video,.drone-pantalla img{width:100%;height:100%;object-fit:cover;display:block}
+/* el HUD de la camara, encima del video */
+.hud{
+  position:absolute;pointer-events:none;z-index:2;
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11.5px;font-weight:600;
+  letter-spacing:.09em;color:#B8F0D2;text-shadow:0 1px 3px rgba(0,0,0,.75);line-height:1.45;
+}
+.hud-si{top:14px;left:14px;display:flex;align-items:center;gap:8px}
+.hud-sd{top:14px;right:14px;text-align:right}
+.hud-ii{bottom:14px;left:14px}
+.hud-id{bottom:14px;right:14px;text-align:right}
+.hud-rec{width:9px;height:9px;border-radius:50%;background:#FF4D4D;animation:hudblink 1.2s steps(2) infinite}
+@keyframes hudblink{50%{opacity:.18}}
+.drone-tomas{display:grid;gap:16px;margin-top:26px}
+.drone-toma{
+  padding:18px;border:1px solid rgba(255,255,255,.15);border-radius:14px;
+  background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.03));
+}
+.drone-toma .pv-ey{display:block;font-family:Montserrat,Inter,sans-serif;font-size:10px;font-weight:800;
+  letter-spacing:.16em;text-transform:uppercase;color:#7DE3A8;margin-bottom:8px}
+.drone-toma h3{font-size:1.05rem;color:#fff;margin-bottom:6px}
+.drone-toma p{font-size:14px;color:rgba(255,255,255,.7);line-height:1.6}
+@media(min-width:780px){.drone-tomas{grid-template-columns:repeat(3,1fr)}}
+@media (prefers-reduced-motion:reduce){.hud-rec{animation:none}}
+@media(max-width:760px){
+  /* en el celular conviene mas alto: 16/10 deja el ambiente muy achatado */
+  .ba{aspect-ratio:4/3}
+  /* y los rotulos mas chicos, si no se tocan en el medio */
+  .ba-tag{font-size:9px;letter-spacing:.08em;padding:6px 9px;top:10px}
+  .ba-tag.izq{left:10px}.ba-tag.der{right:10px}
+  .hud{font-size:10px;letter-spacing:.06em}
+  .hud-ii,.hud-id{bottom:10px}
+  .hud-ii{left:10px}.hud-id{right:10px}
+  .hud-si{left:10px;top:10px}.hud-sd{right:10px;top:10px}
+}
+
+/* ---------- produccion en 7 dias ---------- */
+.prod{background:var(--paper)}
+.prod-pasos{display:grid;gap:22px;counter-reset:p;list-style:none;padding:0;margin:0}
+.prod-pasos li{display:flex;flex-direction:column;gap:6px}
+.prod-pasos li::before{
+  counter-increment:p;content:"0" counter(p);
+  font-family:Montserrat,Inter,sans-serif;font-size:1.9rem;font-weight:800;
+  letter-spacing:-.04em;color:var(--red);line-height:1;margin-bottom:4px;
+}
+.prod-pasos h3{font-size:1.05rem;letter-spacing:-.015em}
+.prod-pasos p{font-size:14.5px;color:var(--muted);line-height:1.6}
+@media(min-width:680px){.prod-pasos{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1000px){.prod-pasos{grid-template-columns:repeat(4,1fr)}}
+/* el cierre del bloque, con el boton a WhatsApp */
+.prod-cta{
+  margin-top:38px;background:var(--navy);color:#fff;border-radius:var(--r-lg);
+  padding:34px 28px;display:grid;gap:20px;align-items:center;text-align:center;
+}
+.prod-cta h3{font-family:Montserrat,Inter,sans-serif;font-size:clamp(1.35rem,3.6vw,1.9rem);
+  font-weight:800;letter-spacing:-.03em;line-height:1.15;color:#fff}
+.prod-cta p{color:rgba(255,255,255,.72);font-size:15px;line-height:1.6;margin-top:8px}
+.prod-cta .btn{width:100%;max-width:340px;margin-inline:auto}
+@media(min-width:820px){
+  .prod-cta{grid-template-columns:1fr auto;text-align:left;padding:38px 40px;gap:28px}
+  .prod-cta .btn{margin-inline:0}
+}
+
 /* ---------- vendidas ---------- */
 .vendidas{background:var(--cream)}
 .vd-top{display:grid;gap:12px;margin-bottom:26px}
@@ -985,7 +1146,8 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
       <div>
         <span class="eyebrow"><span class="dot"></span>Respondo hoy · Palermo &amp; Zona Oeste</span>
         <h1>Amo este trabajo<em>y vas a notarlo.</em></h1>
-        <p class="lede">Soy <strong>Fernando Castro</strong>, agente inmobiliario de <strong>RE/MAX Premium 1</strong>. Estoy de la mañana a la noche, todos los días, y te digo el precio real de tu propiedad —no el que querés escuchar—. <strong>Tasación sin cargo en 48hs.</strong></p>
+        <p class="hero-sub">Vendé tu propiedad en Palermo con Fernando Castro · RE/MAX Premium 1.</p>
+        <p class="lede">Soy <strong>Fernando Castro</strong>, agente inmobiliario de <strong>RE/MAX Premium 1</strong>. Estoy de la mañana a la noche, todos los días, y te ayudo a definir un precio realista para vender bien, con datos concretos del mercado. <strong>Tasación sin cargo en 48hs.</strong></p>
 
         <div class="rating-row">
           <a class="chip" href="https://share.google/ayJGn7dHlrtmHFuXk" target="_blank" rel="noopener"><span class="stars">★★★★★</span> <span data-rs="chip-palermo">5,0 Palermo · 96 reseñas</span></a>
@@ -1173,7 +1335,7 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
 
       <div class="val-card rv">
         <h3>Pedí tu tasación sin cargo</h3>
-        <p class="sub">Dejame tu email y se abre WhatsApp con la consulta lista para enviar.</p>
+        <p class="sub">Completá lo que sepas y se abre WhatsApp con la consulta lista para enviar.</p>
         <form id="valForm">
           <div class="f2">
             <div>
@@ -1201,21 +1363,20 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
               <input id="m2" name="m2" type="text" inputmode="numeric" placeholder="Ej: 68">
             </div>
           </div>
+          <div>
+            <label for="nombre">Tu nombre</label>
+            <input id="nombre" name="nombre" type="text" placeholder="Cómo te llamo" autocomplete="given-name">
+          </div>
           <div class="f2">
-            <div>
-              <label for="nombre">Tu nombre</label>
-              <input id="nombre" name="nombre" type="text" placeholder="Cómo te llamo" autocomplete="given-name">
-            </div>
             <div>
               <label for="tel">Teléfono <span class="opt">(opcional)</span></label>
               <input id="tel" name="tel" type="tel" placeholder="Por si preferís que te llame" autocomplete="tel">
             </div>
-          </div>
-          <div>
-            <label for="email">Tu email</label>
-            <input id="email" name="email" type="email" required placeholder="nombre@email.com"
-                   autocomplete="email" inputmode="email"
-                   title="Necesito tu email para mandarte el informe de tasación.">
+            <div>
+              <label for="email">Email <span class="opt">(opcional)</span></label>
+              <input id="email" name="email" type="email" placeholder="nombre@email.com"
+                     autocomplete="email" inputmode="email">
+            </div>
           </div>
           <button class="btn btn-wa" type="submit">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.2-1.8-.9-2.1-1-.3-.1-.5-.2-.7.1-.2.3-.8 1-1 1.2-.2.2-.4.3-.7.1-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.2-.2.4-.5.6-.7.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5 0-.2-.7-1.7-.9-2.3-.2-.5-.4-.5-.6-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4 0 1.4 1 2.8 1.2 3 .1.2 1.9 3 4.7 4.1 2.3.9 2.8.8 3.3.7.5-.1 1.6-.7 1.9-1.3.2-.7.2-1.2.2-1.3-.1-.2-.2-.2-.3-.3zM12 2a10 10 0 0 0-8.5 15.3L2 22l4.8-1.4A10 10 0 1 0 12 2z"/></svg>
@@ -1263,7 +1424,7 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
           <p>Hoy llevo <strong>más de 260 operaciones cerradas</strong> y los dos reconocimientos más altos de la red RE/MAX: el <strong>Hall of Fame</strong> y el <strong>Lifetime Achievement</strong>. Sigo trabajando las dos zonas, Palermo y San Justo, porque de las dos aprendí algo que no cambia: detrás de cada propiedad hay una familia tomando una de las decisiones más grandes de su vida.</p>
 
           <div class="pull">
-            <q>Por eso te digo el precio real, no el que querés escuchar. Prefiero una conversación incómoda el primer día, antes que una propiedad estancada seis meses.</q>
+            <q>Por eso trabajo con datos concretos del mercado y no con ilusiones. Prefiero una charla franca el primer día, antes que una propiedad estancada seis meses.</q>
           </div>
 
           <div class="tl">
@@ -1299,6 +1460,140 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
         <h3>Negociación y cierre</h3>
         <p>Filtro curiosos, traigo compradores calificados y defiendo tu precio con datos. Te acompaño en reserva, escritura y mudanza, con todo documentado y en regla.</p>
       </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===== AMUEBLAMIENTO VIRTUAL ===== -->
+<section class="amu" id="amueblamiento">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="kicker">Amueblamiento virtual</span>
+      <h2>Deslizá y mirá la diferencia.</h2>
+      <p>Un ambiente vacío se ve chico y frío. Amueblado, el comprador entiende las medidas y se proyecta. Sin mudanzas, sin costo de decoración para vos.</p>
+    </div>
+
+    <div class="amu-tabs rv" role="tablist" aria-label="Elegí el ambiente">
+      <button class="amu-tab" type="button" role="tab" aria-selected="true" data-amb="terraza">Terraza</button>
+      <button class="amu-tab" type="button" role="tab" aria-selected="false" data-amb="living">Living comedor</button>
+      <button class="amu-tab" type="button" role="tab" aria-selected="false" data-amb="dorm">Dormitorio</button>
+    </div>
+
+    <div class="ba rv" id="ba" style="--pos:50%">
+      <img id="ba-despues" src="img/terraza-despues.jpg" width="1080" height="720" alt="La misma terraza amueblada virtualmente, con parrilla, mesa y jardín vertical" loading="lazy" decoding="async">
+      <img id="ba-antes" class="ba-antes" src="img/terraza-antes.jpg" width="1080" height="720" alt="La terraza vacía, antes del amueblamiento virtual" loading="lazy" decoding="async">
+      <span class="ba-tag izq">Antes · vacío</span>
+      <span class="ba-tag der">Después · amueblado</span>
+      <input type="range" id="ba-rango" min="0" max="100" value="50" step="0.5" aria-label="Deslizá para comparar el ambiente vacío con el amueblado">
+      <div class="ba-div">
+        <div class="ba-knob">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0A1733" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6"/></svg>
+        </div>
+      </div>
+    </div>
+    <p class="amu-pie">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6"/></svg>
+      Arrastrá la barra, o usá las flechas del teclado.
+    </p>
+
+    <div class="amu-ben rv">
+      <div><h3>Frenan el scroll</h3><p>En los portales, la primera foto define si entran o pasan de largo. Un ambiente con vida gana el clic.</p></div>
+      <div><h3>Muestran el potencial</h3><p>El comprador ve dónde va el sillón, la mesa y la cama. Deja de dudar si “entra todo”.</p></div>
+      <div><h3>Traen visitas calificadas</h3><p>Llegan sabiendo cómo es la propiedad. Menos visitas de curiosos, más ofertas concretas.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PROPUESTA DE VALOR ===== -->
+<section class="pv" id="propuesta">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="kicker">Cómo publico tu propiedad</span>
+      <h2>Tu propiedad, en primera fila. Siempre.</h2>
+      <p>Mientras otras publicaciones se pierden en la página 5, la tuya aparece arriba, con la mejor imagen y lista para que la recorran sin moverse de su casa.</p>
+    </div>
+    <div class="pv-grid">
+      <article class="pv-card pv-star rv">
+        <span class="pv-ey">Máxima exposición</span>
+        <h3>Zonaprop Anunciante Premier + Superdestacado</h3>
+        <p>Tu aviso sale en los primeros lugares de búsqueda, con más tamaño y más fotos. Más vistas, más consultas, más rápido.</p>
+      </article>
+      <article class="pv-card rv">
+        <span class="pv-ey">Primera impresión</span>
+        <h3>Fotos profesionales</h3>
+        <p>Fotógrafo con equipo gran angular y luz cuidada. Cada ambiente en su mejor versión.</p>
+      </article>
+      <article class="pv-card rv">
+        <span class="pv-ey">Visitas desde el sillón</span>
+        <h3>Tour virtual 360°</h3>
+        <p>El comprador recorre toda la propiedad online. Llega a la visita ya convencido.</p>
+      </article>
+      <article class="pv-card rv">
+        <span class="pv-ey">Potencial a la vista</span>
+        <h3>Amueblamiento virtual</h3>
+        <p>Ambientes vacíos transformados en espacios que dan ganas de vivir.</p>
+      </article>
+      <article class="pv-card rv">
+        <span class="pv-ey">El barrio, desde arriba</span>
+        <h3>Video con drone 4K</h3>
+        <p>Fachada, entorno y amenities en un video listo para portales y Reels.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===== VIDEO CON DRONE ===== -->
+<section class="drone" id="drone">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="kicker">Video con drone</span>
+      <h2>Vendemos la propiedad y también el barrio.</h2>
+      <p>Tomas aéreas en 4K de la fachada, la cuadra y todo lo que tenés cerca: plazas, subte, avenidas. El comprador entiende la ubicación en 10 segundos.</p>
+    </div>
+
+    <div class="drone-pantalla rv">
+      <!-- si todavia no existe video/drone.mp4, queda el poster y el HUD encima -->
+      <video id="droneVid" poster="img/drone-poster.jpg" autoplay muted loop playsinline preload="none"
+             aria-label="Vuelo de drone sobre el barrio">
+        <source src="video/drone.mp4" type="video/mp4">
+      </video>
+      <span class="hud hud-si"><span class="hud-rec"></span>REC 00:<span id="droneSeg">00</span></span>
+      <span class="hud hud-sd">4K · 30 FPS</span>
+      <span class="hud hud-ii">ALT 60 m<br>VEL 4 m/s</span>
+      <span class="hud hud-id">34°35′S 58°25′O<br>PALERMO</span>
+    </div>
+
+    <div class="drone-tomas rv">
+      <div class="drone-toma"><span class="pv-ey">Toma 1</span><h3>Fachada y acceso</h3><p>Ascenso frontal que muestra el edificio entero y su entrada.</p></div>
+      <div class="drone-toma"><span class="pv-ey">Toma 2</span><h3>Entorno y servicios</h3><p>Paneo de 360° marcando plazas, colegios, transporte y comercios.</p></div>
+      <div class="drone-toma"><span class="pv-ey">Toma 3</span><h3>Terraza y amenities</h3><p>Vuelo bajo sobre pileta, parrilla y vistas abiertas.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PRODUCCIÓN EN 7 DÍAS ===== -->
+<section class="prod" id="produccion">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="kicker">De la captación a la publicación</span>
+      <h2>De la captación a la publicación en 7 días.</h2>
+    </div>
+    <ol class="prod-pasos rv">
+      <li><h3>Visita y tasación</h3><p>Conozco la propiedad y definimos juntos un precio realista, con datos del barrio.</p></li>
+      <li><h3>Fotos + tour 360°</h3><p>Fotos profesionales y recorrido virtual de cada ambiente.</p></li>
+      <li><h3>Amueblado + drone</h3><p>Amueblo virtualmente los ambientes vacíos y filmo la fachada y el entorno desde el aire.</p></li>
+      <li><h3>Difusión premium</h3><p>Zonaprop Premier con Superdestacado, Instagram, Reels y mi base de compradores.</p></li>
+    </ol>
+
+    <div class="prod-cta rv">
+      <div>
+        <h3>¿Querés que tu propiedad se vea así?</h3>
+        <p>Coordinamos la visita y te muestro cómo quedaría amueblada antes de publicarla. La tasación no tiene costo.</p>
+      </div>
+      <a class="btn btn-wa" href="https://wa.me/5491150379426?text=Hola%20Fernando%2C%20quiero%20una%20tasaci%C3%B3n%20y%20ver%20c%C3%B3mo%20quedar%C3%ADa%20mi%20propiedad%20con%20amueblamiento%20virtual%20y%20video%20con%20drone" target="_blank" rel="noopener">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.2-1.8-.9-2.1-1-.3-.1-.5-.2-.7.1-.2.3-.8 1-1 1.2-.2.2-.4.3-.7.1-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.2-.2.4-.5.6-.7.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5 0-.2-.7-1.7-.9-2.3-.2-.5-.4-.5-.6-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4 0 1.4 1 2.8 1.2 3 .1.2 1.9 3 4.7 4.1 2.3.9 2.8.8 3.3.7.5-.1 1.6-.7 1.9-1.3.2-.7.2-1.2.2-1.3-.1-.2-.2-.2-.3-.3zM12 2a10 10 0 0 0-8.5 15.3L2 22l4.8-1.4A10 10 0 1 0 12 2z"/></svg>
+        Pedir tasación por WhatsApp
+      </a>
     </div>
   </div>
 </section>
@@ -2165,6 +2460,87 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
   });
 
 
+  /* ---- comparador antes / despues del amueblamiento virtual ----
+     El recorte lo hace el CSS con --pos; el input range invisible es el que
+     manda, asi funciona con el dedo, con el mouse y con las flechas. */
+  var ba=document.getElementById("ba");
+  if(ba){
+    var rango=document.getElementById("ba-rango"),
+        imgAntes=document.getElementById("ba-antes"),
+        imgDespues=document.getElementById("ba-despues"),
+        menosMovimiento=matchMedia("(prefers-reduced-motion: reduce)").matches,
+        anim=null;
+
+    function ponerPos(v){ ba.style.setProperty("--pos", v+"%"); rango.value=v; }
+    function frenarIntro(){ if(anim){ cancelAnimationFrame(anim); anim=null; } }
+
+    rango.addEventListener("input", function(e){ frenarIntro(); ponerPos(e.target.value); });
+    ba.addEventListener("pointerdown", frenarIntro);
+
+    /* al aparecer, la barra se mueve sola una vez para invitar a deslizar */
+    function barrido(){
+      if(menosMovimiento) return;
+      frenarIntro();
+      var pasos=[[0,50],[700,82],[1500,18],[2200,50]], t0=performance.now();
+      var suave=function(x){ return x<.5 ? 2*x*x : 1-Math.pow(-2*x+2,2)/2; };
+      (function paso(ahora){
+        var t=ahora-t0, i=0;
+        while(i < pasos.length-2 && t > pasos[i+1][0]) i++;
+        var k=Math.min(1,(t-pasos[i][0])/(pasos[i+1][0]-pasos[i][0]));
+        ponerPos(pasos[i][1]+(pasos[i+1][1]-pasos[i][1])*suave(k));
+        anim = t < pasos[pasos.length-1][0] ? requestAnimationFrame(paso) : null;
+      })(t0);
+    }
+    if("IntersectionObserver" in window){
+      var ioBa=new IntersectionObserver(function(es){
+        if(es[0].isIntersecting){ barrido(); ioBa.disconnect(); }
+      },{threshold:.5});
+      ioBa.observe(ba);
+    }
+
+    /* cambio de ambiente. Precargo el otro par para que no parpadee */
+    var ambientes={
+      terraza:{antes:"img/terraza-antes.jpg", despues:"img/terraza-despues.jpg", nombre:"terraza"},
+      living: {antes:"img/living-antes.jpg",  despues:"img/living-despues.jpg",  nombre:"living comedor"},
+      dorm:   {antes:"img/dorm-antes.jpg",    despues:"img/dorm-despues.jpg",    nombre:"dormitorio"}
+    };
+    Object.keys(ambientes).forEach(function(k){
+      [ambientes[k].antes, ambientes[k].despues].forEach(function(u){ new Image().src=u; });
+    });
+    document.querySelectorAll(".amu-tab").forEach(function(tab){
+      tab.addEventListener("click",function(){
+        var amb=ambientes[tab.dataset.amb]; if(!amb) return;
+        document.querySelectorAll(".amu-tab").forEach(function(t){
+          t.setAttribute("aria-selected", t===tab ? "true" : "false");
+        });
+        imgAntes.src=amb.antes;   imgAntes.alt="El "+amb.nombre+" vacío, antes del amueblamiento virtual";
+        imgDespues.src=amb.despues; imgDespues.alt="El "+amb.nombre+" amueblado virtualmente";
+        barrido();
+      });
+    });
+  }
+
+  /* ---- reloj del HUD del drone ---- */
+  var droneSeg=document.getElementById("droneSeg");
+  if(droneSeg && !matchMedia("(prefers-reduced-motion: reduce)").matches){
+    setInterval(function(){
+      droneSeg.textContent=String(Math.floor(Date.now()/1000)%60).padStart(2,"0");
+    },1000);
+  }
+  /* el video solo se carga cuando la seccion esta cerca, para no pesar al abrir */
+  var droneVid=document.getElementById("droneVid");
+  if(droneVid && "IntersectionObserver" in window){
+    var ioDr=new IntersectionObserver(function(es){
+      if(es[0].isIntersecting){
+        droneVid.preload="auto"; droneVid.load();
+        var p=droneVid.play(); if(p&&p.catch) p.catch(function(){});
+        ioDr.disconnect();
+      }
+    },{rootMargin:"200px"});
+    ioDr.observe(droneVid);
+  }
+
+
   /* un solo lugar para avisarle a Analytics y a Meta que hubo una consulta.
      A Meta le va solo el origen, nunca datos de la persona */
   function marcarLead(metodo,origen){
@@ -2206,16 +2582,20 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
   var btnLl=document.getElementById("btnLlamame");
   if(btnLl){
     btnLl.addEventListener("click",function(){
-      /* este boton no dispara el submit, asi que la validacion del email
-         hay que pedirla a mano */
+      /* Por WhatsApp no pido nada: el telefono llega solo con el mensaje.
+         Pero si quiere que lo llame yo, necesito alguna via de contacto,
+         sea el mail o el telefono. */
       var f=document.getElementById("valForm");
-      var mail=document.getElementById("email");
-      if(f && !f.reportValidity()){
-        mail && mail.focus();
+      var mail=document.getElementById("email"), tel=document.getElementById("tel");
+      var hayMail=mail && mail.value.trim() && mail.checkValidity();
+      var hayTel =tel  && tel.value.trim().length>=6;
+      if(!hayMail && !hayTel){
+        (tel||mail) && (tel||mail).focus();
         var n=document.getElementById("formNota");
-        if(n){ n.textContent="Dejame tu email y te escribo yo."; n.style.color="#FFC53D"; }
+        if(n){ n.textContent="Dejame un teléfono o un email y te contacto yo."; n.style.color="#FFC53D"; }
         return;
       }
+      if(f && !f.reportValidity()){ mail && mail.focus(); return; }
       guardarLead("pidio que lo contacten");
       marcarLead("formulario","pidio contacto");
       var n2=document.getElementById("formNota");
