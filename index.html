@@ -2819,10 +2819,20 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
      gte:totalRooms=N                           N o más ambientes
      filterCount=N                              cuántos filtros hay puestos (la zona cuenta)
 
-   Ojo con landingPath: hasta octubre de 2026 filtraba solo, y dejó de hacerlo.
-   No da error: arma el título "en Palermo, Capital Federal" y abajo lista las
-   65.000 propiedades del país entero, Mendoza incluida. El cityId de cada barrio
-   sale de https://api-ar.redremax.com/remaxweb-ar/api/search/findAll/{texto}?level=1
+   Dos trampas de RE/MAX, las dos verificadas contra el contador el 28/10/2026:
+
+   1. landingPath dejó de filtrar. No da error: arma el título "en Palermo, Capital
+      Federal" y abajo lista las 65.000 propiedades del país, Mendoza incluida.
+      Quien filtra es locations, con el cityId del barrio.
+   2. Pero si va landingPath y NINGÚN filtro más, el servidor ignora locations y
+      vuelve a listar el país entero. Alcanza con que viaje un pricein para que
+      agarre. Por eso el precio se manda SIEMPRE: si el visitante no puso nada,
+      va 0 a 5.000.000 de dólares, que no deja ninguna propiedad afuera. Sacar
+      landingPath también arreglaría el filtro, pero entonces el título queda
+      cortado en "propiedades en venta en" y la etiqueta de zona sale vacía.
+
+   El cityId de cada barrio sale de
+   https://api-ar.redremax.com/remaxweb-ar/api/search/findAll/{texto}?level=1
    y está escrito en el data-id de cada <option>. Si se agrega una zona hay que
    pedirle el id a esa API, no inventarlo. */
 (function(){
@@ -2877,18 +2887,17 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
     // Si los cargó al revés, se ordenan solos en vez de no devolver nada.
     if (min !== null && max !== null && min > max) { var t = min; min = max; max = t; }
 
-    var hayPrecio = (min !== null || max !== null);
-    var filtros = [];
-    if (hayPrecio) {
-      filtros.push('pricein=1:' + (min !== null ? min : 0) + ':' + (max !== null ? max : TOPE),
-                   'eq:currencyId=1');
-    }
+    // El precio viaja siempre, aunque el visitante no lo haya puesto: sin un pricein
+    // el servidor de RE/MAX ignora la zona (ver la nota de arriba).
+    var filtros = ['pricein=1:' + (min !== null ? min : 0) + ':' + (max !== null ? max : TOPE),
+                   'eq:currencyId=1'];
     if (amb) {
       var a = amb.split(':');
       filtros.push((a[0] === 'gte' ? 'gte:totalRooms=' : 'eq:totalRooms=') + a[1]);
     }
-    // filterCount cuenta filtros para el usuario, no parámetros: precio va con currencyId.
-    var cuantos = 1 + (hayPrecio ? 1 : 0) + (amb ? 1 : 0);
+    // filterCount es el numerito del botón "Filtros": cuenta etiquetas, no parámetros.
+    // Zona y precio siempre están puestos; currencyId viaja con el precio.
+    var cuantos = 2 + (amb ? 1 : 0);
     filtros.push('filterCount=' + cuantos);
 
     var url = 'https://fcastro.remax.com.ar/listings/buy' +
