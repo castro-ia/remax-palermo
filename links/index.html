@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1E0MPZ6PHR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag("js", new Date());
+  gtag("config", "G-1E0MPZ6PHR");
+</script>
+
+<!-- Pixel de Meta: la misma cuenta que la home, para medir a la gente que
+     llega desde el link de Instagram. Solo viaja el evento, nunca datos. -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version="2.0";n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,"script","https://connect.facebook.net/en_US/fbevents.js");
+fbq("init","1324205362420362");
+fbq("track","PageView");
+</script>
+<noscript><img height="1" width="1" style="display:none" alt=""
+src="https://www.facebook.com/tr?id=1324205362420362&ev=PageView&noscript=1"></noscript>
+
+<title>Empezá por acá · Fernando Castro · RE/MAX Palermo</title>
+<meta name="description" content="Todos mis links en un solo lugar: tasación sin cargo, propiedades en venta, WhatsApp, Instagram y reseñas. Fernando Castro, agente de RE/MAX Premium 1 en Palermo.">
+<meta name="author" content="Fernando Castro">
+<meta name="theme-color" content="#06080F">
+<meta name="robots" content="noindex,follow">
+<link rel="canonical" href="https://llamaloafer.com.ar/links/">
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_AR">
+<meta property="og:site_name" content="RE/MAX Palermo · Fernando Castro">
+<meta property="og:title" content="Empezá por acá · Fernando Castro · RE/MAX Palermo">
+<meta property="og:description" content="Tasación sin cargo, propiedades en venta y WhatsApp directo. Todo en un solo lugar.">
+<meta property="og:url" content="https://llamaloafer.com.ar/links/">
+<meta property="og:image" content="https://llamaloafer.com.ar/img/fernando.webp">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="manifest" href="../site.webmanifest">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --noche:#06080F; --noche-2:#0B1120;
+  --red:#E4002B; --red-lt:#FF2D4F; --red-dk:#B8001F;
+  --blue-lt:#2E6BE6; --wa:#1FAF54;
+  --tx:#F4F5F8; --tx-2:#9AA3B5;
+  --borde:rgba(255,255,255,.10);
+  --r:14px;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--noche);color:var(--tx);
+  font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;
+  font-size:16px;line-height:1.55;letter-spacing:-.011em;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+h1{font-family:Montserrat,Inter,system-ui,sans-serif;font-weight:900;margin:0;letter-spacing:-.038em;line-height:1.04}
+p{margin:0}
+svg{display:block}
+
+/* ---------- el fondo: noche + resplandor rojo arriba ---------- */
+.cielo{position:fixed;inset:0;z-index:-2;background:var(--noche)}
+.cielo::before{
+  content:"";position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 120% 70% at 50% -18%,rgba(228,0,43,.22),transparent 58%),
+    radial-gradient(ellipse 90% 60% at 50% 115%,rgba(46,107,230,.16),transparent 62%);
+}
+.cielo::after{
+  content:"";position:absolute;inset:0;
+  background:radial-gradient(ellipse 85% 60% at 50% 45%,transparent,rgba(0,0,0,.55) 100%);
+}
+
+/* chispas: suben despacio, solo decoran */
+.chispas{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
+.chispas i{
+  position:absolute;bottom:-12px;width:3px;height:3px;border-radius:50%;
+  background:var(--red-lt);opacity:0;
+  box-shadow:0 0 8px 1px rgba(255,45,79,.65);
+  animation:subir linear infinite;
+}
+@keyframes subir{
+  0%{transform:translateY(0) translateX(0);opacity:0}
+  12%{opacity:.85}
+  80%{opacity:.5}
+  100%{transform:translateY(-104vh) translateX(var(--dx,14px));opacity:0}
+}
+@media (prefers-reduced-motion:reduce){ .chispas{display:none} }
+
+/* ---------- la columna ---------- */
+.hoja{
+  position:relative;width:100%;max-width:520px;margin-inline:auto;
+  min-height:100svh;padding:46px 20px 34px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+}
+
+/* la foto, con el mismo marco que el resto */
+.retrato{
+  width:100%;border-radius:20px;overflow:hidden;position:relative;
+  border:1px solid rgba(255,255,255,.12);
+  box-shadow:0 0 40px -6px rgba(228,0,43,.35),0 30px 70px -30px #000;
+}
+.retrato img{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;object-position:50% 16%}
+.retrato::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,transparent 55%,rgba(6,8,15,.72));
+}
+
+.firma{
+  margin-top:20px;font-size:11px;font-weight:700;letter-spacing:.3em;
+  text-transform:uppercase;color:rgba(255,255,255,.52);
+}
+h1{margin-top:10px;font-size:clamp(32px,8.6vw,48px)}
+h1 span{
+  background:linear-gradient(100deg,var(--red-lt),var(--red) 60%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.chapa{
+  margin-top:16px;display:inline-block;padding:9px 16px;border-radius:999px;
+  border:1px solid rgba(228,0,43,.34);background:rgba(255,255,255,.04);
+  font-size:10.5px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;
+  color:rgba(255,255,255,.78);
+}
+
+/* ---------- los botones ---------- */
+.pila{width:100%;margin-top:26px;display:flex;flex-direction:column;gap:11px}
+
+.bt{
+  display:flex;align-items:center;gap:14px;text-align:left;
+  padding:17px 18px;border-radius:var(--r);
+  border:1px solid var(--borde);
+  background:linear-gradient(145deg,rgba(255,255,255,.075),rgba(255,255,255,.028));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.06);
+  transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease,background .2s ease;
+}
+.bt:hover,.bt:focus-visible{transform:translateY(-2px);border-color:rgba(255,255,255,.22)}
+.bt .ic{
+  flex:0 0 auto;width:38px;height:38px;border-radius:11px;
+  display:grid;place-items:center;background:rgba(255,255,255,.09);
+  color:#fff;
+}
+.bt .tx{flex:1 1 auto;min-width:0}
+.bt .tx b{display:block;font-size:15.5px;font-weight:700;letter-spacing:-.01em}
+.bt .tx small{display:block;font-size:12.5px;color:var(--tx-2);margin-top:2px;letter-spacing:0}
+.bt .fl{flex:0 0 auto;color:rgba(255,255,255,.45);transition:transform .2s ease,color .2s ease}
+.bt:hover .fl{transform:translateX(3px);color:#fff}
+
+/* el principal: el que quiero que toquen */
+.bt.jefe{
+  border-color:transparent;
+  background:linear-gradient(120deg,var(--red-lt),var(--red-dk));
+  box-shadow:0 0 26px 1px rgba(228,0,43,.42),0 22px 48px -26px rgba(228,0,43,.9);
+}
+.bt.jefe .ic{background:rgba(0,0,0,.22)}
+.bt.jefe .tx b{font-size:16px;letter-spacing:.02em;text-transform:uppercase}
+.bt.jefe .tx small{color:rgba(255,255,255,.82)}
+.bt.jefe .fl{color:rgba(255,255,255,.85)}
+.bt.jefe:hover{box-shadow:0 0 34px 2px rgba(228,0,43,.55),0 26px 54px -26px rgba(228,0,43,1)}
+
+.bt.wa{
+  border-color:rgba(31,175,84,.42);
+  background:linear-gradient(145deg,rgba(31,175,84,.18),rgba(31,175,84,.06));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 20px 46px -34px rgba(31,175,84,.9);
+}
+.bt.wa .ic{background:rgba(31,175,84,.22);color:#5BE08E}
+.bt.azul .ic{background:rgba(46,107,230,.22);color:#8DB2FF}
+
+/* la fila chica de abajo */
+.rejilla{width:100%;margin-top:11px;display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.mini{
+  display:flex;align-items:center;justify-content:center;gap:9px;
+  padding:14px 10px;border-radius:12px;
+  border:1px solid rgba(255,255,255,.09);background:rgba(255,255,255,.045);
+  font-size:13.5px;font-weight:600;color:rgba(255,255,255,.88);
+  transition:transform .2s ease,border-color .2s ease,background .2s ease;
+}
+.mini:hover,.mini:focus-visible{transform:translateY(-2px);border-color:rgba(255,255,255,.2);background:rgba(255,255,255,.08)}
+.mini svg{flex:0 0 auto;color:rgba(255,255,255,.7)}
+
+.pie{
+  margin-top:28px;font-size:10px;font-weight:600;letter-spacing:.2em;
+  text-transform:uppercase;color:rgba(255,255,255,.32);line-height:1.8;
+}
+.pie a{border-bottom:1px solid rgba(255,255,255,.18)}
+.pie a:hover{color:#fff}
+
+:focus-visible{outline:2px solid var(--red-lt);outline-offset:3px}
+
+@media (max-width:400px){
+  .hoja{padding:34px 16px 28px}
+  .bt{padding:15px 15px;gap:12px}
+  .bt .ic{width:34px;height:34px;border-radius:10px}
+}
+</style>
+</head>
+<body>
+
+<div class="cielo"></div>
+<div class="chispas" id="chispas" aria-hidden="true"></div>
+
+<main class="hoja">
+
+  <div class="retrato">
+    <img src="../img/fernando.webp" width="900" height="675" alt="Fernando Castro, agente de RE/MAX Premium 1" fetchpriority="high">
+  </div>
+
+  <p class="firma">Fernando Castro</p>
+
+  <h1>Dejá de estimar.<br><span>Vendé con datos.</span></h1>
+
+  <p class="chapa">RE/MAX Premium 1 · Palermo</p>
+
+  <div class="pila">
+
+    <a class="bt jefe" href="https://llamaloafer.com.ar/#tasacion" data-ev="tasacion">
+      <span class="ic" aria-hidden="true">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.6V20h14V9.6"/><path d="M9.5 20v-5.5h5V20"/></svg>
+      </span>
+      <span class="tx">
+        <b>Quiero mi tasación</b>
+        <small>Sin cargo · te respondo en 48 horas</small>
+      </span>
+      <span class="fl" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13"/><path d="m12.5 5.5 6.5 6.5-6.5 6.5"/></svg>
+      </span>
+    </a>
+
+    <a class="bt wa" href="https://wa.me/5491150379426?text=Hola%20Fernando%2C%20entr%C3%A9%20por%20tu%20link%20y%20quiero%20hablar%20sobre%20mi%20propiedad" target="_blank" rel="noopener" data-ev="whatsapp">
+      <span class="ic" aria-hidden="true">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 2a8 8 0 1 1-4.1 14.9l-.3-.2-2.9.8.8-2.8-.2-.3A8 8 0 0 1 12 4Zm-3.3 4.3c-.2 0-.5.1-.7.3-.3.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.7 2.8 4.3 3.8 2.1.8 2.6.7 3 .6.5 0 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2l-.6-.3-1.6-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.5 6.5 0 0 1-3.2-2.8c-.1-.2 0-.4.1-.5l.5-.6.2-.4v-.4l-.7-1.7c-.2-.4-.4-.4-.6-.4h-.4Z"/></svg>
+      </span>
+      <span class="tx">
+        <b>Hablemos por WhatsApp</b>
+        <small>Me escribís y te contesto yo</small>
+      </span>
+      <span class="fl" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13"/><path d="m12.5 5.5 6.5 6.5-6.5 6.5"/></svg>
+      </span>
+    </a>
+
+    <a class="bt azul" href="https://fcastro.remax.com.ar/" target="_blank" rel="noopener" data-ev="propiedades">
+      <span class="ic" aria-hidden="true">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m16.5 16.5 4 4"/></svg>
+      </span>
+      <span class="tx">
+        <b>Ver propiedades en venta</b>
+        <small>Toda la red RE/MAX · te atiendo yo</small>
+      </span>
+      <span class="fl" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13"/><path d="m12.5 5.5 6.5 6.5-6.5 6.5"/></svg>
+      </span>
+    </a>
+
+    <a class="bt" href="https://llamaloafer.com.ar/" data-ev="web">
+      <span class="ic" aria-hidden="true">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3.2 9.5h17.6M3.2 14.5h17.6"/><path d="M12 3a15 15 0 0 1 0 18 15 15 0 0 1 0-18Z"/></svg>
+      </span>
+      <span class="tx">
+        <b>Mi web completa</b>
+        <small>Cómo trabajo, propiedades vendidas y reseñas</small>
+      </span>
+      <span class="fl" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13"/><path d="m12.5 5.5 6.5 6.5-6.5 6.5"/></svg>
+      </span>
+    </a>
+
+  </div>
+
+  <div class="rejilla">
+    <a class="mini" href="https://instagram.com/fcastro.remax" target="_blank" rel="noopener" data-ev="instagram">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg>
+      Instagram
+    </a>
+    <a class="mini" href="https://www.youtube.com/@fcastro.remax1" target="_blank" rel="noopener" data-ev="youtube">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="2.5" y="5" width="19" height="14" rx="4.2"/><path d="m10.4 9.2 4.6 2.8-4.6 2.8Z" fill="currentColor"/></svg>
+      YouTube
+    </a>
+    <a class="mini" href="https://share.google/ayJGn7dHlrtmHFuXk" target="_blank" rel="noopener" data-ev="resenas">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="m12 3.6 2.5 5.1 5.6.8-4.1 4 1 5.6-5-2.7-5 2.7 1-5.6-4.1-4 5.6-.8Z"/></svg>
+      Reseñas 5,0
+    </a>
+    <a class="mini" href="https://maps.google.com/?q=Dorrego+3550,+Palermo,+CABA" target="_blank" rel="noopener" data-ev="mapa">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-5.6 7-11a7 7 0 1 0-14 0c0 5.4 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>
+      Cómo llegar
+    </a>
+  </div>
+
+  <p class="pie">
+    © <span id="yr">2026</span> Fernando Castro · RE/MAX Premium 1<br>
+    Operaciones concluidas por corredor colegiado · <a href="https://llamaloafer.com.ar/#faq">ver datos</a>
+  </p>
+
+</main>
+
+<script>
+(function(){
+  "use strict";
+
+  /* chispas: puras decorativas, no se dibujan si el equipo pide menos movimiento */
+  var quieto = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if(!quieto){
+    var caja = document.getElementById("chispas"), html = "";
+    for(var i=0;i<22;i++){
+      var x = Math.random()*100,
+          dur = 9 + Math.random()*11,
+          esp = -Math.random()*dur,
+          dx = (Math.random()*60-30).toFixed(0),
+          tam = (2 + Math.random()*2.4).toFixed(1);
+      html += '<i style="left:'+x.toFixed(2)+'%;width:'+tam+'px;height:'+tam+'px;'+
+              '--dx:'+dx+'px;animation-duration:'+dur.toFixed(1)+'s;animation-delay:'+esp.toFixed(1)+'s"></i>';
+    }
+    caja.innerHTML = html;
+  }
+
+  /* un solo lugar para avisarle a Analytics y a Meta */
+  function marcarLead(metodo,origen){
+    if(typeof gtag==="function") gtag("event","generate_lead",{method:metodo,origen:origen});
+    if(typeof fbq==="function")  fbq("track","Lead",{content_name:origen});
+  }
+
+  var yr=document.getElementById("yr");
+  if(yr) yr.textContent=new Date().getFullYear();
+
+  document.querySelectorAll("[data-ev]").forEach(function(a){
+    a.addEventListener("click",function(){
+      var ev = a.getAttribute("data-ev");
+      if(typeof gtag==="function") gtag("event","click_link",{origen:"links_"+ev});
+      if(ev==="whatsapp") marcarLead("whatsapp","links");
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
