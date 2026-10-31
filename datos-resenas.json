@@ -1,6 +1,6 @@
 {
   "_nota": "Las cantidades de reseñas de Google. Si GOOGLE_PLACES_API_KEY está cargada en los secrets del repo, lo actualiza solo el workflow 'Actualizar reseñas'. Si no, se edita a mano: cambiás los dos numeros de abajo y la página se actualiza entera sola.",
-  "actualizado": "2026-10-24",
+  "actualizado": "2026-10-30",
   "automatico": false,
   "fichas": [
     {
@@ -10,7 +10,7 @@
       "busqueda": "RE/MAX Palermo | Fernando Castro - Agente Inmobiliario",
       "placeId": null,
       "puntaje": 5.0,
-      "resenas": 96
+      "resenas": 99
     },
     {
       "id": "san-justo",
