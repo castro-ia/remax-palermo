@@ -539,6 +539,64 @@ select option{background:#0F1F42;color:#fff}
   .ticker::-webkit-scrollbar{display:none}
 }
 
+/* ---------- guía de cierres ----------
+   Banda oscura entre dos secciones crema: es lo único que descansa en la tapa
+   del PDF, así que el bloque la imita en chico. */
+.guia{position:relative;overflow:hidden;background:var(--navy);color:#fff;padding:56px 0}
+.guia::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(760px 420px at 84% -14%,rgba(46,107,230,.32),transparent 62%),
+    radial-gradient(560px 360px at 2% 110%,rgba(228,0,43,.28),transparent 66%);
+}
+.guia .wrap{position:relative;z-index:2}
+.guia-grid{display:grid;gap:28px;align-items:center}
+@media(min-width:880px){.guia-grid{grid-template-columns:1.15fr .85fr;gap:48px}}
+.guia .kicker{color:#FF8DA1;margin-bottom:14px}
+.guia h2{color:#fff;font-size:clamp(1.7rem,5vw,2.5rem);text-wrap:balance}
+.guia h2 em{font-style:normal;color:var(--red)}
+.guia .bajada{margin-top:14px;color:rgba(255,255,255,.76);font-size:1.02rem;max-width:34rem}
+.guia-cifras{margin-top:24px;display:flex;flex-wrap:wrap;gap:12px}
+.guia-cifras div{
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.13);
+  border-radius:13px;padding:12px 15px;
+}
+.guia-cifras b{display:block;font-family:Montserrat,Inter,sans-serif;font-size:1.3rem;font-weight:800;letter-spacing:-.03em;line-height:1}
+.guia-cifras b.baja{color:#FF7A8F}
+.guia-cifras span{display:block;margin-top:4px;font-size:10.5px;font-weight:700;letter-spacing:.11em;text-transform:uppercase;color:rgba(255,255,255,.55)}
+.guia-botones{margin-top:26px;display:flex;flex-wrap:wrap;gap:11px}
+.guia .btn-ver{
+  display:inline-flex;align-items:center;gap:9px;background:var(--red);color:#fff;
+  padding:14px 20px;border-radius:13px;font-size:15px;font-weight:700;
+  box-shadow:0 0 24px rgba(228,0,43,.35),0 16px 36px -22px rgba(228,0,43,.9);
+  transition:transform .2s ease,box-shadow .2s ease;
+}
+.guia .btn-ver:hover{transform:translateY(-2px);box-shadow:0 0 32px rgba(228,0,43,.5),0 20px 44px -22px rgba(228,0,43,1)}
+.guia .btn-pdf{
+  display:inline-flex;align-items:center;gap:9px;color:#fff;
+  border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.05);
+  padding:14px 20px;border-radius:13px;font-size:15px;font-weight:600;
+  transition:transform .2s ease,border-color .2s ease;
+}
+.guia .btn-pdf:hover{transform:translateY(-2px);border-color:rgba(255,255,255,.45)}
+
+/* la tapa en chico, apoyada sobre el costado */
+.guia-tapa{
+  position:relative;border-radius:var(--r-lg);overflow:hidden;
+  background:linear-gradient(165deg,#132350,#070E22);
+  border:1px solid rgba(255,255,255,.14);
+  box-shadow:0 24px 60px -28px #000;
+  padding:30px 26px;aspect-ratio:1/1.1;display:flex;flex-direction:column;justify-content:center;
+}
+.guia-tapa span{font-size:9.5px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.5)}
+.guia-tapa strong{
+  display:block;margin-top:14px;font-family:Montserrat,Inter,sans-serif;
+  font-size:clamp(1.9rem,6vw,2.6rem);font-weight:900;letter-spacing:-.04em;line-height:.95;text-transform:uppercase;
+}
+.guia-tapa strong i{font-style:normal;color:var(--red)}
+.guia-tapa p{margin-top:16px;font-size:12.5px;color:rgba(255,255,255,.55);line-height:1.5}
+@media(max-width:879px){.guia-tapa{aspect-ratio:16/9;padding:24px}}
+
 /* ---------- sobre mi ---------- */
 .about{background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 .about-grid{display:grid;gap:30px;align-items:start}
@@ -1264,6 +1322,7 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
       <a href="#sobre-mi">Sobre mí</a>
       <a href="#proceso">Cómo trabajo</a>
       <a href="#vendidas">Vendidas</a>
+      <a href="cierres-2026/">Cierres 2026</a>
       <a href="#resenas">Reseñas</a>
       <a href="#faq">Preguntas</a>
       <a href="#propiedades">Propiedades</a>
@@ -1541,6 +1600,40 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
 <section class="ticker" id="mercado" aria-label="Datos del mercado inmobiliario">
   <span class="tk-live"><i></i><span>En vivo</span></span>
   <div class="tk-track" id="tkTrack"><div class="tk-set"></div><div class="tk-set"></div></div>
+</section>
+
+<!-- ===== GUÍA DE CIERRES ===== -->
+<section class="guia" id="cierres">
+  <div class="wrap">
+    <div class="guia-grid">
+      <div class="rv">
+        <span class="kicker">Guía gratis · Edición noviembre 2026</span>
+        <h2>A cuánto se vendió en CABA este año, <em>barrio por barrio</em>.</h2>
+        <p class="bajada">1.169 ventas cerradas de la red RE/MAX entre enero y agosto. El valor real del m² en 23 barrios, cuáles subieron y cuáles bajaron contra 2025, y cuánto tarda hoy una venta.</p>
+        <div class="guia-cifras">
+          <div><b>USD 2.188</b><span>m² mediano de cierre</span></div>
+          <div><b class="baja">−2%</b><span>contra 2025</span></div>
+          <div><b>134 días</b><span>tarda una venta</span></div>
+        </div>
+        <div class="guia-botones">
+          <a class="btn-ver" href="cierres-2026/">
+            Ver la guía completa
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13"/><path d="m12.5 5.5 6.5 6.5-6.5 6.5"/></svg>
+          </a>
+          <a class="btn-pdf" href="cierres-2026/Cierres-2026-CABA-Team-Fernando-Castro.pdf" download>
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7.5 10.5 4.5 4.5 4.5-4.5"/><path d="M4 19h16"/></svg>
+            Descargar el PDF
+          </a>
+        </div>
+      </div>
+
+      <a class="guia-tapa rv" href="cierres-2026/" aria-label="Abrir la guía Cierres 2026 en CABA">
+        <span>Team Fernando Castro · Nov 2026</span>
+        <strong>Cierres <i>2026</i> en CABA.</strong>
+        <p>1.169 ventas · 23 barrios · enero a agosto<br>Datos de cierres de la red RE/MAX</p>
+      </a>
+    </div>
+  </div>
 </section>
 
 <!-- ===== SOBRE MI ===== -->
