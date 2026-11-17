@@ -986,7 +986,8 @@ select option{background:#0F1F42;color:#fff}
 .vid:hover{transform:translateY(-5px);box-shadow:0 1px 0 rgba(255,255,255,.1) inset,0 20px 44px rgba(0,0,0,.55)}
 .vid img{width:100%;height:100%;object-fit:cover;transition:transform .5s,opacity .3s}
 .vid:hover img{transform:scale(1.05)}
-.gate iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.gate iframe,.gate video{position:absolute;inset:0;width:100%;height:100%;border:0}
+.gate video{object-fit:cover;background:#000}
 .play{
   position:absolute;inset:0;display:grid;place-items:center;
   background:linear-gradient(180deg,rgba(10,23,51,.1) 0%,rgba(10,23,51,.55) 100%);
@@ -2049,6 +2050,7 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
       <p>Recorridos reales de departamentos en venta y propietarios contando cómo fue vender conmigo. Sin actores y sin guion.</p>
     </div>
     <div class="reel" id="reel">
+      <div class="vid" data-mp4="video/reel-san-justo.mp4" role="button" tabindex="0" aria-label="Reproducir: recorrido con drone de una casa en San Justo"><span class="gate"><img src="img/reel-san-justo.jpg" width="608" height="1080" loading="lazy" alt="Fernando Castro frente a una casa en San Justo, antes de mostrarla"><span class="play"><i></i></span></span></div>
       <div class="vid" data-yt="lircPuAWMZ0" role="button" tabindex="0" aria-label="Reproducir: Recorrido de una propiedad en Haedo publicada en USD 159.000"><span class="gate"><img src="https://i.ytimg.com/vi/lircPuAWMZ0/hq720.jpg" loading="lazy" alt="Recorrido de una propiedad en Haedo publicada en USD 159.000"><span class="play"><i></i></span></span></div>
       <div class="vid" data-yt="5tnFIsGmgkY" role="button" tabindex="0" aria-label="Reproducir: Recorrido de un cuatro ambientes en Belgrano, a dos cuadras del subte D"><span class="gate"><img src="https://i.ytimg.com/vi/5tnFIsGmgkY/hq720.jpg" loading="lazy" alt="Recorrido de un cuatro ambientes en Belgrano, a dos cuadras del subte D"><span class="play"><i></i></span></span></div>
       <div class="vid" data-yt="YJKg9fQ8iMU" role="button" tabindex="0" aria-label="Reproducir: Testimonios de vendedores de Palermo que operaron con RE/MAX Premium"><span class="gate"><img src="https://i.ytimg.com/vi/YJKg9fQ8iMU/hq720.jpg" loading="lazy" alt="Testimonios de vendedores de Palermo que operaron con RE/MAX Premium"><span class="play"><i></i></span></span></div>
@@ -2711,18 +2713,28 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
 
   /* click-to-play youtube (keeps the page fast) */
   function playVideo(box){
-    var id=box.getAttribute("data-yt");
-    if(!id||box.dataset.loaded)return;
+    if(box.dataset.loaded)return;
+    var id=box.getAttribute("data-yt"), mp4=box.getAttribute("data-mp4"), nodo;
+    if(mp4){
+      /* los videos propios se sirven desde acá: no cargan nada hasta que los tocan */
+      nodo=document.createElement("video");
+      nodo.src=mp4;
+      nodo.controls=true;
+      nodo.autoplay=true;
+      nodo.setAttribute("playsinline","");
+      nodo.preload="auto";
+    }else if(id){
+      nodo=document.createElement("iframe");
+      nodo.src="https://www.youtube.com/embed/"+id+"?autoplay=1&rel=0&playsinline=1";
+      nodo.title="Video de Fernando Castro";
+      nodo.allow="accelerometer; autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share";
+      nodo.allowFullscreen=true;
+    }else return;
     box.dataset.loaded="1";
-    var f=document.createElement("iframe");
-    f.src="https://www.youtube.com/embed/"+id+"?autoplay=1&rel=0&playsinline=1";
-    f.title="Video de Fernando Castro";
-    f.allow="accelerometer; autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share";
-    f.allowFullscreen=true;
-    /* el iframe entra en la ventanilla, no en el marco: las perforaciones quedan */
+    /* el reproductor entra en la ventanilla, no en el marco: las perforaciones quedan */
     var gate=box.querySelector(".gate")||box;
     gate.innerHTML="";
-    gate.appendChild(f);
+    gate.appendChild(nodo);
   }
   document.querySelectorAll(".vid").forEach(function(box){
     box.addEventListener("click",function(){ playVideo(box); });
