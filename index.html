@@ -226,11 +226,18 @@ a.chip:hover{background:rgba(255,255,255,.15);transform:translateY(-1px)}
 }
 .badge-float .n{font-family:Montserrat,Inter,sans-serif;font-size:21px;font-weight:700;line-height:1;color:var(--red)}
 .badge-float .t{font-size:10.5px;font-weight:600;line-height:1.25;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
-.hof{
-  position:absolute;right:-8px;top:14px;background:linear-gradient(140deg,#F2D98B,#C9A227);
-  color:#3A2C00;font-size:10.5px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;
-  padding:7px 12px;border-radius:999px;box-shadow:0 6px 18px rgba(201,162,39,.4);
+/* los dos reconocimientos de la red, uno abajo del otro y alineados al borde */
+.premios-hero{
+  position:absolute;right:-8px;top:14px;z-index:3;
+  display:flex;flex-direction:column;align-items:flex-end;gap:8px;
 }
+.hof{
+  background:linear-gradient(140deg,#F2D98B,#C9A227);
+  color:#3A2C00;font-size:10.5px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;
+  padding:7px 12px;border-radius:999px;box-shadow:0 6px 18px rgba(201,162,39,.4);white-space:nowrap;
+}
+/* en pantallas angostas el de Lifetime se come el ancho del retrato */
+@media(max-width:400px){.hof{font-size:9.5px;letter-spacing:.07em;padding:6px 10px}}
 
 /* stats strip */
 .stats{
@@ -392,7 +399,7 @@ select option{background:#0F1F42;color:#fff}
 .lk,.step,.rev,.gbadge{transform-style:preserve-3d}
 .step:hover,.gbadge:hover{transform:translateY(-4px) scale(1.012)}
 
-.hof{animation:float 3.6s ease-in-out infinite}
+.premios-hero{animation:float 3.6s ease-in-out infinite}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
 
 .stat{transition:background .3s}
@@ -400,7 +407,7 @@ select option{background:#0F1F42;color:#fff}
 
 @media (prefers-reduced-motion:reduce){
   .js h1 .w,.js .lede,.js .rating-row,.js .cta-row,.js .eyebrow{opacity:1;transform:none;animation:none}
-  .btn-wa::after,.hof{animation:none}
+  .btn-wa::after,.premios-hero{animation:none}
   #prog{display:none}
 }
 
@@ -1372,7 +1379,10 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
         <div class="portrait">
           <img src="img/fernando-retrato.webp" width="768" height="1024" alt="Fernando Castro, agente inmobiliario de RE/MAX Premium 1" fetchpriority="high">
         </div>
-        <span class="hof">Hall of Fame</span>
+        <div class="premios-hero">
+          <span class="hof">Hall of Fame</span>
+          <span class="hof">Lifetime Achievement</span>
+        </div>
         <div class="badge-float">
           <span class="n">260+</span>
           <span class="t">Operaciones<br>cerradas</span>
