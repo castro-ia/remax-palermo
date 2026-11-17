@@ -1173,7 +1173,8 @@ select option{background:#0F1F42;color:#fff}
 .final{
   position:relative;overflow:hidden;color:#fff;padding:66px 0 54px;background:#060C1C;
 }
-/* Palermo desde el aire, de su propio video del drone */
+/* Palermo desde el aire. Vive aparte del poster de la seccion del drone, que
+   desde noviembre es la casa de San Justo */
 .final .fondo{
   position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.38;
 }
@@ -1993,15 +1994,15 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
     </div>
 
     <div class="drone-pantalla rv">
-      <!-- si todavia no existe video/drone.mp4, queda el poster y el HUD encima -->
-      <video id="droneVid" poster="img/drone-poster.jpg?v=2" autoplay muted loop playsinline preload="none"
+      <!-- Toma real de Fernando: los dos tramos aereos de su video de la casa de San Justo -->
+      <video id="droneVid" poster="img/drone-poster.jpg?v=3" autoplay muted loop playsinline preload="none"
              aria-label="Vuelo de drone sobre el barrio">
-        <source src="video/drone.mp4?v=2" type="video/mp4">
+        <source src="video/drone.mp4?v=3" type="video/mp4">
       </video>
       <span class="hud hud-si"><span class="hud-rec"></span>REC 00:<span id="droneSeg">00</span></span>
       <span class="hud hud-sd">4K · 30 FPS</span>
       <span class="hud hud-ii">ALT 60 m<br>VEL 4 m/s</span>
-      <span class="hud hud-id">34°35′S 58°25′O<br>PALERMO</span>
+      <span class="hud hud-id">34°41′S 58°34′O<br>SAN JUSTO</span>
     </div>
 
     <div class="drone-tomas rv">
@@ -2253,7 +2254,7 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
 
 <!-- ===== FINAL CTA ===== -->
 <section class="final">
-  <img class="fondo" src="img/drone-poster.jpg?v=2" alt="" width="1152" height="648" loading="lazy" decoding="async">
+  <img class="fondo" src="img/cierre-aereo.jpg" alt="" width="1152" height="648" loading="lazy" decoding="async">
   <div class="chispas" data-chispas="16" aria-hidden="true"></div>
   <div class="wrap">
     <div class="final-grid">
