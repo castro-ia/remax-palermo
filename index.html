@@ -239,6 +239,16 @@ a.chip:hover{background:rgba(255,255,255,.15);transform:translateY(-1px)}
 /* en pantallas angostas el de Lifetime se come el ancho del retrato */
 @media(max-width:400px){.hof{font-size:9.5px;letter-spacing:.07em;padding:6px 10px}}
 
+/* los mismos dos, pinchados en el borde de arriba de la foto de "Sobre mi".
+   Solo en escritorio: en el celular esa foto es un redondelito de 76px. */
+.premios-about{display:none}
+@media(min-width:860px){
+  .premios-about{
+    display:flex;position:absolute;top:-13px;left:16px;right:16px;z-index:3;
+    justify-content:space-between;align-items:flex-start;gap:8px;flex-wrap:wrap;
+  }
+}
+
 /* stats strip */
 .stats{
   position:relative;z-index:2;margin-top:40px;
@@ -1652,6 +1662,10 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
   <div class="wrap">
     <div class="about-grid">
       <div class="about-photo rv">
+        <div class="premios-about">
+          <span class="hof">Hall of Fame</span>
+          <span class="hof">Lifetime Achievement</span>
+        </div>
         <picture>
           <source media="(min-width:860px)" srcset="img/fernando-retrato.webp" width="768" height="1024">
           <img src="img/fernando-retrato-avatar.webp" width="300" height="300" alt="Fernando Castro, Team Leader de RE/MAX Premium 1" loading="lazy">
