@@ -1,6 +1,6 @@
 {
   "_nota": "Lo actualiza solo el workflow 'Actualizar datos del mercado'. Todos estos datos se leen de fuentes oficiales; no se edita a mano.",
-  "actualizado": "2026-11-18",
+  "actualizado": "2026-11-19",
   "items": [
     {
       "label": "Escrituras CABA",
@@ -31,21 +31,21 @@
     },
     {
       "label": "m² CABA · precio de cierre",
-      "valor": "US$ 2.097",
-      "periodo": "sep 2026",
-      "delta": 2.45,
+      "valor": "US$ 2.124",
+      "periodo": "oct 2026",
+      "delta": 1.27,
       "deltaNota": "mensual",
       "fuente": "Índice M2 Real · RE/MAX + UCEMA",
-      "url": "https://ucema.edu.ar/indices-y-bases-de-datos/m2-092026"
+      "url": "https://ucema.edu.ar/indices-y-bases-de-datos/m2-102026"
     },
     {
       "label": "Se cierra por debajo del publicado",
-      "valor": "-4,75%",
-      "periodo": "sep 2026",
+      "valor": "-5,01%",
+      "periodo": "oct 2026",
       "delta": null,
       "deltaNota": "vs. precio publicado",
       "fuente": "Índice M2 Real · RE/MAX + UCEMA",
-      "url": "https://ucema.edu.ar/indices-y-bases-de-datos/m2-092026"
+      "url": "https://ucema.edu.ar/indices-y-bases-de-datos/m2-102026"
     }
   ]
 }
