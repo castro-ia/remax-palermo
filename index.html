@@ -560,6 +560,104 @@ select option{background:#0F1F42;color:#fff}
 .chat-cierre .btn{width:100%;padding:13px 16px;font-size:14.5px;border-radius:12px}
 .chat-cierre .btn-ghost{color:#E9EDEF;border-color:rgba(233,237,239,.3)}
 
+/* ---------- las tres opciones ----------
+   La misma lista de herramientas mirada desde las tres veredas. En escritorio
+   se ven las tres columnas; en el celular, solo la que el visitante elige. */
+.cmp{background:var(--cream);border-top:1px solid var(--line)}
+.cmp-modos{margin-top:22px;display:flex;flex-wrap:wrap;gap:8px}
+.cmp-modo{
+  background:var(--paper);border:1px solid var(--line);color:var(--muted);
+  padding:11px 17px;border-radius:999px;font:inherit;font-size:14.5px;font-weight:600;cursor:pointer;
+  transition:border-color .2s,color .2s,background .2s,transform .2s;
+}
+.cmp-modo:hover{transform:translateY(-1px);border-color:#C9C6C0;color:var(--ink)}
+.cmp-modo[aria-pressed="true"]{background:var(--navy);border-color:var(--navy);color:#fff}
+.cmp-modo[aria-pressed="true"][data-col="yo"]{background:var(--red);border-color:var(--red)}
+.cmp-caja{margin-top:20px;background:var(--paper);border:1px solid var(--line);border-radius:var(--r-lg);
+  box-shadow:var(--sh-sm);overflow:hidden}
+.cmp-tabla{width:100%;border-collapse:collapse;font-size:15px}
+.cmp-tabla th,.cmp-tabla td{padding:13px 14px;border-bottom:1px solid var(--line);text-align:left;vertical-align:middle}
+.cmp-tabla thead th{
+  font-size:11px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);
+  background:#FBFAF8;white-space:nowrap;
+}
+.cmp-tabla thead th[data-col]{text-align:center}
+.cmp-tabla thead th[data-col="yo"]{color:var(--red)}
+.cmp-tabla tbody th{font-weight:600;color:var(--ink);line-height:1.4}
+.cmp-tabla td{text-align:center;white-space:nowrap}
+.cmp-tabla tbody tr:last-child th,.cmp-tabla tbody tr:last-child td{border-bottom:0}
+.cmp-tabla tbody tr:hover{background:#FBFAF8}
+/* la columna elegida se destaca de punta a punta */
+.cmp-tabla [data-col="yo"]{background:#FFF6F7}
+.cmp-tabla tbody tr:hover [data-col="yo"]{background:#FFEFF1}
+.marca{display:inline-flex;align-items:center;gap:6px;font-size:13.5px;font-weight:600}
+.marca.si{color:#1C8F4B}
+.marca.no{color:#B9BDC7;font-weight:500}
+.marca.quiza{color:#B07D00;font-weight:500}
+.marca.pagas{color:var(--red)}
+.marca svg{flex:none}
+.cmp-cuenta{display:block;margin-top:5px;font-size:11px;font-weight:700;letter-spacing:.04em;color:var(--muted);text-transform:none}
+.cmp-tabla thead th[data-col="yo"] .cmp-cuenta{color:var(--red)}
+.cmp-pie{margin-top:16px;font-size:12.5px;color:var(--muted);line-height:1.6;max-width:52rem}
+@media(max-width:820px){
+  .cmp-tabla{font-size:14px}
+  .cmp-tabla th,.cmp-tabla td{padding:11px 10px}
+  /* en el celular queda la columna elegida y nada más. Ojo con el .cmp-tabla:
+     sin él se esconden también los botones, que llevan el mismo data-col. */
+  .cmp[data-ver="solo"] .cmp-tabla [data-col="trad"],.cmp[data-ver="solo"] .cmp-tabla [data-col="yo"],
+  .cmp[data-ver="trad"] .cmp-tabla [data-col="solo"],.cmp[data-ver="trad"] .cmp-tabla [data-col="yo"],
+  .cmp[data-ver="yo"] .cmp-tabla [data-col="solo"],.cmp[data-ver="yo"] .cmp-tabla [data-col="trad"]{display:none}
+  .cmp-modo{flex:1;min-width:0;padding:11px 10px;font-size:13.5px;text-align:center}
+}
+
+/* ---------- el dato de los 100 ----------
+   Cien puntitos: los 81 que cerraron por debajo de lo publicado se prenden en
+   rojo cuando la grilla entra en pantalla. */
+.dato{background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:58px 0}
+.dato-grid{display:grid;gap:34px}
+@media(min-width:860px){.dato-grid{grid-template-columns:.95fr 1.05fr;gap:52px;align-items:center}}
+.puntos{display:grid;grid-template-columns:repeat(10,1fr);gap:7px;max-width:330px}
+.puntos i{
+  aspect-ratio:1;border-radius:50%;background:var(--line);
+  transition:background .5s ease,transform .5s ease;
+}
+.puntos.en i.rojo{background:var(--red);transform:scale(1.08)}
+.puntos i:nth-child(n+1){transition-delay:calc(var(--n,0) * 9ms)}
+.dato-leyenda{margin-top:16px;display:flex;flex-wrap:wrap;gap:16px;font-size:12.5px;color:var(--muted)}
+.dato-leyenda span{display:inline-flex;align-items:center;gap:7px}
+.dato-leyenda b{width:11px;height:11px;border-radius:50%;display:inline-block}
+.dato-mas{margin-top:24px;display:grid;gap:12px;grid-template-columns:1fr 1fr}
+.dato-mas div{background:var(--cream);border:1px solid var(--line);border-radius:14px;padding:15px 16px}
+.dato-mas b{display:block;font-family:Montserrat,Inter,sans-serif;font-size:1.6rem;font-weight:800;letter-spacing:-.03em;line-height:1;color:var(--navy)}
+.dato-mas span{display:block;margin-top:6px;font-size:13px;color:var(--muted);line-height:1.45}
+.dato-fuente{margin-top:18px;font-size:12px;color:var(--muted);line-height:1.6}
+.dato-fuente a{color:var(--red);border-bottom:1px solid rgba(228,0,43,.35)}
+
+/* ---------- a cuánto cerró tu barrio ---------- */
+.barrio{background:var(--cream);padding:56px 0}
+.barrio-caja{
+  margin-top:24px;background:var(--navy);color:#fff;border-radius:var(--r-lg);
+  padding:28px 24px;box-shadow:var(--sh-lg);position:relative;overflow:hidden;
+}
+.barrio-caja::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(520px 300px at 108% -12%,rgba(46,107,230,.34),transparent 62%)}
+.barrio-caja > *{position:relative;z-index:1}
+.barrio-caja label{color:rgba(255,255,255,.62)}
+.barrio-caja select{max-width:420px}
+.barrio-datos{margin-top:22px;display:grid;gap:14px;grid-template-columns:repeat(2,1fr)}
+@media(min-width:700px){.barrio-datos{grid-template-columns:repeat(4,1fr)}}
+.barrio-datos div{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.13);border-radius:14px;padding:15px 16px}
+.barrio-datos b{display:block;font-family:Montserrat,Inter,sans-serif;font-size:1.45rem;font-weight:800;letter-spacing:-.03em;line-height:1}
+.barrio-datos span{display:block;margin-top:6px;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.55)}
+.barrio-pie{margin-top:20px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between}
+.barrio-pie p{font-size:12.5px;color:rgba(255,255,255,.55);line-height:1.5;max-width:30rem}
+.barrio-pie a{
+  display:inline-flex;align-items:center;gap:8px;background:var(--red);color:#fff;
+  padding:12px 18px;border-radius:12px;font-size:14.5px;font-weight:700;white-space:nowrap;
+  transition:transform .2s ease,filter .2s ease;
+}
+.barrio-pie a:hover{transform:translateY(-2px);filter:brightness(1.07)}
+
 /* ---------- efectos ---------- */
 #prog{position:fixed;top:0;left:0;height:3px;width:0;z-index:90;
   background:linear-gradient(90deg,var(--red),#FF7D96);transition:width .1s linear;
@@ -1715,6 +1813,59 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
   </div>
 </section>
 
+<!-- ===== A CUÁNTO CERRÓ TU BARRIO ===== -->
+<section class="barrio" id="mibarrio">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="kicker">34 barrios · Precios de cierre</span>
+      <h2>¿A cuánto se cerró el m² en tu barrio?</h2>
+      <p>No el valor de los avisos: lo que de verdad se pagó, sobre ventas cerradas de la red RE/MAX.</p>
+    </div>
+
+    <div class="barrio-caja rv">
+      <label for="miBarrio">Elegí tu barrio</label>
+      <select id="miBarrio"></select>
+
+      <div class="barrio-datos">
+        <div><b id="bM2">—</b><span>m² de cierre</span></div>
+        <div><b id="bAmb">—</b><span>2 ambientes típico</span></div>
+        <div><b id="bDias">—</b><span>días de venta</span></div>
+        <div><b id="bNeg">—</b><span>se negocia</span></div>
+      </div>
+
+      <div class="barrio-pie">
+        <p>Valores medianos de departamentos vendidos en 2025–2026. No reemplaza una tasación: tu propiedad tiene piso, estado y orientación.</p>
+        <a href="#tasacion">Quiero el número de la mía</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== EL DATO DE LOS 100 ===== -->
+<section class="dato" id="dato">
+  <div class="wrap">
+    <div class="dato-grid">
+      <div class="rv">
+        <span class="kicker">El dato que no está en los portales</span>
+        <h2>De cada 100 que se vendieron, 81 cerraron por debajo de lo publicado.</h2>
+        <p class="intro" style="margin-top:16px;color:var(--muted);font-size:1.03rem">El precio del aviso es lo que el dueño pide. El de cierre es lo que alguien pagó. Entre uno y otro, en CABA, hay casi un 5% de diferencia promedio.</p>
+        <div class="dato-mas">
+          <div><b>4,9%</b><span>se negocia en promedio antes de firmar</span></div>
+          <div><b>135 días</b><span>tarda una venta, de la publicación al cierre</span></div>
+        </div>
+        <p class="dato-fuente">Sobre 3.009 ventas reales de la red RE/MAX en CABA, 2025–2026. Están todas en <a href="precio-real-caba/">la guía del precio real</a>.</p>
+      </div>
+      <div class="rv">
+        <div class="puntos" id="puntos" aria-hidden="true"></div>
+        <p class="dato-leyenda">
+          <span><b style="background:var(--red)"></b>Cerró por debajo de lo publicado</span>
+          <span><b style="background:var(--line)"></b>Cerró al precio pedido</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ===== LA PROPIEDAD QUE SE MUEVE ===== -->
 <section class="mueve" id="mueve" aria-label="Una propiedad bien tasada se mueve">
  <div class="mueve-alto" id="mueveAlto">
@@ -1751,7 +1902,7 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
     </div>
 
     <h2 class="mueve-frase rv">Si no se mueve, <em>no es el mercado.</em></h2>
-    <p class="mueve-bajada rv">Es el precio de salida. <strong>El 81% de las propiedades de CABA se vendió por debajo de lo publicado</strong>, y la que arranca cara termina bajando igual, pero casi 40 días más tarde. Empecemos por saber cuánto vale la tuya de verdad.</p>
+    <p class="mueve-bajada rv">Es el precio de salida. <strong>La que arranca cara termina bajando igual</strong>, pero casi 40 días más tarde. Empecemos por saber cuánto vale la tuya de verdad.</p>
    </div>
   </div>
  </div>
@@ -2270,6 +2421,53 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
         Pedir tasación por WhatsApp
       </a>
     </div>
+  </div>
+</section>
+
+<!-- ===== LAS TRES OPCIONES ===== -->
+<section class="cmp" id="comparar" data-ver="yo">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="kicker">Las tres opciones que tenés</span>
+      <h2>Venderla solo, darla a cualquiera, o trabajar conmigo.</h2>
+      <p>La misma lista de herramientas, mirada desde las tres veredas. Tocá una opción para verla sola.</p>
+    </div>
+
+    <div class="cmp-modos rv" role="group" aria-label="Elegí una opción para compararla">
+      <button type="button" class="cmp-modo" data-col="solo" aria-pressed="false">Vendés solo</button>
+      <button type="button" class="cmp-modo" data-col="trad" aria-pressed="false">Inmobiliaria tradicional</button>
+      <button type="button" class="cmp-modo" data-col="yo" aria-pressed="true">Conmigo</button>
+    </div>
+
+    <div class="cmp-caja rv">
+      <table class="cmp-tabla" id="cmpTabla">
+        <thead>
+          <tr>
+            <th scope="col">Qué incluye</th>
+            <th scope="col" data-col="solo">Vendés solo<span class="cmp-cuenta"></span></th>
+            <th scope="col" data-col="trad">Inmobiliaria tradicional<span class="cmp-cuenta"></span></th>
+            <th scope="col" data-col="yo">Conmigo<span class="cmp-cuenta"></span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">Tasación con precios de cierre, no de portal</th><td data-col="solo"><span class="marca no"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>No</span></td><td data-col="trad"><span class="marca quiza">A veces</span></td><td data-col="yo"><span class="marca si"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m4 12.5 5 5L20 6.5"/></svg>Sí</span></td></tr>
+          <tr><th scope="row">Los valores reales de 34 barrios de CABA</th><td data-col="solo"><span class="marca no"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>No</span></td><td data-col="trad"><span class="marca no"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>No</span></td><td data-col="yo"><span class="marca si"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m4 12.5 5 5L20 6.5"/></svg>Sí</span></td></tr>
+          <tr><th scope="row">Fotos profesionales con gran angular</th><td data-col="solo"><span class="marca no"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>No</span></td><td data-col="trad"><span class="marca si"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m4 12.5 5 5L20 6.5"/></svg>Sí</span></td><td data-col="yo"><span class="marca si"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m4 12.5 5 5L20 6.5"/></svg>Sí</span></td></tr>
+          <tr><th scope="row">Tour virtual 360° de toda la propiedad</th><td data-col="solo"><span class="marca no"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>No</span></td><td data-col="trad"><span class="marca quiza">A veces</span></td><td data-col="yo"><span class="marca si"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m4 12.5 5 5L20 6.5"/></svg>Sí</span></td></tr>
+          <tr><th scope="row">Amueblamiento virtual de los ambientes vacíos</th><td data-col="solo"><span class="marca no"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>No</span></td><td data-col="trad"><span class="marca no"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>No</span></td><td data-col="yo"><span class="marca si"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m4 12.5 5 5L20 6.5"/></svg>Sí</span></td></tr>
+          <tr><th scope="row">Video con drone del barrio</th><td data-col="solo"><span class="marca no"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>No</span></td><td data-col="trad"><span class="marca no"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>No</span></td><td data-col="yo"><span class="marca si"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m4 12.5 5 5L20 6.5"/></svg>Sí</span></td></tr>
+          <tr><th scope="row">Zonaprop Premier y Superdestacado</th><td data-col="solo"><span class="marca pagas">Lo pagás vos</span></td><td data-col="trad"><span class="marca si"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m4 12.5 5 5L20 6.5"/></svg>Sí</span></td><td data-col="yo"><span class="marca si"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m4 12.5 5 5L20 6.5"/></svg>Sí</span></td></tr>
+          <tr><th scope="row">Reels y contenido en redes</th><td data-col="solo"><span class="marca no"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>No</span></td><td data-col="trad"><span class="marca quiza">A veces</span></td><td data-col="yo"><span class="marca si"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m4 12.5 5 5L20 6.5"/></svg>Sí</span></td></tr>
+          <tr><th scope="row">Toda la red RE/MAX buscando tu comprador</th><td data-col="solo"><span class="marca no"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>No</span></td><td data-col="trad"><span class="marca no"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>No</span></td><td data-col="yo"><span class="marca si"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m4 12.5 5 5L20 6.5"/></svg>Sí</span></td></tr>
+          <tr><th scope="row">Filtro de quién entra a tu casa</th><td data-col="solo"><span class="marca no"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>No</span></td><td data-col="trad"><span class="marca si"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m4 12.5 5 5L20 6.5"/></svg>Sí</span></td><td data-col="yo"><span class="marca si"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m4 12.5 5 5L20 6.5"/></svg>Sí</span></td></tr>
+          <tr><th scope="row">Dominio, inhibición y papeles de la sucesión</th><td data-col="solo"><span class="marca pagas">Lo pagás vos</span></td><td data-col="trad"><span class="marca si"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m4 12.5 5 5L20 6.5"/></svg>Sí</span></td><td data-col="yo"><span class="marca si"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m4 12.5 5 5L20 6.5"/></svg>Sí</span></td></tr>
+          <tr><th scope="row">Acompañamiento hasta el día de la escritura</th><td data-col="solo"><span class="marca no"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>No</span></td><td data-col="trad"><span class="marca si"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m4 12.5 5 5L20 6.5"/></svg>Sí</span></td><td data-col="yo"><span class="marca si"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m4 12.5 5 5L20 6.5"/></svg>Sí</span></td></tr>
+          <tr><th scope="row">Lo que gastás vos en marketing</th><td data-col="solo"><span class="marca pagas">A tu cargo</span></td><td data-col="trad"><span class="marca quiza">A veces</span></td><td data-col="yo"><span class="marca si">$0</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="cmp-pie rv">«A veces» quiere decir que depende de la inmobiliaria: algunas lo hacen y otras no, y conviene preguntarlo antes de firmar. Lo que figura como «lo pagás vos» es lo que termina saliendo del bolsillo del propietario cuando no hay nadie atrás.</p>
   </div>
 </section>
 
@@ -3579,6 +3777,119 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
   function alScroll(){ if(!pedido){ pedido=true; requestAnimationFrame(pintar); } }
   addEventListener("scroll",alScroll,{passive:true});
   addEventListener("resize",alScroll);
+  pintar();
+})();
+</script>
+
+<script>
+/* Las tres opciones. La tabla ya viene escrita en el HTML (así la lee Google);
+   acá solo se cuenta cuántos sí tiene cada columna y se elige cuál mirar. */
+(function(){
+  var sec=document.getElementById("comparar"), tabla=document.getElementById("cmpTabla");
+  if(!sec||!tabla) return;
+
+  ["solo","trad","yo"].forEach(function(col){
+    var celdas=tabla.querySelectorAll('tbody td[data-col="'+col+'"] .marca.si');
+    var total=tabla.querySelectorAll("tbody tr").length;
+    var cab=tabla.querySelector('thead th[data-col="'+col+'"] .cmp-cuenta');
+    if(cab) cab.textContent=celdas.length+" de "+total;
+  });
+
+  sec.querySelectorAll(".cmp-modo").forEach(function(b){
+    b.addEventListener("click",function(){
+      sec.querySelectorAll(".cmp-modo").forEach(function(o){
+        o.setAttribute("aria-pressed", o===b ? "true" : "false");
+      });
+      sec.dataset.ver=b.dataset.col;
+      if(window.gtag) gtag("event","comparador",{opcion:b.dataset.col});
+    });
+  });
+})();
+</script>
+
+<script>
+/* Los 100 puntitos: 81 rojos, repartidos salteados y siempre los mismos, para
+   que no parezca que el número cambia en cada visita. */
+(function(){
+  var caja=document.getElementById("puntos");
+  if(!caja) return;
+  var rojos=81, cuales={}, paso=100/rojos, acum=0, h="";
+  for(var k=0;k<rojos;k++){ cuales[Math.min(99,Math.round(acum))]=1; acum+=paso; }
+  var puestos=Object.keys(cuales).length, i=0;
+  while(puestos<rojos && i<100){ if(!cuales[i]){ cuales[i]=1; puestos++; } i++; }
+  for(var n=0;n<100;n++) h+='<i'+(cuales[n]?' class="rojo"':'')+' style="--n:'+n+'"></i>';
+  caja.innerHTML=h;
+
+  if("IntersectionObserver" in window){
+    var obs=new IntersectionObserver(function(es){
+      if(es[0].isIntersecting){ caja.classList.add("en"); obs.disconnect(); }
+    },{threshold:.3});
+    obs.observe(caja);
+    setTimeout(function(){ caja.classList.add("en"); }, 3000);
+  } else caja.classList.add("en");
+})();
+
+/* A cuánto cerró tu barrio. Los valores son los mismos de /precio-real-caba/:
+   si se actualiza la guía, hay que tocarlos en los dos lados. */
+(function(){
+  var sel=document.getElementById("miBarrio");
+  if(!sel) return;
+
+  var BARRIOS = [
+    ["Núñez",               2834, 137, 134, 4.1],
+    ["Palermo",             2734, 126, 125, 4.7],
+    ["Villa Urquiza",       2726, 127, 114, 4.6],
+    ["Belgrano",            2675, 121, 117, 4.4],
+    ["Saavedra",            2648, 125,  95, 4.9],
+    ["Coghlan",             2549, null, 105, 4.9],
+    ["Colegiales",          2539, 141, 117, 3.9],
+    ["Recoleta",            2453,  96, 121, 5.6],
+    ["Villa Ortúzar",       2300, 107, 103, 5.5],
+    ["Villa Devoto",        2255, 110, 148, 5.5],
+    ["Chacarita",           2193,  95, 156, 6.3],
+    ["Villa del Parque",    2179,  88, 132, 5.1],
+    ["Retiro",              2170,  99, 112, 7.5],
+    ["Villa Crespo",        2164,  85, 127, 5.1],
+    ["Villa Pueyrredón",    2163,  97, 131, 4.5],
+    ["Villa Santa Rita",    2095,  84, 103, 4.0],
+    ["Caballito",           2079,  90, 126, 4.1],
+    ["Almagro",             2060,  75, 136, 4.6],
+    ["Boedo",               2000,  72,  97, 5.7],
+    ["San Telmo",           1974,  96, 154, 1.3],
+    ["Villa Luro",          1949,  94, 153, 4.7],
+    ["Monte Castro",        1901, 103, 155, 4.6],
+    ["Villa General Mitre", 1828,  79, 173, 4.4],
+    ["Barracas",            1814,  85, 159, 4.5],
+    ["Parque Chacabuco",    1759,  75, 144, 3.5],
+    ["Flores",              1731,  81, 147, 5.6],
+    ["San Cristóbal",       1722,  72, 144, 3.7],
+    ["Monserrat",           1517,  58, 152, 5.0],
+    ["Floresta",            1501,  67, 144, 4.2],
+    ["Parque Patricios",    1467,  60, 128, 5.3],
+    ["Balvanera",           1456,  56, 119, 5.7],
+    ["San Nicolás",         1452,  62, 137, 6.3],
+    ["Mataderos",           1444, null, 155, 6.5],
+    ["Liniers",             1344, null, 163, 5.8]
+  ];
+
+  var miles=function(n){ return n.toLocaleString("es-AR"); };
+  var coma =function(n){ return n.toFixed(1).replace(".", ","); };
+
+  sel.innerHTML=BARRIOS.map(function(b,i){
+    return '<option value="'+i+'"'+(b[0]==="Palermo"?" selected":"")+'>'+b[0]+'</option>';
+  }).join("");
+
+  function pintar(){
+    var b=BARRIOS[+sel.value];
+    document.getElementById("bM2").textContent="USD "+miles(b[1]);
+    document.getElementById("bAmb").textContent=b[2]===null ? "—" : "USD "+b[2]+"k";
+    document.getElementById("bDias").textContent=b[3]+" d";
+    document.getElementById("bNeg").textContent=coma(b[4])+"%";
+  }
+  sel.addEventListener("change",function(){
+    pintar();
+    if(window.gtag) gtag("event","barrio_consultado",{barrio:BARRIOS[+sel.value][0]});
+  });
   pintar();
 })();
 </script>
