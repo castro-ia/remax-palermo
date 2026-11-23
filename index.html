@@ -661,7 +661,17 @@ select option{background:#0F1F42;color:#fff}
 /* ---------- qué le pasa a tu aviso ----------
    Tres interruptores y un aviso de mentira que va cambiando. Las barras son
    ilustrativas a propósito: no hay número que mida "cuánto mejora una foto". */
-.sim{background:var(--paper);border-top:1px solid var(--line);padding:58px 0}
+.sim{position:relative;background:var(--navy);color:#fff;overflow:hidden}
+.sim::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(66% 50% at 86% -8%, rgba(228,0,43,.3), transparent 64%),
+    repeating-linear-gradient(135deg, rgba(255,255,255,.035) 0 1px, transparent 1px 10px);
+}
+.sim .wrap{position:relative;z-index:1}
+.sim .sec-head h2{color:#fff}
+.sim .sec-head p{color:rgba(255,255,255,.66)}
+.sim .kicker{color:#FF6B86}
 .sim-grid{margin-top:26px;display:grid;gap:20px}
 .sim-col-pasos{order:1}
 .aviso{order:2}
@@ -673,8 +683,9 @@ select option{background:#0F1F42;color:#fff}
 
 /* el aviso */
 .aviso{
-  position:relative;background:var(--cream);border:1px solid var(--line);border-radius:var(--r-lg);
-  overflow:hidden;box-shadow:var(--sh-sm);
+  position:relative;background:var(--paper);color:var(--ink);
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:var(--r-lg);overflow:hidden;box-shadow:0 18px 44px rgba(0,0,0,.34);
 }
 .aviso-barra{display:flex;align-items:center;gap:7px;padding:11px 14px;border-bottom:1px solid var(--line);background:var(--paper)}
 .aviso-barra i{width:9px;height:9px;border-radius:50%;background:var(--line)}
@@ -694,7 +705,7 @@ select option{background:#0F1F42;color:#fff}
   opacity:0;transform:translateX(8px);transition:opacity .35s ease,transform .35s ease;
 }
 .sim[data-p1="1"] .aviso-chip{opacity:1;transform:none}
-.aviso-cuerpo{padding:15px 16px}
+.aviso-cuerpo{padding:15px 16px;background:var(--paper)}
 .aviso-precio{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap}
 .aviso-precio b{font-family:Montserrat,Inter,sans-serif;font-size:1.5rem;font-weight:800;letter-spacing:-.03em;color:var(--navy)}
 .aviso-precio em{font-style:normal;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
@@ -724,26 +735,35 @@ select option{background:#0F1F42;color:#fff}
 .sim-pasos{display:grid;gap:10px}
 .paso-sw{
   display:flex;align-items:center;gap:13px;width:100%;text-align:left;cursor:pointer;
-  background:var(--cream);border:1px solid var(--line);border-radius:16px;padding:15px 16px;
-  font:inherit;color:var(--ink);transition:border-color .2s,background .2s,transform .2s;
+  background:linear-gradient(180deg,rgba(255,255,255,.075),rgba(255,255,255,.035));
+  border:1px solid rgba(255,255,255,.14);border-radius:16px;padding:15px 16px;
+  font:inherit;color:#fff;box-shadow:0 14px 34px rgba(0,0,0,.2);
+  transition:border-color .25s,background .25s,transform .25s,box-shadow .25s;
 }
-.paso-sw:hover{transform:translateY(-1px);border-color:#C9C6C0}
-.paso-sw[aria-pressed="true"]{background:var(--paper);border-color:var(--red)}
-.sw{flex:none;width:44px;height:26px;border-radius:999px;background:#D8D5CF;position:relative;transition:background .25s}
+.paso-sw:hover{transform:translateY(-3px);border-color:rgba(255,107,134,.5)}
+.paso-sw[aria-pressed="true"]{
+  background:linear-gradient(180deg,rgba(255,255,255,.12),rgba(255,255,255,.05));
+  border-color:var(--red);box-shadow:0 16px 38px rgba(228,0,43,.22);
+}
+.sw{flex:none;width:44px;height:26px;border-radius:999px;background:rgba(255,255,255,.22);position:relative;transition:background .25s}
 .sw::after{content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;
   background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.3);transition:transform .25s}
 .paso-sw[aria-pressed="true"] .sw{background:var(--red)}
 .paso-sw[aria-pressed="true"] .sw::after{transform:translateX(18px)}
 .paso-sw b{display:block;font-size:15px;font-weight:700;letter-spacing:-.015em}
-.paso-sw span{display:block;margin-top:3px;font-size:13px;color:var(--muted);line-height:1.45}
-.sim-medidores{background:var(--navy);border-radius:var(--r);padding:18px 18px 16px;color:#fff}
+.paso-sw span{display:block;margin-top:3px;font-size:13px;color:rgba(255,255,255,.7);line-height:1.45}
+.sim-medidores{
+  background:linear-gradient(180deg,rgba(255,255,255,.075),rgba(255,255,255,.035));
+  border:1px solid rgba(255,255,255,.14);border-radius:var(--r);padding:18px 18px 16px;color:#fff;
+}
 .med{display:grid;grid-template-columns:132px 1fr;gap:12px;align-items:center;font-size:13px}
 .med + .med{margin-top:11px}
 .med span{color:rgba(255,255,255,.72)}
 .med i{display:block;height:9px;border-radius:999px;background:rgba(255,255,255,.14);overflow:hidden}
 .med i::after{content:"";display:block;height:100%;border-radius:999px;width:var(--w,12%);
   background:linear-gradient(90deg,var(--red),#FF9A6E);transition:width .5s cubic-bezier(.2,.7,.3,1)}
-.sim-nota{margin-top:14px;font-size:12px;color:var(--muted);line-height:1.6}
+.sim-nota{margin-top:14px;font-size:12px;color:rgba(255,255,255,.55);line-height:1.6}
+.sim-nota strong{color:#fff}
 
 /* ---------- efectos ---------- */
 #prog{position:fixed;top:0;left:0;height:3px;width:0;z-index:90;
@@ -1016,69 +1036,6 @@ select option{background:#0F1F42;color:#fff}
   .about-photo .sig b{color:#fff;font-size:15px}
 }
 
-/* ---------- proceso ---------- */
-/* va en oscuro para separarlo de "vendidas", que es crema igual que el fondo
-   general y lo dejaba sin corte visual */
-#proceso{position:relative;background:var(--navy);color:#fff;overflow:hidden}
-#proceso::before{
-  content:"";position:absolute;inset:0;pointer-events:none;
-  background:
-    radial-gradient(66% 50% at 86% -8%, rgba(228,0,43,.3), transparent 64%),
-    repeating-linear-gradient(135deg, rgba(255,255,255,.035) 0 1px, transparent 1px 10px);
-}
-#proceso .wrap{position:relative;z-index:1}
-#proceso .sec-head h2{color:#fff}
-#proceso .sec-head p{color:rgba(255,255,255,.66)}
-#proceso .kicker{color:#FF6B86}
-
-.steps{position:relative;display:grid;gap:16px;counter-reset:s}
-.step{
-  position:relative;overflow:hidden;border-radius:var(--r);padding:26px 22px 24px;
-  background:linear-gradient(180deg,rgba(255,255,255,.075),rgba(255,255,255,.035));
-  border:1px solid rgba(255,255,255,.14);
-  box-shadow:0 14px 34px rgba(0,0,0,.26);
-  transition:transform .28s cubic-bezier(.2,.7,.3,1),border-color .28s,box-shadow .28s,background .28s;
-}
-.step:hover{
-  transform:translateY(-5px);border-color:rgba(255,107,134,.5);
-  background:linear-gradient(180deg,rgba(255,255,255,.11),rgba(255,255,255,.05));
-  box-shadow:0 22px 50px rgba(0,0,0,.36);
-}
-/* el numero en hueco, asomando por la esquina y recortado por la tarjeta.
-   Lleva tambien un relleno muy tenue por si el navegador no hace text-stroke */
-.step::before{
-  counter-increment:s;content:counter(s,decimal-leading-zero);
-  position:absolute;right:-10px;top:-24px;pointer-events:none;
-  font-family:Montserrat,Inter,sans-serif;font-size:104px;font-weight:800;
-  line-height:1;letter-spacing:-.05em;
-  color:rgba(255,255,255,.055);-webkit-text-stroke:1.5px rgba(255,255,255,.17);
-  transition:-webkit-text-stroke-color .28s,transform .4s cubic-bezier(.2,.7,.3,1);
-}
-.step:hover::before{-webkit-text-stroke-color:rgba(255,107,134,.55);transform:translateY(4px)}
-.step h3{position:relative;font-size:1.18rem;margin-bottom:9px;color:#fff}
-.step p{position:relative;font-size:14.8px;color:rgba(255,255,255,.7);line-height:1.6}
-
-@media(min-width:800px){
-  .steps{grid-template-columns:repeat(3,1fr);gap:20px;padding-top:40px}
-  /* el riel con los tres nodos. Se desenrolla de izquierda a derecha cuando
-     la seccion entra en pantalla, asi que los puntos van apareciendo en orden */
-  .steps::before{
-    content:"";position:absolute;top:6px;left:0;right:0;height:14px;pointer-events:none;
-    background:
-      radial-gradient(circle at calc((100% - 40px) / 6) 50%, var(--red) 0 6px, rgba(228,0,43,.22) 6px 11px, transparent 11px) no-repeat,
-      radial-gradient(circle at 50% 50%, var(--red) 0 6px, rgba(228,0,43,.22) 6px 11px, transparent 11px) no-repeat,
-      radial-gradient(circle at calc(100% - (100% - 40px) / 6) 50%, var(--red) 0 6px, rgba(228,0,43,.22) 6px 11px, transparent 11px) no-repeat,
-      linear-gradient(90deg, transparent, rgba(255,255,255,.26) 14%, rgba(255,255,255,.26) 86%, transparent) no-repeat center / 100% 2px;
-    transform:scaleX(0);transform-origin:left center;
-    transition:transform 1.15s cubic-bezier(.2,.7,.3,1) .1s;
-  }
-  .steps.in::before{transform:scaleX(1)}
-}
-@media (prefers-reduced-motion:reduce){
-  .steps::before{transform:none;transition:none}
-  .step:hover{transform:none}
-}
-
 /* ---------- amueblamiento virtual ---------- */
 .amu{background:var(--cream)}
 .amu-tabs{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:18px}
@@ -1127,35 +1084,6 @@ select option{background:#0F1F42;color:#fff}
 .amu-ben h3{font-size:1.05rem;margin-bottom:7px}
 .amu-ben p{font-size:14.5px;color:var(--muted);line-height:1.6}
 @media(min-width:780px){.amu-ben{grid-template-columns:repeat(3,1fr)}}
-
-/* ---------- propuesta de valor ---------- */
-.pv{background:var(--paper);border-top:1px solid var(--line)}
-.pv-grid{display:grid;gap:16px}
-.pv-card{
-  background:var(--cream);border:1px solid var(--line);border-radius:var(--r);padding:22px;
-  transition:transform .25s cubic-bezier(.2,.7,.3,1),box-shadow .25s;
-}
-.pv-card:hover{transform:translateY(-3px);box-shadow:var(--sh)}
-.pv-card .pv-ey{
-  display:block;font-family:Montserrat,Inter,sans-serif;font-size:10.5px;font-weight:800;
-  letter-spacing:.16em;text-transform:uppercase;color:var(--red);margin-bottom:9px;
-}
-.pv-card h3{font-size:1.1rem;margin-bottom:7px;letter-spacing:-.015em}
-.pv-card p{font-size:14.5px;color:var(--muted);line-height:1.6}
-/* la tarjeta estrella: mas grande y en rojo */
-.pv-card.pv-star{
-  background:var(--red);border-color:var(--red);color:#fff;
-  display:flex;flex-direction:column;justify-content:flex-end;min-height:230px;
-  box-shadow:0 10px 30px rgba(228,0,43,.26);
-}
-.pv-card.pv-star .pv-ey{color:rgba(255,255,255,.82)}
-.pv-card.pv-star h3{font-size:clamp(1.3rem,3.2vw,1.75rem);line-height:1.15}
-.pv-card.pv-star p{color:rgba(255,255,255,.9)}
-.pv-card.pv-star:hover{box-shadow:0 18px 44px rgba(228,0,43,.34)}
-@media(min-width:780px){
-  .pv-grid{grid-template-columns:1.25fr 1fr 1fr}
-  .pv-card.pv-star{grid-row:span 2}
-}
 
 /* ---------- video con drone ---------- */
 .drone{position:relative;background:var(--navy);color:#fff;overflow:hidden}
@@ -1235,28 +1163,18 @@ select option{background:#0F1F42;color:#fff}
 }
 
 /* ---------- compactacion del bloque de servicios ----------
-   Son cuatro secciones seguidas: con el aire de siempre empujan las ventas y
+   Son tres secciones seguidas: con el aire de siempre empujan las ventas y
    las resenas demasiado abajo. Aca van mas juntas que el resto de la pagina. */
-#amueblamiento,#propuesta,#drone,#produccion{padding:46px 0}
-#amueblamiento .sec-head,#propuesta .sec-head,#drone .sec-head,#produccion .sec-head{margin-bottom:24px}
-#amueblamiento .sec-head p,#propuesta .sec-head p,#drone .sec-head p{margin-top:10px;font-size:.98rem}
+#amueblamiento,#drone,#produccion{padding:46px 0}
+#amueblamiento .sec-head,#drone .sec-head,#produccion .sec-head{margin-bottom:24px}
+#amueblamiento .sec-head p,#drone .sec-head p{margin-top:10px;font-size:.98rem}
 .amu-ben{gap:20px;margin-top:26px}
-.pv-grid{gap:14px}
-.pv-card{padding:18px}
 .drone-tomas{gap:14px;margin-top:20px}
 .drone-toma{padding:15px}
 .prod-pasos{gap:18px}
 .prod-cta{margin-top:28px;padding:26px 22px}
 @media(max-width:760px){
-  #amueblamiento,#propuesta,#drone,#produccion{padding:36px 0}
-  /* en el celular las tarjetas de la propuesta van de a dos: apiladas eran
-     cinco pantallazos de scroll para la misma informacion */
-  .pv-grid{grid-template-columns:1fr 1fr;gap:12px}
-  .pv-card{padding:15px}
-  .pv-card h3{font-size:1rem}
-  .pv-card p{font-size:13px;line-height:1.5}
-  .pv-card .pv-ey{font-size:9.5px;letter-spacing:.12em;margin-bottom:7px}
-  .pv-card.pv-star{grid-column:1 / -1;min-height:0;padding:20px}
+  #amueblamiento,#drone,#produccion{padding:36px 0}
   .amu-ben{gap:16px;margin-top:22px}
   .drone-tomas{gap:12px}
   .prod-pasos{gap:16px}
@@ -1704,7 +1622,7 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
     <div class="navlinks">
       <a href="#tasacion">Tasación sin cargo</a>
       <a href="#sobre-mi">Sobre mí</a>
-      <a href="#proceso">Cómo trabajo</a>
+      <a href="#simulador">Cómo publico</a>
       <a href="#vendidas">Vendidas</a>
       <a href="precio-real-caba/">Precio real</a>
       <a href="#resenas">Reseñas</a>
@@ -2149,27 +2067,71 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
   </div>
 </section>
 
-<!-- ===== PROCESO ===== -->
-<section id="proceso">
+<!-- ===== QUÉ LE PASA A TU AVISO ===== -->
+<section class="sim" id="simulador" data-p1="0" data-p2="0" data-p3="0">
   <div class="wrap">
     <div class="sec-head rv">
-      <span class="kicker">Cómo trabajo</span>
-      <h2>Vender bien no es publicar y esperar.</h2>
-      <p>La mayoría de las propiedades se estancan por un precio mal puesto el primer mes. Este es el método con el que cerré más de 260 operaciones.</p>
+      <span class="kicker">Probalo vos</span>
+      <h2>Qué le pasa a tu aviso cuando lo hacemos bien.</h2>
+      <p>Prendé los tres pasos y mirá cómo cambia la publicación. Es el mismo departamento en los dos casos.</p>
     </div>
-    <div class="steps rv">
-      <article class="step rv">
-        <h3>Precio con fundamento</h3>
-        <p>Analizo qué se vendió realmente cerca tuyo, a qué valor cerró y en cuántos días. Salimos con un número que el mercado convalida, no con una ilusión que después hay que bajar tres veces.</p>
-      </article>
-      <article class="step rv">
-        <h3>Producción que se nota</h3>
-        <p>Fotos profesionales, video vertical, plano y recorrido. Invierto en mostrar tu propiedad mejor que el resto de la zona, porque en Instagram y en los portales se decide en tres segundos.</p>
-      </article>
-      <article class="step rv">
-        <h3>Negociación y cierre</h3>
-        <p>Filtro curiosos, traigo compradores calificados y defiendo tu precio con datos. Te acompaño en reserva, escritura y mudanza, con todo documentado y en regla.</p>
-      </article>
+
+    <div class="sim-grid">
+      <div class="sim-col-pasos rv">
+        <div class="sim-pasos">
+          <button type="button" class="paso-sw" data-paso="1" aria-pressed="false">
+            <span class="sw" aria-hidden="true"></span>
+            <span><b>01 · Cómo se ve</b><span>Fotos profesionales, amueblamiento virtual, tour 360° y video con drone del barrio.</span></span>
+          </button>
+          <button type="button" class="paso-sw" data-paso="2" aria-pressed="false">
+            <span class="sw" aria-hidden="true"></span>
+            <span><b>02 · Dónde aparece</b><span>Zonaprop Premier y superdestacado, más toda la red RE/MAX buscando tu comprador.</span></span>
+          </button>
+          <button type="button" class="paso-sw" data-paso="3" aria-pressed="false">
+            <span class="sw" aria-hidden="true"></span>
+            <span><b>03 · A cuánto sale</b><span>Publicado con el precio de cierre de tu barrio, no con el del aviso de al lado.</span></span>
+          </button>
+        </div>
+      </div>
+
+      <div class="aviso rv">
+        <div class="aviso-barra"><i></i><i></i><i></i><span>Tu aviso</span></div>
+
+        <div class="aviso-foto">
+          <img src="img/living-antes.jpg?v=3" alt="El living vacío, como sale la foto sin preparar" width="1080" height="675" loading="lazy">
+          <img class="despues" src="img/living-despues.jpg?v=3" alt="El mismo living con amueblamiento virtual" width="1080" height="675" loading="lazy">
+          <span class="aviso-sello">Foto de celular, ambiente vacío</span>
+          <span class="aviso-chips">
+            <span class="aviso-chip">Tour 360°</span>
+            <span class="aviso-chip">Video con drone</span>
+            <span class="aviso-chip">Amueblado virtual</span>
+          </span>
+          <span class="aviso-estampa">¡Vendido!</span>
+        </div>
+
+        <div class="aviso-cuerpo">
+          <div class="aviso-precio">
+            <b>USD 148.000</b>
+            <em>Precio de portal</em>
+          </div>
+          <h3>3 ambientes con balcón · Palermo</h3>
+          <p>72 m² · 2 dormitorios · 1 baño</p>
+          <div class="aviso-portales">
+            <b class="destaca">Zonaprop</b>
+            <b class="destaca">Argenprop</b>
+            <b class="red">Toda la red RE/MAX</b>
+          </div>
+        </div>
+      </div>
+
+      <div class="sim-col-med rv">
+        <div class="sim-medidores">
+          <div class="med"><span>Cuánta gente lo ve</span><i id="medVe"></i></div>
+          <div class="med"><span>Cuántos consultan</span><i id="medCons"></i></div>
+          <div class="med"><span>Velocidad de venta</span><i id="medDias"></i></div>
+        </div>
+        <p class="sim-nota">Las barras son ilustrativas: no existe un número que mida cuánto mejora una foto. Lo que sí está medido es lo otro: el que publica a precio de cierre vende <strong>casi 40 días antes</strong>, sobre 4.261 ventas de la red.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -2417,44 +2379,6 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
   </div>
 </section>
 
-<!-- ===== PROPUESTA DE VALOR ===== -->
-<section class="pv" id="propuesta">
-  <div class="wrap">
-    <div class="sec-head rv">
-      <span class="kicker">Cómo publico tu propiedad</span>
-      <h2>Tu propiedad, en primera fila. Siempre.</h2>
-      <p>Mientras otras publicaciones se pierden en la página 5, la tuya aparece arriba, con la mejor imagen y lista para que la recorran sin moverse de su casa.</p>
-    </div>
-    <div class="pv-grid">
-      <article class="pv-card pv-star rv">
-        <span class="pv-ey">Máxima exposición</span>
-        <h3>Zonaprop Anunciante Premier + Superdestacado</h3>
-        <p>Tu aviso sale en los primeros lugares de búsqueda, con más tamaño y más fotos. Más vistas, más consultas, más rápido.</p>
-      </article>
-      <article class="pv-card rv">
-        <span class="pv-ey">Primera impresión</span>
-        <h3>Fotos profesionales</h3>
-        <p>Fotógrafo con equipo gran angular y luz cuidada. Cada ambiente en su mejor versión.</p>
-      </article>
-      <article class="pv-card rv">
-        <span class="pv-ey">Visitas desde el sillón</span>
-        <h3>Tour virtual 360°</h3>
-        <p>El comprador recorre toda la propiedad online. Llega a la visita ya convencido.</p>
-      </article>
-      <article class="pv-card rv">
-        <span class="pv-ey">Potencial a la vista</span>
-        <h3>Amueblamiento virtual</h3>
-        <p>Ambientes vacíos transformados en espacios que dan ganas de vivir.</p>
-      </article>
-      <article class="pv-card rv">
-        <span class="pv-ey">El barrio, desde arriba</span>
-        <h3>Video con drone 4K</h3>
-        <p>Fachada, entorno y amenities en un video listo para portales y Reels.</p>
-      </article>
-    </div>
-  </div>
-</section>
-
 <!-- ===== VIDEO CON DRONE ===== -->
 <section class="drone" id="drone">
   <div class="wrap">
@@ -2507,75 +2431,6 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.2-1.8-.9-2.1-1-.3-.1-.5-.2-.7.1-.2.3-.8 1-1 1.2-.2.2-.4.3-.7.1-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.2-.2.4-.5.6-.7.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5 0-.2-.7-1.7-.9-2.3-.2-.5-.4-.5-.6-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4 0 1.4 1 2.8 1.2 3 .1.2 1.9 3 4.7 4.1 2.3.9 2.8.8 3.3.7.5-.1 1.6-.7 1.9-1.3.2-.7.2-1.2.2-1.3-.1-.2-.2-.2-.3-.3zM12 2a10 10 0 0 0-8.5 15.3L2 22l4.8-1.4A10 10 0 1 0 12 2z"/></svg>
         Pedir tasación por WhatsApp
       </a>
-    </div>
-  </div>
-</section>
-
-<!-- ===== QUÉ LE PASA A TU AVISO ===== -->
-<section class="sim" id="simulador" data-p1="0" data-p2="0" data-p3="0">
-  <div class="wrap">
-    <div class="sec-head rv">
-      <span class="kicker">Probalo vos</span>
-      <h2>Qué le pasa a tu aviso cuando lo hacemos bien.</h2>
-      <p>Prendé los tres pasos y mirá cómo cambia la publicación. Es el mismo departamento en los dos casos.</p>
-    </div>
-
-    <div class="sim-grid">
-      <div class="sim-col-pasos rv">
-        <div class="sim-pasos">
-          <button type="button" class="paso-sw" data-paso="1" aria-pressed="false">
-            <span class="sw" aria-hidden="true"></span>
-            <span><b>01 · Cómo se ve</b><span>Fotos profesionales, amueblamiento virtual, tour 360° y video con drone del barrio.</span></span>
-          </button>
-          <button type="button" class="paso-sw" data-paso="2" aria-pressed="false">
-            <span class="sw" aria-hidden="true"></span>
-            <span><b>02 · Dónde aparece</b><span>Zonaprop Premier y superdestacado, más toda la red RE/MAX buscando tu comprador.</span></span>
-          </button>
-          <button type="button" class="paso-sw" data-paso="3" aria-pressed="false">
-            <span class="sw" aria-hidden="true"></span>
-            <span><b>03 · A cuánto sale</b><span>Publicado con el precio de cierre de tu barrio, no con el del aviso de al lado.</span></span>
-          </button>
-        </div>
-      </div>
-
-      <div class="aviso rv">
-        <div class="aviso-barra"><i></i><i></i><i></i><span>Tu aviso</span></div>
-
-        <div class="aviso-foto">
-          <img src="img/living-antes.jpg?v=3" alt="El living vacío, como sale la foto sin preparar" width="1080" height="675" loading="lazy">
-          <img class="despues" src="img/living-despues.jpg?v=3" alt="El mismo living con amueblamiento virtual" width="1080" height="675" loading="lazy">
-          <span class="aviso-sello">Foto de celular, ambiente vacío</span>
-          <span class="aviso-chips">
-            <span class="aviso-chip">Tour 360°</span>
-            <span class="aviso-chip">Video con drone</span>
-            <span class="aviso-chip">Amueblado virtual</span>
-          </span>
-          <span class="aviso-estampa">¡Vendido!</span>
-        </div>
-
-        <div class="aviso-cuerpo">
-          <div class="aviso-precio">
-            <b>USD 148.000</b>
-            <em>Precio de portal</em>
-          </div>
-          <h3>3 ambientes con balcón · Palermo</h3>
-          <p>72 m² · 2 dormitorios · 1 baño</p>
-          <div class="aviso-portales">
-            <b class="destaca">Zonaprop</b>
-            <b class="destaca">Argenprop</b>
-            <b class="red">Toda la red RE/MAX</b>
-          </div>
-        </div>
-      </div>
-
-      <div class="sim-col-med rv">
-        <div class="sim-medidores">
-          <div class="med"><span>Cuánta gente lo ve</span><i id="medVe"></i></div>
-          <div class="med"><span>Cuántos consultan</span><i id="medCons"></i></div>
-          <div class="med"><span>Velocidad de venta</span><i id="medDias"></i></div>
-        </div>
-        <p class="sim-nota">Las barras son ilustrativas: no existe un número que mida cuánto mejora una foto. Lo que sí está medido es lo otro: el que publica a precio de cierre vende <strong>casi 40 días antes</strong>, sobre 4.261 ventas de la red.</p>
-      </div>
     </div>
   </div>
 </section>
