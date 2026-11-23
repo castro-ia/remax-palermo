@@ -3016,6 +3016,15 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
 
     var resp = {}, i = 0;
 
+    /* Para ver dónde se cae la gente: un evento por pregunta mostrada, más
+       el arranque y el final. En Analytics eso se lee como un embudo. */
+    function medir(evento, extra){
+      if(typeof gtag!=="function") return;
+      var d={};
+      for(var k in extra) d[k]=extra[k];
+      gtag("event", evento, d);
+    }
+
     function poner(id, valor){ var e=document.getElementById(id); if(e) e.value=valor; }
 
     function burbuja(texto, quien, vacia){
@@ -3061,6 +3070,7 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
       avance();
       if(i>=PASOS.length){ cerrar(); return; }
       var paso=PASOS[i];
+      medir("tasacion_paso",{numero:i+1, campo:paso.k});
       pintarPie("");
       var esc=escribiendo();
       setTimeout(function(){
@@ -3114,6 +3124,7 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
     function contestar(paso, valor, textoSalteo){
       burbuja(textoSalteo || valor, "vos", !valor);
       if(valor) guardarRespuesta(paso.k, valor);
+      medir(valor ? "tasacion_respuesta" : "tasacion_salteo", {numero:i+1, campo:paso.k});
       i++;
       preguntar();
     }
@@ -3138,6 +3149,7 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
         var comoTeLlamo = resp.nombre ? resp.nombre+", listo" : "Listo";
         burbuja(comoTeLlamo+". Con esto armo el análisis comparativo de tu zona y te lo mando en 24 a 48 horas.","el");
         burbuja("¿Te lo paso por WhatsApp ahora o preferís que te escriba yo?","el");
+        medir("tasacion_completa",{campos_llenos:Object.keys(resp).length});
         pintarPie(
           '<div class="chat-cierre">'+
             '<button type="button" class="btn btn-wa" id="chatWa">'+
@@ -3149,11 +3161,13 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
           '</div>'
         );
         document.getElementById("chatWa").addEventListener("click",function(){
+          medir("tasacion_cierre",{via:"whatsapp"});
           marcarLead("whatsapp","tasacion guiada");
           guardarLead("abrio WhatsApp");
           window.open("https://wa.me/5491150379426?text="+encodeURIComponent(resumen()),"_blank","noopener");
         });
         document.getElementById("chatSolo").addEventListener("click",function(){
+          medir("tasacion_cierre",{via:"que me escriba"});
           marcarLead("formulario","tasacion guiada");
           guardarLead("pidio que lo contacten");
           pintarPie('<p class="chat-ayuda" style="color:#3ADB7C;font-size:14px">¡Listo! Te escribo dentro de las próximas horas.</p>');
@@ -3169,6 +3183,7 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
       arrancado=true;
       burbuja("¡Hola! Soy Fernando. Te hago seis preguntas cortas y te digo cuánto vale tu propiedad hoy, con cierres reales de tu zona.","el");
       burbuja("Lo que no sepas, lo salteás.","el");
+      medir("tasacion_inicio",{total_pasos:PASOS.length});
       preguntar();
     }
     if("IntersectionObserver" in window){
