@@ -762,6 +762,16 @@ select option{background:#0F1F42;color:#fff}
 .med i{display:block;height:9px;border-radius:999px;background:rgba(255,255,255,.14);overflow:hidden}
 .med i::after{content:"";display:block;height:100%;border-radius:999px;width:var(--w,12%);
   background:linear-gradient(90deg,var(--red),#FF9A6E);transition:width .5s cubic-bezier(.2,.7,.3,1)}
+.sim-cierre{
+  margin-top:12px;padding:13px 15px;border-radius:14px;font-size:13.5px;line-height:1.55;
+  color:rgba(255,255,255,.72);background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.12);border-left:3px solid rgba(255,255,255,.22);
+  transition:border-left-color .45s,color .45s,background .45s;
+}
+.sim-cierre b{color:#fff;font-weight:700}
+.sim.listo .sim-cierre{
+  border-left-color:var(--red);color:rgba(255,255,255,.9);background:rgba(228,0,43,.11);
+}
 .sim-nota{margin-top:14px;font-size:12px;color:rgba(255,255,255,.55);line-height:1.6}
 .sim-nota strong{color:#fff}
 
@@ -2130,6 +2140,7 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
           <div class="med"><span>Cuántos consultan</span><i id="medCons"></i></div>
           <div class="med"><span>Velocidad de venta</span><i id="medDias"></i></div>
         </div>
+        <p class="sim-cierre"><b>Y cuando aparece el comprador:</b> filtro quién entra a tu casa, reviso dominio, inhibiciones y los papeles de la sucesión si hace falta, y te acompaño hasta el día de la escritura.</p>
         <p class="sim-nota">Las barras son ilustrativas: no existe un número que mida cuánto mejora una foto. Lo que sí está medido es lo otro: el que publica a precio de cierre vende <strong>casi 40 días antes</strong>, sobre 4.261 ventas de la red.</p>
       </div>
     </div>
