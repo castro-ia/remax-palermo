@@ -1876,24 +1876,24 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
 <section class="barrio" id="mibarrio">
   <div class="wrap">
     <div class="sec-head rv">
-      <span class="kicker">34 barrios · Precios de cierre</span>
+      <span class="kicker">46 barrios y localidades · Precios de cierre</span>
       <h2>¿A cuánto se cerró el m² en tu barrio?</h2>
-      <p>No el valor de los avisos: lo que de verdad se pagó, sobre ventas cerradas de la red RE/MAX.</p>
+      <p>No el valor de los avisos: lo que de verdad se pagó en Capital y en Zona Oeste, sobre ventas cerradas de la red RE/MAX.</p>
     </div>
 
     <div class="barrio-caja rv">
-      <label for="miBarrio">Elegí tu barrio</label>
+      <label for="miBarrio">Elegí tu barrio o localidad</label>
       <select id="miBarrio"></select>
 
       <div class="barrio-datos">
         <div><b id="bM2">—</b><span>m² de cierre</span></div>
-        <div><b id="bAmb">—</b><span>2 ambientes típico</span></div>
+        <div><b id="bAmb">—</b><span id="bAmbRot">2 ambientes típico</span></div>
         <div><b id="bDias">—</b><span>días de venta</span></div>
         <div><b id="bNeg">—</b><span>se negocia</span></div>
       </div>
 
       <div class="barrio-pie">
-        <p>Valores medianos de departamentos vendidos en 2025–2026. No reemplaza una tasación: tu propiedad tiene piso, estado y orientación.</p>
+        <p id="bPie">Valores medianos de departamentos vendidos en 2025–2026. No reemplaza una tasación: tu propiedad tiene piso, estado y orientación.</p>
         <a href="#tasacion">Quiero el número de la mía</a>
       </div>
     </div>
@@ -2547,7 +2547,7 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
         </thead>
         <tbody>
           <tr><th scope="row">Tasación con precios de cierre, no de portal</th><td data-col="solo"><span class="marca no"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>No</span></td><td data-col="trad"><span class="marca quiza">A veces</span></td><td data-col="yo"><span class="marca si"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m4 12.5 5 5L20 6.5"/></svg>Sí</span></td></tr>
-          <tr><th scope="row">Los valores reales de 34 barrios de CABA</th><td data-col="solo"><span class="marca no"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>No</span></td><td data-col="trad"><span class="marca no"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>No</span></td><td data-col="yo"><span class="marca si"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m4 12.5 5 5L20 6.5"/></svg>Sí</span></td></tr>
+          <tr><th scope="row">Los valores reales de 46 barrios y localidades</th><td data-col="solo"><span class="marca no"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>No</span></td><td data-col="trad"><span class="marca no"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>No</span></td><td data-col="yo"><span class="marca si"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m4 12.5 5 5L20 6.5"/></svg>Sí</span></td></tr>
           <tr><th scope="row">Fotos profesionales con gran angular</th><td data-col="solo"><span class="marca no"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>No</span></td><td data-col="trad"><span class="marca si"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m4 12.5 5 5L20 6.5"/></svg>Sí</span></td><td data-col="yo"><span class="marca si"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m4 12.5 5 5L20 6.5"/></svg>Sí</span></td></tr>
           <tr><th scope="row">Tour virtual 360° de toda la propiedad</th><td data-col="solo"><span class="marca no"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>No</span></td><td data-col="trad"><span class="marca quiza">A veces</span></td><td data-col="yo"><span class="marca si"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m4 12.5 5 5L20 6.5"/></svg>Sí</span></td></tr>
           <tr><th scope="row">Amueblamiento virtual de los ambientes vacíos</th><td data-col="solo"><span class="marca no"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>No</span></td><td data-col="trad"><span class="marca no"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>No</span></td><td data-col="yo"><span class="marca si"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m4 12.5 5 5L20 6.5"/></svg>Sí</span></td></tr>
@@ -3925,66 +3925,105 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
   } else caja.classList.add("en");
 })();
 
-/* A cuánto cerró tu barrio. Los valores son los mismos de /precio-real-caba/:
-   si se actualiza la guía, hay que tocarlos en los dos lados. */
+/* A cuánto cerró tu barrio. Los valores son los mismos de /precio-real-caba/
+   y /precio-real-oeste/: si se actualiza una guía, hay que tocarlos acá también.
+   Cada zona trae su propio rótulo para el segundo dato, porque en Capital es
+   el 2 ambientes típico y en el Oeste es el precio de toda la operación. */
 (function(){
   var sel=document.getElementById("miBarrio");
   if(!sel) return;
 
-  var BARRIOS = [
-    ["Núñez",               2834, 137, 134, 4.1],
-    ["Palermo",             2734, 126, 125, 4.7],
-    ["Villa Urquiza",       2726, 127, 114, 4.6],
-    ["Belgrano",            2675, 121, 117, 4.4],
-    ["Saavedra",            2648, 125,  95, 4.9],
-    ["Coghlan",             2549, null, 105, 4.9],
-    ["Colegiales",          2539, 141, 117, 3.9],
-    ["Recoleta",            2453,  96, 121, 5.6],
-    ["Villa Ortúzar",       2300, 107, 103, 5.5],
-    ["Villa Devoto",        2255, 110, 148, 5.5],
-    ["Chacarita",           2193,  95, 156, 6.3],
-    ["Villa del Parque",    2179,  88, 132, 5.1],
-    ["Retiro",              2170,  99, 112, 7.5],
-    ["Villa Crespo",        2164,  85, 127, 5.1],
-    ["Villa Pueyrredón",    2163,  97, 131, 4.5],
-    ["Villa Santa Rita",    2095,  84, 103, 4.0],
-    ["Caballito",           2079,  90, 126, 4.1],
-    ["Almagro",             2060,  75, 136, 4.6],
-    ["Boedo",               2000,  72,  97, 5.7],
-    ["San Telmo",           1974,  96, 154, 1.3],
-    ["Villa Luro",          1949,  94, 153, 4.7],
-    ["Monte Castro",        1901, 103, 155, 4.6],
-    ["Villa General Mitre", 1828,  79, 173, 4.4],
-    ["Barracas",            1814,  85, 159, 4.5],
-    ["Parque Chacabuco",    1759,  75, 144, 3.5],
-    ["Flores",              1731,  81, 147, 5.6],
-    ["San Cristóbal",       1722,  72, 144, 3.7],
-    ["Monserrat",           1517,  58, 152, 5.0],
-    ["Floresta",            1501,  67, 144, 4.2],
-    ["Parque Patricios",    1467,  60, 128, 5.3],
-    ["Balvanera",           1456,  56, 119, 5.7],
-    ["San Nicolás",         1452,  62, 137, 6.3],
-    ["Mataderos",           1444, null, 155, 6.5],
-    ["Liniers",             1344, null, 163, 5.8]
+  var ZONAS = [
+    {
+      zona:"Capital Federal",
+      rotulo:"2 ambientes típico",
+      pie:"Valores medianos de departamentos vendidos en 2025–2026. No reemplaza una tasación: tu propiedad tiene piso, estado y orientación.",
+      /* [barrio, m² de cierre, 2 ambientes en miles, días, % de negociación] */
+      datos:[
+        ["Núñez",               2834, 137, 134, 4.1],
+        ["Palermo",             2734, 126, 125, 4.7],
+        ["Villa Urquiza",       2726, 127, 114, 4.6],
+        ["Belgrano",            2675, 121, 117, 4.4],
+        ["Saavedra",            2648, 125,  95, 4.9],
+        ["Coghlan",             2549, null, 105, 4.9],
+        ["Colegiales",          2539, 141, 117, 3.9],
+        ["Recoleta",            2453,  96, 121, 5.6],
+        ["Villa Ortúzar",       2300, 107, 103, 5.5],
+        ["Villa Devoto",        2255, 110, 148, 5.5],
+        ["Chacarita",           2193,  95, 156, 6.3],
+        ["Villa del Parque",    2179,  88, 132, 5.1],
+        ["Retiro",              2170,  99, 112, 7.5],
+        ["Villa Crespo",        2164,  85, 127, 5.1],
+        ["Villa Pueyrredón",    2163,  97, 131, 4.5],
+        ["Villa Santa Rita",    2095,  84, 103, 4.0],
+        ["Caballito",           2079,  90, 126, 4.1],
+        ["Almagro",             2060,  75, 136, 4.6],
+        ["Boedo",               2000,  72,  97, 5.7],
+        ["San Telmo",           1974,  96, 154, 1.3],
+        ["Villa Luro",          1949,  94, 153, 4.7],
+        ["Monte Castro",        1901, 103, 155, 4.6],
+        ["Villa General Mitre", 1828,  79, 173, 4.4],
+        ["Barracas",            1814,  85, 159, 4.5],
+        ["Parque Chacabuco",    1759,  75, 144, 3.5],
+        ["Flores",              1731,  81, 147, 5.6],
+        ["San Cristóbal",       1722,  72, 144, 3.7],
+        ["Monserrat",           1517,  58, 152, 5.0],
+        ["Floresta",            1501,  67, 144, 4.2],
+        ["Parque Patricios",    1467,  60, 128, 5.3],
+        ["Balvanera",           1456,  56, 119, 5.7],
+        ["San Nicolás",         1452,  62, 137, 6.3],
+        ["Mataderos",           1444, null, 155, 6.5],
+        ["Liniers",             1344, null, 163, 5.8]
+      ]
+    },
+    {
+      zona:"Zona Oeste",
+      rotulo:"precio típico",
+      pie:"Valores medianos de todo lo vendido —departamentos, PH y casas juntos— entre 2025 y agosto de 2026, así que una localidad de casas aparece más barata por m². La negociación es la de tu partido. No reemplaza una tasación.",
+      /* [localidad, m² de cierre, precio típico en miles, días, % de negociación del partido] */
+      datos:[
+        ["Villa Sáenz Peña",   1615,  70, 128, 4.3],
+        ["Santos Lugares",     1423,  71, 157, 4.3],
+        ["Caseros",            1305,  62, 144, 4.3],
+        ["Ramos Mejía",        1101,  75, 194, 5.9],
+        ["Villa Raffo",        1081,  68, 109, 4.3],
+        ["Villa Luzuriaga",    1039,  80, 174, 5.9],
+        ["Morón",               975,  53, 202, 4.8],
+        ["Hurlingham",          913, 225, 223, null],
+        ["Ciudadela",           855,  53, 174, 4.3],
+        ["Villa Bosch",         783,  45, 128, 4.3],
+        ["San Justo",           710,  77, 171, 5.9],
+        ["Lomas del Mirador",   568,  74, 338, 5.9]
+      ]
+    }
   ];
 
   var miles=function(n){ return n.toLocaleString("es-AR"); };
   var coma =function(n){ return n.toFixed(1).replace(".", ","); };
 
-  sel.innerHTML=BARRIOS.map(function(b,i){
-    return '<option value="'+i+'"'+(b[0]==="Palermo"?" selected":"")+'>'+b[0]+'</option>';
+  sel.innerHTML=ZONAS.map(function(z,g){
+    return '<optgroup label="'+z.zona+'">'+z.datos.map(function(b,i){
+      return '<option value="'+g+"-"+i+'"'+(b[0]==="Palermo"?" selected":"")+'>'+b[0]+'</option>';
+    }).join("")+'</optgroup>';
   }).join("");
 
+  function elegido(){
+    var p=sel.value.split("-"), z=ZONAS[+p[0]];
+    return { zona:z, barrio:z.datos[+p[1]] };
+  }
+
   function pintar(){
-    var b=BARRIOS[+sel.value];
+    var e=elegido(), b=e.barrio;
     document.getElementById("bM2").textContent="USD "+miles(b[1]);
     document.getElementById("bAmb").textContent=b[2]===null ? "—" : "USD "+b[2]+"k";
     document.getElementById("bDias").textContent=b[3]+" d";
-    document.getElementById("bNeg").textContent=coma(b[4])+"%";
+    document.getElementById("bNeg").textContent=b[4]===null ? "—" : coma(b[4])+"%";
+    document.getElementById("bAmbRot").textContent=e.zona.rotulo;
+    document.getElementById("bPie").textContent=e.zona.pie;
   }
   sel.addEventListener("change",function(){
     pintar();
-    if(window.gtag) gtag("event","barrio_consultado",{barrio:BARRIOS[+sel.value][0]});
+    if(window.gtag) gtag("event","barrio_consultado",{barrio:elegido().barrio[0], zona:elegido().zona.zona});
   });
   pintar();
 })();
