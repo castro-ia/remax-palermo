@@ -397,8 +397,12 @@ select option{background:#0F1F42;color:#fff}
 /* el conjunto que viaja: el que empuja y la casa */
 .mueve-grupo{position:absolute;bottom:26px;left:calc(1% + var(--p,0) * 62%);
   display:flex;align-items:flex-end}
-.mueve-yo{width:56px;height:auto;display:block;margin-right:-4px;
-  transform:translateY(calc(sin(var(--p,0) * 18rad) * 1.5px))}
+/* él mismo, apoyado contra la casa y apenas inclinado hacia adelante */
+.mueve-yo{
+  height:96px;width:auto;display:block;margin-right:-10px;position:relative;z-index:2;
+  rotate:9deg;transform-origin:bottom center;
+  filter:drop-shadow(0 5px 7px rgba(16,21,33,.18));
+}
 .mueve-casa{position:relative;width:124px}
 .mueve-casa svg{width:100%;height:auto;display:block}
 .mueve-globo{
@@ -424,12 +428,12 @@ select option{background:#0F1F42;color:#fff}
 @media(max-width:620px){
   .mueve-pista{height:160px}
   .mueve-casa{width:88px}
-  .mueve-yo{width:42px}
+  .mueve-yo{height:64px}
   .mueve-meta{width:104px;height:104px}
   .mueve-globo{font-size:11px;padding:7px 10px}
   .mueve-sello{font-size:12px;padding:4px 8px;right:-18px}
 }
-@media(prefers-reduced-motion:reduce){.mueve-yo{transform:none}}
+@media(prefers-reduced-motion:reduce){.mueve-yo{rotate:none}}
 
 /* ---------- tasación guiada, dentro de un iPhone ----------
    El mismo formulario de siempre, pero de a una pregunta y con cara de
@@ -1712,28 +1716,9 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
       <span class="mueve-meta"></span>
 
       <div class="mueve-grupo" id="mueveGrupo">
-        <!-- Fernando empujando: traje azul, camisa clara, corbata roja, anteojos y barba -->
-        <svg class="mueve-yo" viewBox="0 0 84 112">
-          <g fill="none" stroke-linecap="round">
-            <path d="M34 72 16 100" stroke="#2A3C62" stroke-width="10"/>
-            <path d="M12 101h15" stroke="#101521" stroke-width="8"/>
-            <path d="M38 72 46 100" stroke="#1B2A4A" stroke-width="10"/>
-            <path d="M42 101h15" stroke="#101521" stroke-width="8"/>
-            <path d="M33 71 48 44" stroke="#1B2A4A" stroke-width="19"/>
-            <path d="M44 51 50 41" stroke="#F2F5FA" stroke-width="7"/>
-            <path d="M45.5 50 50 42" stroke="#E4002B" stroke-width="3.2"/>
-            <path d="M49 46 76 55" stroke="#1B2A4A" stroke-width="9"/>
-          </g>
-          <circle cx="78" cy="56" r="5" fill="#E3B089"/>
-          <circle cx="54" cy="29" r="11.5" fill="#E3B089"/>
-          <path d="M42.5 27.5a11.5 11.5 0 0 1 22.6-3.6c-4.2 2.4-8.4 3.2-12.6 2.4-4-.8-7.4 0-10 1.2z" fill="#1D1510"/>
-          <path d="M44.5 33.5a10 10 0 0 0 19 0c-.8 6.6-5 10-9.5 10s-8.7-3.4-9.5-10z" fill="#30221A"/>
-          <g fill="#0E1420">
-            <rect x="44.5" y="25" width="8.6" height="6.4" rx="2"/>
-            <rect x="55" y="25" width="8.6" height="6.4" rx="2"/>
-            <rect x="53" y="27.4" width="2.2" height="1.8"/>
-          </g>
-        </svg>
+        <!-- Fernando en persona, recortado de su propia foto -->
+        <img class="mueve-yo" src="img/fernando-empuja.webp" width="171" height="440"
+             alt="Fernando Castro empujando la propiedad" loading="lazy">
 
         <div class="mueve-casa" id="mueveCasa">
           <span class="mueve-globo" id="mueveGlobo">Publicada hace 7 meses</span>
