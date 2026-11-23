@@ -661,23 +661,37 @@ select option{background:#0F1F42;color:#fff}
 /* ---------- qué le pasa a tu aviso ----------
    Tres interruptores y un aviso de mentira que va cambiando. Las barras son
    ilustrativas a propósito: no hay número que mida "cuánto mejora una foto". */
-.sim{position:relative;background:var(--navy);color:#fff;overflow:hidden}
+/* La seccion se clava mientras se baja y los tres pasos se van prendiendo
+   solos, igual que la casa que se mueve. Solo en pantalla grande: en el
+   celular el contenido es mas alto que la pantalla y no entra clavado.
+   Nada de overflow:hidden en .sim-alto, que mata el sticky. */
+.sim-alto{position:relative}
+.sim{position:relative;background:var(--navy);color:#fff}
+@media(min-width:900px){
+  .sim-alto{height:240vh}
+  /* clavada tiene que entrar en una pantalla: va mas apretada que el resto */
+  .sim{position:sticky;top:0;min-height:100svh;display:flex;align-items:center;padding:40px 0}
+  .sim .sim-grid{margin-top:18px}
+  .sim .paso-sw{padding:12px 16px}
+  .sim .sim-medidores{padding:14px 16px 13px}
+  .sim .sim-cierre{padding:11px 14px}
+}
 .sim::before{
   content:"";position:absolute;inset:0;pointer-events:none;
   background:
     radial-gradient(66% 50% at 86% -8%, rgba(228,0,43,.3), transparent 64%),
     repeating-linear-gradient(135deg, rgba(255,255,255,.035) 0 1px, transparent 1px 10px);
 }
-.sim .wrap{position:relative;z-index:1}
+.sim .wrap{position:relative;z-index:1;width:100%}
 .sim .sec-head h2{color:#fff}
 .sim .sec-head p{color:rgba(255,255,255,.66)}
 .sim .kicker{color:#FF6B86}
-.sim-grid{margin-top:26px;display:grid;gap:20px}
-.sim-col-pasos{order:1}
-.aviso{order:2}
+.sim-grid{margin-top:26px;display:flex;flex-direction:column;gap:20px}
+.aviso{order:1}
+.sim-col-pasos{order:2}
 .sim-col-med{order:3}
 @media(min-width:900px){
-  .sim-grid{grid-template-columns:1fr 1fr;grid-template-areas:"a p" "a m";gap:22px 40px;align-items:start}
+  .sim-grid{display:grid;grid-template-columns:1fr 1fr;grid-template-areas:"a p" "a m";gap:22px 40px;align-items:start}
   .aviso{grid-area:a}.sim-col-pasos{grid-area:p}.sim-col-med{grid-area:m}
 }
 
@@ -686,6 +700,11 @@ select option{background:#0F1F42;color:#fff}
   position:relative;background:var(--paper);color:var(--ink);
   border:1px solid rgba(255,255,255,.14);
   border-radius:var(--r-lg);overflow:hidden;box-shadow:0 18px 44px rgba(0,0,0,.34);
+}
+/* en el celular la tarjeta queda pegada arriba mientras los interruptores
+   le pasan por abajo (va despues del bloque de arriba: misma especificidad) */
+@media(max-width:899px){
+  .aviso{position:sticky;top:67px;z-index:2}
 }
 .aviso-barra{display:flex;align-items:center;gap:7px;padding:11px 14px;border-bottom:1px solid var(--line);background:var(--paper)}
 .aviso-barra i{width:9px;height:9px;border-radius:50%;background:var(--line)}
@@ -2078,6 +2097,7 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
 </section>
 
 <!-- ===== QUÉ LE PASA A TU AVISO ===== -->
+<div class="sim-alto">
 <section class="sim" id="simulador" data-p1="0" data-p2="0" data-p3="0">
   <div class="wrap">
     <div class="sec-head rv">
@@ -2146,6 +2166,7 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
     </div>
   </div>
 </section>
+</div>
 
 <!-- ===== VENDIDAS ===== -->
 <section class="vendidas" id="vendidas">
@@ -3940,15 +3961,56 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
     });
   }
 
-  sec.querySelectorAll(".paso-sw").forEach(function(b){
+  var botones=[].slice.call(sec.querySelectorAll(".paso-sw")), manual=false;
+
+  function prender(k,on){
+    if((sec.dataset["p"+k]==="1")===on) return;
+    sec.dataset["p"+k]= on ? "1" : "0";
+    botones[k-1].setAttribute("aria-pressed", on ? "true" : "false");
+  }
+
+  botones.forEach(function(b){
     b.addEventListener("click",function(){
-      var k=b.dataset.paso, on=sec.dataset["p"+k]!=="1";
-      sec.dataset["p"+k]= on ? "1" : "0";
-      b.setAttribute("aria-pressed", on ? "true" : "false");
+      // en cuanto lo toca el, el scroll deja de mandar
+      manual=true;
+      var k=+b.dataset.paso;
+      prender(k, sec.dataset["p"+k]!=="1");
       pintar();
-      if(window.gtag) gtag("event","simulador_aviso",{paso:+k, prendido:on});
+      if(window.gtag) gtag("event","simulador_aviso",{paso:k, prendido:sec.dataset["p"+k]==="1"});
     });
   });
+
+  /* Dos modos. Clavada (pantalla grande): nada se mueve, asi que manda cuanto
+     se avanzo sobre el envoltorio alto. Suelta (celular): la tarjeta queda
+     pegada arriba y los interruptores suben por abajo, asi que cada uno se
+     prende cuando cruza las tres cuartas partes de la pantalla. */
+  var alto=sec.parentNode, UMBRALES=[.10,.32,.54];
+
+  var pedido=false;
+  function alScroll(){
+    if(manual||pedido) return;
+    pedido=true;
+    requestAnimationFrame(function(){
+      pedido=false;
+      if(manual) return;
+      var vh=window.innerHeight||800, k;
+      if(getComputedStyle(sec).position==="sticky"){
+        var r=alto.getBoundingClientRect();
+        var p=(-r.top)/Math.max(1, alto.offsetHeight-vh);
+        p=Math.max(0,Math.min(1,p));
+        for(k=1;k<=3;k++) prender(k, p>=UMBRALES[k-1]);
+      }else{
+        for(k=1;k<=3;k++){
+          var b=botones[k-1].getBoundingClientRect();
+          prender(k, b.bottom < vh-16);
+        }
+      }
+      pintar();
+    });
+  }
+  addEventListener("scroll", alScroll, {passive:true});
+  addEventListener("resize", alScroll, {passive:true});
+  alScroll();
   pintar();
 })();
 </script>
