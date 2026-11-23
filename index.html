@@ -380,22 +380,26 @@ select option{background:#0F1F42;color:#fff}
 }
 
 /* ---------- la propiedad que se mueve ----------
-   Una pista: a la izquierda la propiedad parada hace meses, a la derecha
-   vendida. Avanza con el scroll, no sola: la empuja el que mira. */
+   Fernando empuja la casa de punta a punta de la pista. Avanza con el
+   scroll, no sola: la empuja el que mira. */
 .mueve{background:var(--cream);padding:54px 0 48px;overflow:hidden}
 .mueve-cab{display:flex;justify-content:space-between;align-items:baseline;gap:16px;
   font-size:10.5px;font-weight:800;letter-spacing:.2em;text-transform:uppercase}
 .mueve-a{color:var(--muted)}
 .mueve-b{color:var(--red)}
-.mueve-pista{position:relative;height:184px;margin-top:12px}
-.mueve-linea{position:absolute;left:0;right:0;bottom:28px;height:4px;border-radius:999px;background:var(--line)}
+.mueve-pista{position:relative;height:208px;margin-top:14px}
+.mueve-linea{position:absolute;left:0;right:0;bottom:30px;height:4px;border-radius:999px;background:var(--line)}
 .mueve-linea i{display:block;height:100%;border-radius:999px;background:var(--red);
-  width:calc(8% + var(--p,0) * 78%)}
-/* el lugar al que llega: un circulo punteado que se apaga cuando la casa entra */
-.mueve-meta{position:absolute;right:1%;bottom:32px;width:116px;height:116px;border-radius:50%;
-  border:2px dashed var(--line);opacity:calc(1 - var(--p,0) * .8)}
-.mueve-casa{position:absolute;bottom:24px;left:calc(1% + var(--p,0) * 70%);width:120px;
-  transform:rotate(calc(var(--p,0) * 2deg - 1deg))}
+  width:calc(10% + var(--p,0) * 76%)}
+/* el lugar al que llega */
+.mueve-meta{position:absolute;right:0;bottom:26px;width:150px;height:150px;border-radius:50%;
+  border:2px dashed var(--line);opacity:calc(1 - var(--p,0) * .55)}
+/* el conjunto que viaja: el que empuja y la casa */
+.mueve-grupo{position:absolute;bottom:26px;left:calc(1% + var(--p,0) * 62%);
+  display:flex;align-items:flex-end}
+.mueve-yo{width:56px;height:auto;display:block;margin-right:-4px;
+  transform:translateY(calc(sin(var(--p,0) * 18rad) * 1.5px))}
+.mueve-casa{position:relative;width:124px}
 .mueve-casa svg{width:100%;height:auto;display:block}
 .mueve-globo{
   position:absolute;bottom:100%;left:50%;transform:translate(-50%,-12px);
@@ -404,79 +408,141 @@ select option{background:#0F1F42;color:#fff}
 }
 .mueve-globo::after{content:"";position:absolute;top:100%;left:50%;transform:translateX(-50%);
   border:6px solid transparent;border-top-color:var(--ink)}
-.mueve-cartel{
-  position:absolute;top:-4px;right:-16px;z-index:2;background:#9AA2B4;color:#fff;
-  font-size:9px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
-  padding:5px 9px;border-radius:6px;transform:rotate(7deg);transition:background .3s,transform .3s;
+/* el sello de vendido, que cae al final como un timbre */
+.mueve-sello{
+  position:absolute;top:-10px;right:-26px;z-index:3;
+  border:3px solid var(--red);color:var(--red);background:rgba(255,255,255,.9);
+  font-family:Montserrat,Inter,sans-serif;font-size:15px;font-weight:900;letter-spacing:.04em;
+  padding:5px 11px;border-radius:7px;transform:rotate(-11deg) scale(.3);opacity:0;
+  transition:transform .42s cubic-bezier(.3,1.5,.5,1),opacity .28s;
 }
-.mueve-casa.vendida .mueve-cartel{background:var(--red);transform:rotate(-5deg) scale(1.14)}
-.mueve-frase{margin-top:24px;font-size:clamp(1.6rem,5.2vw,2.9rem);text-wrap:balance}
+.mueve-grupo.vendida .mueve-sello{transform:rotate(-11deg) scale(1);opacity:1}
+.mueve-frase{margin-top:26px;font-size:clamp(1.6rem,5.2vw,2.9rem);text-wrap:balance}
 .mueve-frase em{font-style:normal;color:var(--red)}
 .mueve-bajada{margin-top:14px;max-width:38rem;color:var(--muted);font-size:1.03rem}
 .mueve-bajada strong{color:var(--ink);font-weight:600}
 @media(max-width:620px){
-  .mueve-pista{height:146px}
-  .mueve-casa{width:86px}
-  .mueve-meta{width:82px;height:82px}
+  .mueve-pista{height:160px}
+  .mueve-casa{width:88px}
+  .mueve-yo{width:42px}
+  .mueve-meta{width:104px;height:104px}
   .mueve-globo{font-size:11px;padding:7px 10px}
+  .mueve-sello{font-size:12px;padding:4px 8px;right:-18px}
 }
-@media(prefers-reduced-motion:reduce){.mueve-casa{transform:none}}
+@media(prefers-reduced-motion:reduce){.mueve-yo{transform:none}}
 
-/* ---------- tasación guiada ----------
-   El mismo formulario de siempre, pero de a una pregunta. */
-.chat-cab{display:flex;align-items:center;gap:11px}
-.chat-cab img{width:46px;height:46px;border-radius:50%;object-fit:cover;flex:none;
-  border:2px solid rgba(255,255,255,.22)}
-.chat-cab .punto{width:9px;height:9px;border-radius:50%;background:#3ADB7C;flex:none;
-  box-shadow:0 0 0 3px rgba(58,219,124,.2);margin-left:-20px;align-self:flex-end;margin-bottom:3px}
-.chat-cab .quien{min-width:0}
-.chat-cab b{display:block;font-family:Montserrat,Inter,sans-serif;font-size:16px;font-weight:700;letter-spacing:-.015em}
-.chat-cab .quien span{display:block;font-size:12.5px;color:rgba(255,255,255,.6);line-height:1.35}
-.chat-barra{margin-top:15px;height:3px;border-radius:999px;background:rgba(255,255,255,.14);overflow:hidden}
-.chat-barra i{display:block;height:100%;border-radius:999px;width:0;
-  background:linear-gradient(90deg,var(--red),#FF9A6E);transition:width .45s cubic-bezier(.2,.7,.3,1)}
-.chat-hilo{
-  margin-top:16px;display:flex;flex-direction:column;gap:9px;
-  min-height:214px;max-height:300px;overflow-y:auto;padding-right:4px;scroll-behavior:smooth;
+/* ---------- tasación guiada, dentro de un iPhone ----------
+   El mismo formulario de siempre, pero de a una pregunta y con cara de
+   WhatsApp. Las respuestas caen en los inputs ocultos, así guardarLead()
+   sigue leyendo exactamente lo mismo. */
+.fono-caja{display:flex;justify-content:center}
+.fono{
+  position:relative;width:min(336px,100%);
+  background:linear-gradient(145deg,#2B2F38,#0C0E12);
+  border-radius:46px;padding:11px;
+  box-shadow:0 0 0 2px #3A3F4A inset,0 30px 70px -24px rgba(10,23,51,.6),0 10px 24px rgba(10,23,51,.25);
 }
-.chat-hilo::-webkit-scrollbar{width:5px}
-.chat-hilo::-webkit-scrollbar-thumb{background:rgba(255,255,255,.16);border-radius:99px}
-.burb{max-width:88%;padding:11px 14px;border-radius:16px;font-size:14.8px;line-height:1.5;
-  animation:burbIn .3s cubic-bezier(.2,.7,.3,1) both}
-@keyframes burbIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-.burb.el{align-self:flex-start;background:rgba(255,255,255,.1);border-bottom-left-radius:5px}
-.burb.vos{align-self:flex-end;background:var(--red);color:#fff;font-weight:600;border-bottom-right-radius:5px}
-.burb.vos.vacia{background:rgba(255,255,255,.07);color:rgba(255,255,255,.55);font-weight:500}
-.escribiendo{align-self:flex-start;display:flex;gap:4px;padding:14px 15px;border-radius:16px;
-  background:rgba(255,255,255,.1);border-bottom-left-radius:5px}
-.escribiendo i{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.65);
+/* los botones del costado */
+.fono::before,.fono::after{content:"";position:absolute;width:3px;border-radius:3px;background:#3A3F4A}
+.fono::before{left:-3px;top:112px;height:54px}
+.fono::after{right:-3px;top:96px;height:88px}
+.fono-pantalla{
+  position:relative;border-radius:36px;overflow:hidden;background:#0B141A;color:#E9EDEF;
+  height:min(620px,74vh);min-height:520px;display:flex;flex-direction:column;
+}
+.fono-isla{
+  position:absolute;top:17px;left:50%;transform:translateX(-50%);z-index:5;
+  width:88px;height:25px;border-radius:999px;background:#07090C;
+}
+.fono-barrita{
+  position:absolute;bottom:6px;left:50%;transform:translateX(-50%);z-index:5;
+  width:116px;height:4px;border-radius:999px;background:rgba(233,237,239,.4);
+}
+.wa-estado{
+  flex:none;display:flex;justify-content:space-between;align-items:center;
+  padding:12px 22px 4px;font-size:13px;font-weight:700;color:#fff;letter-spacing:.01em;
+}
+.wa-iconos{display:flex;align-items:center;gap:5px;color:#fff}
+.wa-cab{
+  flex:none;display:flex;align-items:center;gap:9px;padding:8px 12px 9px;
+  background:#1F2C34;border-bottom:1px solid rgba(255,255,255,.06);
+}
+.wa-volver{flex:none;color:#E9EDEF;opacity:.9}
+.wa-cab img{width:36px;height:36px;border-radius:50%;object-fit:cover;flex:none}
+.wa-quien{flex:1;min-width:0;line-height:1.25}
+.wa-quien b{display:block;font-size:15px;font-weight:600;color:#E9EDEF;letter-spacing:-.01em}
+.wa-quien span{display:block;font-size:11.5px;color:#8696A0}
+.wa-ic{flex:none;color:#8696A0}
+/* el fondo de WhatsApp: la trama de siempre, dibujada con puntitos */
+.chat-hilo{
+  flex:1;min-height:0;overflow-y:auto;padding:14px 10px 10px;
+  display:flex;flex-direction:column;gap:3px;scroll-behavior:smooth;
+  background-color:#0B141A;
+  background-image:radial-gradient(rgba(233,237,239,.045) 1px,transparent 1px);
+  background-size:22px 22px;
+}
+.chat-hilo::-webkit-scrollbar{width:0}
+.chat-barra{flex:none;height:2px;background:rgba(233,237,239,.1);overflow:hidden}
+.chat-barra i{display:block;height:100%;width:0;background:#25D366;transition:width .45s cubic-bezier(.2,.7,.3,1)}
+.burb{
+  position:relative;max-width:82%;padding:7px 10px 18px 10px;border-radius:9px;
+  font-size:14.2px;line-height:1.38;color:#E9EDEF;
+  box-shadow:0 1px 1px rgba(0,0,0,.25);
+  animation:burbIn .26s cubic-bezier(.2,.7,.3,1) both;
+}
+@keyframes burbIn{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
+.burb.el{align-self:flex-start;background:#202C33;border-top-left-radius:3px;margin-left:5px}
+.burb.vos{align-self:flex-end;background:#005C4B;border-top-right-radius:3px;margin-right:5px}
+.burb.vos.vacia{background:#1F3B38;color:rgba(233,237,239,.72)}
+/* la hora y los tildes, como en la app */
+.burb .hora{
+  position:absolute;right:9px;bottom:4px;display:flex;align-items:center;gap:3px;
+  font-size:10.5px;color:rgba(233,237,239,.5);
+}
+.burb.vos .hora{color:rgba(173,233,210,.75)}
+.burb .hora svg{display:block}
+/* la colita del globo */
+.burb.el::before,.burb.vos::before{content:"";position:absolute;top:0;width:8px;height:12px}
+.burb.el::before{left:-7px;background:#202C33;clip-path:polygon(100% 0,0 0,100% 55%)}
+.burb.vos::before{right:-7px;background:#005C4B;clip-path:polygon(0 0,100% 0,0 55%)}
+.burb.vos.vacia::before{background:#1F3B38}
+.escribiendo{align-self:flex-start;display:flex;gap:4px;padding:11px 13px;border-radius:9px;
+  background:#202C33;border-top-left-radius:3px;margin-left:5px}
+.escribiendo i{width:6px;height:6px;border-radius:50%;background:rgba(233,237,239,.55);
   animation:puntito 1.1s infinite}
 .escribiendo i:nth-child(2){animation-delay:.15s}
 .escribiendo i:nth-child(3){animation-delay:.3s}
 @keyframes puntito{0%,60%,100%{opacity:.3;transform:translateY(0)}30%{opacity:1;transform:translateY(-3px)}}
-.chat-pie{margin-top:15px;padding-top:14px;border-top:1px solid rgba(255,255,255,.12)}
-.chat-ops{display:flex;flex-wrap:wrap;gap:8px}
+
+.chat-pie{flex:none;background:#0B141A;padding:7px 8px 16px}
+.chat-ops{display:flex;flex-wrap:wrap;gap:6px;justify-content:flex-end}
 .chat-op{
-  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);color:#fff;
-  padding:10px 15px;border-radius:999px;font-size:14.5px;font-weight:600;cursor:pointer;
-  transition:background .18s,border-color .18s,transform .18s;
+  background:#202C33;border:1px solid rgba(37,211,102,.45);color:#25D366;
+  padding:8px 13px;border-radius:999px;font-size:13.5px;font-weight:600;cursor:pointer;
+  transition:background .18s,transform .18s;
 }
-.chat-op:hover{background:rgba(255,255,255,.16);border-color:rgba(255,255,255,.45);transform:translateY(-1px)}
-.chat-fila{display:flex;gap:9px;align-items:center}
-.chat-fila input{flex:1}
+.chat-op:hover{background:#2A3942;transform:translateY(-1px)}
+.chat-fila{display:flex;gap:7px;align-items:center}
+.chat-fila input{
+  flex:1;background:#2A3942;border:0;border-radius:999px;padding:11px 15px;
+  font-size:15px;color:#E9EDEF;
+}
+.chat-fila input::placeholder{color:#8696A0}
+.chat-fila input:focus{outline:0;box-shadow:0 0 0 2px rgba(37,211,102,.4)}
 .chat-enviar{
-  flex:none;width:48px;height:48px;border-radius:14px;border:0;cursor:pointer;
-  background:var(--red);color:#fff;display:grid;place-items:center;transition:transform .18s,filter .18s;
+  flex:none;width:42px;height:42px;border-radius:50%;border:0;cursor:pointer;
+  background:#00A884;color:#fff;display:grid;place-items:center;transition:transform .18s,filter .18s;
 }
-.chat-enviar:hover{transform:translateY(-1px);filter:brightness(1.08)}
+.chat-enviar:hover{transform:scale(1.05);filter:brightness(1.08)}
 .chat-saltar{
-  display:block;margin:10px auto 0;background:none;border:0;cursor:pointer;
-  color:rgba(255,255,255,.55);font-size:13px;text-decoration:underline;text-underline-offset:3px;
+  display:block;margin:8px auto 0;background:none;border:0;cursor:pointer;
+  color:#8696A0;font-size:12.5px;text-decoration:underline;text-underline-offset:3px;
 }
-.chat-saltar:hover{color:#fff}
-.chat-ayuda{margin-top:10px;font-size:12px;color:rgba(255,255,255,.5);line-height:1.5;text-align:center}
-.chat-cierre{display:grid;gap:10px}
-.chat-cierre .btn{width:100%}
+.chat-saltar:hover{color:#E9EDEF}
+.chat-ayuda{margin-top:8px;font-size:11.5px;color:#8696A0;line-height:1.45;text-align:center}
+.chat-cierre{display:grid;gap:8px}
+.chat-cierre .btn{width:100%;padding:13px 16px;font-size:14.5px;border-radius:12px}
+.chat-cierre .btn-ghost{color:#E9EDEF;border-color:rgba(233,237,239,.3)}
 
 /* ---------- efectos ---------- */
 #prog{position:fixed;top:0;left:0;height:3px;width:0;z-index:90;
@@ -1644,18 +1710,44 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
     <div class="mueve-pista" id="muevePista" aria-hidden="true">
       <span class="mueve-linea"><i></i></span>
       <span class="mueve-meta"></span>
-      <div class="mueve-casa" id="mueveCasa">
-        <span class="mueve-globo" id="mueveGlobo">Publicada hace 7 meses</span>
-        <span class="mueve-cartel" id="mueveCartel">En venta</span>
-        <svg viewBox="0 0 120 96">
-          <path d="M18 42h84v42H18z" fill="#fff" stroke="#0A1733" stroke-width="5" stroke-linejoin="round"/>
-          <path d="M14 45 60 12l46 33z" fill="#E4002B" stroke="#0A1733" stroke-width="5" stroke-linejoin="round"/>
-          <rect x="52" y="58" width="18" height="26" rx="2" fill="#C9A227"/>
-          <rect x="29" y="53" width="15" height="14" rx="2" fill="#DCE3F2" stroke="#0A1733" stroke-width="3"/>
-          <rect x="77" y="53" width="15" height="14" rx="2" fill="#DCE3F2" stroke="#0A1733" stroke-width="3"/>
-          <circle cx="38" cy="88" r="7" fill="#0A1733"/>
-          <circle cx="86" cy="88" r="7" fill="#0A1733"/>
+
+      <div class="mueve-grupo" id="mueveGrupo">
+        <!-- Fernando empujando: traje azul, camisa clara, corbata roja, anteojos y barba -->
+        <svg class="mueve-yo" viewBox="0 0 84 112">
+          <g fill="none" stroke-linecap="round">
+            <path d="M34 72 16 100" stroke="#2A3C62" stroke-width="10"/>
+            <path d="M12 101h15" stroke="#101521" stroke-width="8"/>
+            <path d="M38 72 46 100" stroke="#1B2A4A" stroke-width="10"/>
+            <path d="M42 101h15" stroke="#101521" stroke-width="8"/>
+            <path d="M33 71 48 44" stroke="#1B2A4A" stroke-width="19"/>
+            <path d="M44 51 50 41" stroke="#F2F5FA" stroke-width="7"/>
+            <path d="M45.5 50 50 42" stroke="#E4002B" stroke-width="3.2"/>
+            <path d="M49 46 76 55" stroke="#1B2A4A" stroke-width="9"/>
+          </g>
+          <circle cx="78" cy="56" r="5" fill="#E3B089"/>
+          <circle cx="54" cy="29" r="11.5" fill="#E3B089"/>
+          <path d="M42.5 27.5a11.5 11.5 0 0 1 22.6-3.6c-4.2 2.4-8.4 3.2-12.6 2.4-4-.8-7.4 0-10 1.2z" fill="#1D1510"/>
+          <path d="M44.5 33.5a10 10 0 0 0 19 0c-.8 6.6-5 10-9.5 10s-8.7-3.4-9.5-10z" fill="#30221A"/>
+          <g fill="#0E1420">
+            <rect x="44.5" y="25" width="8.6" height="6.4" rx="2"/>
+            <rect x="55" y="25" width="8.6" height="6.4" rx="2"/>
+            <rect x="53" y="27.4" width="2.2" height="1.8"/>
+          </g>
         </svg>
+
+        <div class="mueve-casa" id="mueveCasa">
+          <span class="mueve-globo" id="mueveGlobo">Publicada hace 7 meses</span>
+          <span class="mueve-sello">¡Vendido!</span>
+          <svg viewBox="0 0 120 96">
+            <path d="M18 42h84v42H18z" fill="#fff" stroke="#0A1733" stroke-width="5" stroke-linejoin="round"/>
+            <path d="M14 45 60 12l46 33z" fill="#E4002B" stroke="#0A1733" stroke-width="5" stroke-linejoin="round"/>
+            <rect x="52" y="58" width="18" height="26" rx="2" fill="#C9A227"/>
+            <rect x="29" y="53" width="15" height="14" rx="2" fill="#DCE3F2" stroke="#0A1733" stroke-width="3"/>
+            <rect x="77" y="53" width="15" height="14" rx="2" fill="#DCE3F2" stroke="#0A1733" stroke-width="3"/>
+            <circle cx="38" cy="88" r="7" fill="#0A1733"/>
+            <circle cx="86" cy="88" r="7" fill="#0A1733"/>
+          </svg>
+        </div>
       </div>
     </div>
 
@@ -1688,19 +1780,39 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
         </div>
       </div>
 
-      <div class="val-card rv">
-        <div class="chat-cab">
-          <img src="img/fernando-retrato-avatar.webp" width="300" height="300" alt="Fernando Castro" loading="lazy">
-          <span class="punto" aria-hidden="true"></span>
-          <span class="quien">
-            <b>Fernando Castro</b>
-            <span>Tasación guiada · después te escribo yo</span>
-          </span>
-        </div>
-        <div class="chat-barra" id="chatBarra" role="progressbar" aria-label="Avance de la tasación" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i></i></div>
+      <div class="fono-caja rv">
+        <div class="fono">
+          <span class="fono-isla" aria-hidden="true"></span>
+          <div class="fono-pantalla">
 
-        <div class="chat-hilo" id="chatHilo" role="log" aria-live="polite"></div>
-        <div class="chat-pie" id="chatPie"></div>
+            <div class="wa-estado" aria-hidden="true">
+              <span id="waHora">9:41</span>
+              <span class="wa-iconos">
+                <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor"><rect x="0" y="7" width="3" height="4" rx="1"/><rect x="4.5" y="5" width="3" height="6" rx="1"/><rect x="9" y="2.5" width="3" height="8.5" rx="1"/><rect x="13.5" y="0" width="3" height="11" rx="1"/></svg>
+                <svg width="16" height="11" viewBox="0 0 16 11" fill="currentColor"><path d="M8 10.6 6.2 8.7a2.6 2.6 0 0 1 3.6 0zM3.6 6.1 2 4.4a8.6 8.6 0 0 1 12 0l-1.6 1.7a6.3 6.3 0 0 0-8.8 0z"/></svg>
+                <svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x=".5" y=".5" width="20" height="11" rx="3.2" stroke="currentColor" stroke-opacity=".5"/><rect x="2" y="2" width="15" height="8" rx="2" fill="currentColor"/><path d="M22.5 4v4a2.1 2.1 0 0 0 0-4z" fill="currentColor" fill-opacity=".5"/></svg>
+              </span>
+            </div>
+
+            <div class="wa-cab">
+              <svg class="wa-volver" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H6"/><path d="m11.5 5.5-6.5 6.5 6.5 6.5"/></svg>
+              <img src="img/fernando-retrato-avatar.webp" width="300" height="300" alt="Fernando Castro" loading="lazy">
+              <span class="wa-quien">
+                <b>Fernando Castro</b>
+                <span>en línea</span>
+              </span>
+              <svg class="wa-ic" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m15 10 5.5-3v10L15 14z"/><rect x="3" y="6" width="12" height="12" rx="2.5"/></svg>
+              <svg class="wa-ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6.6 3h3l1.5 4.2-2.1 1.5a12 12 0 0 0 6.3 6.3l1.5-2.1L21 14.4v3a2 2 0 0 1-2.2 2A17 17 0 0 1 4.6 5.2 2 2 0 0 1 6.6 3z"/></svg>
+            </div>
+
+            <div class="chat-barra" id="chatBarra" role="progressbar" aria-label="Avance de la tasación" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i></i></div>
+
+            <div class="chat-hilo" id="chatHilo" role="log" aria-live="polite"></div>
+            <div class="chat-pie" id="chatPie"></div>
+
+            <span class="fono-barrita" aria-hidden="true"></span>
+          </div>
+        </div>
 
         <!-- Las respuestas del chat caen acá, así el lead se guarda igual que siempre -->
         <form id="valForm" hidden>
@@ -2996,20 +3108,14 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
   if (hilo && pie) {
     var PASOS = [
       { k:"barrio", q:"¿Dónde está la propiedad? Con el barrio me alcanza.",
-        tipo:"texto", ph:"Ej: Palermo Hollywood", ayuda:"Cuanto más preciso, más se parece la tasación a tu cuadra." },
-      { k:"tipo", q:"¿Qué tipo de propiedad es?",
+        tipo:"texto", ph:"Ej: Palermo Hollywood" },
+      { k:"tipo", q:"¿Qué es?",
         tipo:"ops", ops:["Departamento","PH","Casa","Local u oficina","Terreno","Otro"] },
-      { k:"amb", q:"¿Cuántos ambientes tiene?",
+      { k:"amb", q:"¿Cuántos ambientes?",
         tipo:"ops", ops:["Monoambiente","2 ambientes","3 ambientes","4 ambientes","5 o más"] },
-      { k:"m2", q:"¿Cuántos metros cubiertos tiene, más o menos?",
-        tipo:"numero", ph:"Ej: 68", saltar:"No lo sé de memoria" },
-      { k:"estado", q:"¿En qué estado está hoy?",
-        tipo:"ops", ops:["A estrenar","Muy bueno","Bueno","Para reciclar"] },
-      { k:"plazo", q:"¿Para cuándo te gustaría venderla?",
-        tipo:"ops", ops:["Lo antes posible","En 3 meses","Este año","Solo quiero saber el valor"] },
-      { k:"nombre", q:"Listo con la propiedad. ¿Cómo te llamo?",
+      { k:"nombre", q:"¿Cómo te llamo?",
         tipo:"texto", ph:"Tu nombre" },
-      { k:"contacto", q:"¿A qué WhatsApp o email te mando el análisis?",
+      { k:"contacto", q:"¿A qué WhatsApp o email te escribo?",
         tipo:"texto", ph:"11 5555-5555 o nombre@email.com",
         ayuda:"Lo uso solo para contestarte. No lo comparto con nadie." }
     ];
@@ -3027,10 +3133,20 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
 
     function poner(id, valor){ var e=document.getElementById(id); if(e) e.value=valor; }
 
+    function reloj(){
+      var d=new Date();
+      return d.getHours()+":"+String(d.getMinutes()).padStart(2,"0");
+    }
+    var TILDES='<svg width="15" height="11" viewBox="0 0 16 11" fill="none" stroke="#53BDEB" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M1 6l3 3 6-7"/><path d="M6 9l6-7"/></svg>';
+
     function burbuja(texto, quien, vacia){
       var b=document.createElement("div");
       b.className="burb "+quien+(vacia?" vacia":"");
-      b.textContent=texto;
+      b.appendChild(document.createTextNode(texto));
+      var h=document.createElement("span");
+      h.className="hora";
+      h.innerHTML=reloj()+(quien==="vos"?TILDES:"");
+      b.appendChild(h);
       hilo.appendChild(b);
       hilo.scrollTop=hilo.scrollHeight;
       return b;
@@ -3181,8 +3297,8 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
     function arrancar(){
       if(arrancado) return;
       arrancado=true;
-      burbuja("¡Hola! Soy Fernando. Te hago seis preguntas cortas y te digo cuánto vale tu propiedad hoy, con cierres reales de tu zona.","el");
-      burbuja("Lo que no sepas, lo salteás.","el");
+      burbuja("¡Hola! Soy Fernando. Te hago unas preguntas cortas y vemos cuánto vale tu propiedad.","el");
+      burbuja("Hablemos, sin compromiso y sin costo para vos.","el");
       medir("tasacion_inicio",{total_pasos:PASOS.length});
       preguntar();
     }
@@ -3416,21 +3532,27 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
    cambian en tres tramos. Si el equipo pide menos movimiento, queda vendida
    y listo. */
 (function(){
-  var sec=document.getElementById("mueve"), casa=document.getElementById("mueveCasa"),
-      globo=document.getElementById("mueveGlobo"), cartel=document.getElementById("mueveCartel");
-  if(!sec||!casa) return;
+  /* la hora de la barra de estado del telefonito, para que no diga siempre 9:41 */
+  var h=document.getElementById("waHora");
+  if(h){ var d=new Date(); h.textContent=d.getHours()+":"+String(d.getMinutes()).padStart(2,"0"); }
+})();
+(function(){
+  var sec=document.getElementById("mueve"), grupo=document.getElementById("mueveGrupo"),
+      globo=document.getElementById("mueveGlobo");
+  if(!sec||!grupo) return;
 
   var TRAMOS=[
-    [0,   "Publicada hace 7 meses", "En venta"],
-    [.34, "Tasada con cierres reales", "Nuevo precio"],
-    [.68, "Visitas todas las semanas", "Reservada"],
-    [.9,  "Escrituramos", "Vendido"]
+    [0,   "Publicada hace 7 meses"],
+    [.3,  "La tasamos con cierres reales"],
+    [.58, "Visitas todas las semanas"],
+    [.82, "Reservada"],
+    [.93, "Escrituramos"]
   ];
 
   if(matchMedia("(prefers-reduced-motion: reduce)").matches){
     sec.style.setProperty("--p","1");
-    globo.textContent=TRAMOS[3][1]; cartel.textContent=TRAMOS[3][2];
-    casa.classList.add("vendida");
+    globo.textContent=TRAMOS[TRAMOS.length-1][1];
+    grupo.classList.add("vendida");
     return;
   }
 
@@ -3448,8 +3570,7 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
     if(n!==ultimo){
       ultimo=n;
       globo.textContent=TRAMOS[n][1];
-      cartel.textContent=TRAMOS[n][2];
-      casa.classList.toggle("vendida", n===TRAMOS.length-1);
+      grupo.classList.toggle("vendida", n===TRAMOS.length-1);
     }
   }
   function alScroll(){ if(!pedido){ pedido=true; requestAnimationFrame(pintar); } }
