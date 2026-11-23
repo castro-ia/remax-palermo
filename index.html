@@ -658,6 +658,93 @@ select option{background:#0F1F42;color:#fff}
 }
 .barrio-pie a:hover{transform:translateY(-2px);filter:brightness(1.07)}
 
+/* ---------- qué le pasa a tu aviso ----------
+   Tres interruptores y un aviso de mentira que va cambiando. Las barras son
+   ilustrativas a propósito: no hay número que mida "cuánto mejora una foto". */
+.sim{background:var(--paper);border-top:1px solid var(--line);padding:58px 0}
+.sim-grid{margin-top:26px;display:grid;gap:20px}
+.sim-col-pasos{order:1}
+.aviso{order:2}
+.sim-col-med{order:3}
+@media(min-width:900px){
+  .sim-grid{grid-template-columns:1fr 1fr;grid-template-areas:"a p" "a m";gap:22px 40px;align-items:start}
+  .aviso{grid-area:a}.sim-col-pasos{grid-area:p}.sim-col-med{grid-area:m}
+}
+
+/* el aviso */
+.aviso{
+  position:relative;background:var(--cream);border:1px solid var(--line);border-radius:var(--r-lg);
+  overflow:hidden;box-shadow:var(--sh-sm);
+}
+.aviso-barra{display:flex;align-items:center;gap:7px;padding:11px 14px;border-bottom:1px solid var(--line);background:var(--paper)}
+.aviso-barra i{width:9px;height:9px;border-radius:50%;background:var(--line)}
+.aviso-barra span{margin-left:auto;font-size:10.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.aviso-foto{position:relative;aspect-ratio:16/10;overflow:hidden;background:#E8E6E1}
+.aviso-foto img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .5s ease}
+.aviso-foto .despues{opacity:0}
+.sim[data-p1="1"] .aviso-foto .despues{opacity:1}
+.aviso-sello{
+  position:absolute;left:12px;bottom:12px;background:rgba(16,21,33,.82);color:#fff;
+  font-size:11px;font-weight:600;padding:6px 10px;border-radius:8px;backdrop-filter:blur(6px);
+}
+.aviso-chips{position:absolute;right:12px;top:12px;display:flex;flex-direction:column;align-items:flex-end;gap:6px}
+.aviso-chip{
+  background:rgba(255,255,255,.94);color:var(--ink);font-size:10px;font-weight:800;
+  letter-spacing:.08em;text-transform:uppercase;padding:5px 9px;border-radius:7px;
+  opacity:0;transform:translateX(8px);transition:opacity .35s ease,transform .35s ease;
+}
+.sim[data-p1="1"] .aviso-chip{opacity:1;transform:none}
+.aviso-cuerpo{padding:15px 16px}
+.aviso-precio{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap}
+.aviso-precio b{font-family:Montserrat,Inter,sans-serif;font-size:1.5rem;font-weight:800;letter-spacing:-.03em;color:var(--navy)}
+.aviso-precio em{font-style:normal;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--muted);background:#EFEDE8;padding:4px 8px;border-radius:6px;transition:background .3s,color .3s}
+.sim[data-p3="1"] .aviso-precio em{background:var(--red);color:#fff}
+.aviso-cuerpo h3{margin-top:7px;font-size:1rem;font-weight:700;letter-spacing:-.015em}
+.aviso-cuerpo p{margin-top:4px;font-size:13px;color:var(--muted)}
+.aviso-portales{
+  margin-top:13px;padding-top:12px;border-top:1px solid var(--line);
+  display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:11.5px;color:var(--muted);
+}
+.aviso-portales b{
+  font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
+  background:#EFEDE8;color:var(--muted);padding:5px 9px;border-radius:6px;transition:background .3s,color .3s;
+}
+.sim[data-p2="1"] .aviso-portales b.destaca{background:var(--blue);color:#fff}
+.sim[data-p2="1"] .aviso-portales b.red{background:var(--navy);color:#fff}
+.aviso-estampa{
+  position:absolute;right:16px;top:50%;z-index:3;border:3px solid var(--red);color:var(--red);
+  background:rgba(255,255,255,.92);font-family:Montserrat,Inter,sans-serif;font-size:1.1rem;font-weight:900;
+  padding:7px 14px;border-radius:9px;transform:rotate(-10deg) scale(.4);opacity:0;
+  transition:transform .45s cubic-bezier(.3,1.5,.5,1),opacity .3s;
+}
+.sim.listo .aviso-estampa{transform:rotate(-10deg) scale(1);opacity:1}
+
+/* los interruptores */
+.sim-pasos{display:grid;gap:10px}
+.paso-sw{
+  display:flex;align-items:center;gap:13px;width:100%;text-align:left;cursor:pointer;
+  background:var(--cream);border:1px solid var(--line);border-radius:16px;padding:15px 16px;
+  font:inherit;color:var(--ink);transition:border-color .2s,background .2s,transform .2s;
+}
+.paso-sw:hover{transform:translateY(-1px);border-color:#C9C6C0}
+.paso-sw[aria-pressed="true"]{background:var(--paper);border-color:var(--red)}
+.sw{flex:none;width:44px;height:26px;border-radius:999px;background:#D8D5CF;position:relative;transition:background .25s}
+.sw::after{content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;
+  background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.3);transition:transform .25s}
+.paso-sw[aria-pressed="true"] .sw{background:var(--red)}
+.paso-sw[aria-pressed="true"] .sw::after{transform:translateX(18px)}
+.paso-sw b{display:block;font-size:15px;font-weight:700;letter-spacing:-.015em}
+.paso-sw span{display:block;margin-top:3px;font-size:13px;color:var(--muted);line-height:1.45}
+.sim-medidores{background:var(--navy);border-radius:var(--r);padding:18px 18px 16px;color:#fff}
+.med{display:grid;grid-template-columns:132px 1fr;gap:12px;align-items:center;font-size:13px}
+.med + .med{margin-top:11px}
+.med span{color:rgba(255,255,255,.72)}
+.med i{display:block;height:9px;border-radius:999px;background:rgba(255,255,255,.14);overflow:hidden}
+.med i::after{content:"";display:block;height:100%;border-radius:999px;width:var(--w,12%);
+  background:linear-gradient(90deg,var(--red),#FF9A6E);transition:width .5s cubic-bezier(.2,.7,.3,1)}
+.sim-nota{margin-top:14px;font-size:12px;color:var(--muted);line-height:1.6}
+
 /* ---------- efectos ---------- */
 #prog{position:fixed;top:0;left:0;height:3px;width:0;z-index:90;
   background:linear-gradient(90deg,var(--red),#FF7D96);transition:width .1s linear;
@@ -2424,6 +2511,75 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
   </div>
 </section>
 
+<!-- ===== QUÉ LE PASA A TU AVISO ===== -->
+<section class="sim" id="simulador" data-p1="0" data-p2="0" data-p3="0">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="kicker">Probalo vos</span>
+      <h2>Qué le pasa a tu aviso cuando lo hacemos bien.</h2>
+      <p>Prendé los tres pasos y mirá cómo cambia la publicación. Es el mismo departamento en los dos casos.</p>
+    </div>
+
+    <div class="sim-grid">
+      <div class="sim-col-pasos rv">
+        <div class="sim-pasos">
+          <button type="button" class="paso-sw" data-paso="1" aria-pressed="false">
+            <span class="sw" aria-hidden="true"></span>
+            <span><b>01 · Cómo se ve</b><span>Fotos profesionales, amueblamiento virtual, tour 360° y video con drone del barrio.</span></span>
+          </button>
+          <button type="button" class="paso-sw" data-paso="2" aria-pressed="false">
+            <span class="sw" aria-hidden="true"></span>
+            <span><b>02 · Dónde aparece</b><span>Zonaprop Premier y superdestacado, más toda la red RE/MAX buscando tu comprador.</span></span>
+          </button>
+          <button type="button" class="paso-sw" data-paso="3" aria-pressed="false">
+            <span class="sw" aria-hidden="true"></span>
+            <span><b>03 · A cuánto sale</b><span>Publicado con el precio de cierre de tu barrio, no con el del aviso de al lado.</span></span>
+          </button>
+        </div>
+      </div>
+
+      <div class="aviso rv">
+        <div class="aviso-barra"><i></i><i></i><i></i><span>Tu aviso</span></div>
+
+        <div class="aviso-foto">
+          <img src="img/living-antes.jpg?v=3" alt="El living vacío, como sale la foto sin preparar" width="1080" height="675" loading="lazy">
+          <img class="despues" src="img/living-despues.jpg?v=3" alt="El mismo living con amueblamiento virtual" width="1080" height="675" loading="lazy">
+          <span class="aviso-sello">Foto de celular, ambiente vacío</span>
+          <span class="aviso-chips">
+            <span class="aviso-chip">Tour 360°</span>
+            <span class="aviso-chip">Video con drone</span>
+            <span class="aviso-chip">Amueblado virtual</span>
+          </span>
+          <span class="aviso-estampa">¡Vendido!</span>
+        </div>
+
+        <div class="aviso-cuerpo">
+          <div class="aviso-precio">
+            <b>USD 148.000</b>
+            <em>Precio de portal</em>
+          </div>
+          <h3>3 ambientes con balcón · Palermo</h3>
+          <p>72 m² · 2 dormitorios · 1 baño</p>
+          <div class="aviso-portales">
+            <b class="destaca">Zonaprop</b>
+            <b class="destaca">Argenprop</b>
+            <b class="red">Toda la red RE/MAX</b>
+          </div>
+        </div>
+      </div>
+
+      <div class="sim-col-med rv">
+        <div class="sim-medidores">
+          <div class="med"><span>Cuánta gente lo ve</span><i id="medVe"></i></div>
+          <div class="med"><span>Cuántos consultan</span><i id="medCons"></i></div>
+          <div class="med"><span>Velocidad de venta</span><i id="medDias"></i></div>
+        </div>
+        <p class="sim-nota">Las barras son ilustrativas: no existe un número que mida cuánto mejora una foto. Lo que sí está medido es lo otro: el que publica a precio de cierre vende <strong>casi 40 días antes</strong>, sobre 4.261 ventas de la red.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ===== LAS TRES OPCIONES ===== -->
 <section class="cmp" id="comparar" data-ver="yo">
   <div class="wrap">
@@ -3889,6 +4045,43 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
   sel.addEventListener("change",function(){
     pintar();
     if(window.gtag) gtag("event","barrio_consultado",{barrio:BARRIOS[+sel.value][0]});
+  });
+  pintar();
+})();
+</script>
+
+<script>
+/* El aviso de mentira. Cada interruptor prende una parte; con los tres cae el
+   sello. Las barras suben juntas porque son ilustrativas, no una medición. */
+(function(){
+  var sec=document.getElementById("simulador");
+  if(!sec) return;
+  var sello=sec.querySelector(".aviso-sello"),
+      etiq=sec.querySelector(".aviso-precio em"),
+      TEXTOS=["Foto de celular, ambiente vacío","Fotos profesionales y amueblamiento virtual"],
+      PRECIO=["Precio de portal","Precio que cierra"],
+      BARRAS={medVe:[14,96],medCons:[11,88],medDias:[18,82]};
+
+  function pintar(){
+    var n=0, i;
+    for(i=1;i<=3;i++) if(sec.dataset["p"+i]==="1") n++;
+    sec.classList.toggle("listo", n===3);
+    sello.textContent=TEXTOS[sec.dataset.p1==="1" ? 1 : 0];
+    etiq.textContent=PRECIO[sec.dataset.p3==="1" ? 1 : 0];
+    Object.keys(BARRAS).forEach(function(id){
+      var a=BARRAS[id][0], b=BARRAS[id][1];
+      document.getElementById(id).style.setProperty("--w", (a+(b-a)*(n/3)).toFixed(0)+"%");
+    });
+  }
+
+  sec.querySelectorAll(".paso-sw").forEach(function(b){
+    b.addEventListener("click",function(){
+      var k=b.dataset.paso, on=sec.dataset["p"+k]!=="1";
+      sec.dataset["p"+k]= on ? "1" : "0";
+      b.setAttribute("aria-pressed", on ? "true" : "false");
+      pintar();
+      if(window.gtag) gtag("event","simulador_aviso",{paso:+k, prendido:on});
+    });
   });
   pintar();
 })();
