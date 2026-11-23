@@ -382,12 +382,22 @@ select option{background:#0F1F42;color:#fff}
 /* ---------- la propiedad que se mueve ----------
    Fernando empuja la casa de punta a punta de la pista. Avanza con el
    scroll, no sola: la empuja el que mira. */
-.mueve{background:var(--cream);padding:54px 0 48px;overflow:hidden}
+.mueve{background:var(--cream)}
+/* El recorrido se hace con el scroll: la sección mide más que la pantalla y
+   adentro hay un bloque pegado arriba. Mientras dura ese sobrante, la página
+   parece quieta y lo único que avanza es la casa. Después sigue de largo.
+   Ojo: nada de overflow:hidden acá arriba, que mata al sticky. */
+.mueve-alto{height:230vh;position:relative}
+.mueve-fijo{
+  position:sticky;top:0;height:100svh;min-height:520px;
+  display:flex;flex-direction:column;justify-content:center;overflow-x:clip;
+}
 .mueve-cab{display:flex;justify-content:space-between;align-items:baseline;gap:16px;
   font-size:10.5px;font-weight:800;letter-spacing:.2em;text-transform:uppercase}
 .mueve-a{color:var(--muted)}
 .mueve-b{color:var(--red)}
 .mueve-pista{position:relative;height:208px;margin-top:14px}
+.mueve-fijo .wrap{width:100%}
 .mueve-linea{position:absolute;left:0;right:0;bottom:30px;height:4px;border-radius:999px;background:var(--line)}
 .mueve-linea i{display:block;height:100%;border-radius:999px;background:var(--red);
   width:calc(10% + var(--p,0) * 76%)}
@@ -398,11 +408,8 @@ select option{background:#0F1F42;color:#fff}
 .mueve-grupo{position:absolute;bottom:26px;left:calc(1% + var(--p,0) * 62%);
   display:flex;align-items:flex-end}
 /* él mismo, apoyado contra la casa y apenas inclinado hacia adelante */
-.mueve-yo{
-  height:96px;width:auto;display:block;margin-right:-10px;position:relative;z-index:2;
-  rotate:9deg;transform-origin:bottom center;
-  filter:drop-shadow(0 5px 7px rgba(16,21,33,.18));
-}
+/* ya viene inclinado en la pose: no hace falta rotarlo, solo pegarlo a la pared */
+.mueve-yo{height:88px;width:auto;display:block;margin-right:-8px;position:relative;z-index:2}
 .mueve-casa{position:relative;width:124px}
 .mueve-casa svg{width:100%;height:auto;display:block}
 .mueve-globo{
@@ -421,19 +428,24 @@ select option{background:#0F1F42;color:#fff}
   transition:transform .42s cubic-bezier(.3,1.5,.5,1),opacity .28s;
 }
 .mueve-grupo.vendida .mueve-sello{transform:rotate(-11deg) scale(1);opacity:1}
+@media(prefers-reduced-motion:reduce){
+  .mueve-alto{height:auto}
+  .mueve-fijo{position:static;height:auto;min-height:0;padding:54px 0 48px}
+}
 .mueve-frase{margin-top:26px;font-size:clamp(1.6rem,5.2vw,2.9rem);text-wrap:balance}
 .mueve-frase em{font-style:normal;color:var(--red)}
 .mueve-bajada{margin-top:14px;max-width:38rem;color:var(--muted);font-size:1.03rem}
 .mueve-bajada strong{color:var(--ink);font-weight:600}
 @media(max-width:620px){
+  .mueve-alto{height:220vh}
   .mueve-pista{height:160px}
   .mueve-casa{width:88px}
-  .mueve-yo{height:64px}
+  .mueve-yo{height:62px}
   .mueve-meta{width:104px;height:104px}
   .mueve-globo{font-size:11px;padding:7px 10px}
   .mueve-sello{font-size:12px;padding:4px 8px;right:-18px}
 }
-@media(prefers-reduced-motion:reduce){.mueve-yo{rotate:none}}
+
 
 /* ---------- tasación guiada, dentro de un iPhone ----------
    El mismo formulario de siempre, pero de a una pregunta y con cara de
@@ -1705,7 +1717,9 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
 
 <!-- ===== LA PROPIEDAD QUE SE MUEVE ===== -->
 <section class="mueve" id="mueve" aria-label="Una propiedad bien tasada se mueve">
-  <div class="wrap">
+ <div class="mueve-alto" id="mueveAlto">
+  <div class="mueve-fijo">
+   <div class="wrap">
     <div class="mueve-cab">
       <span class="mueve-a">Tu propiedad hoy</span>
       <span class="mueve-b">Conmigo</span>
@@ -1716,8 +1730,8 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
       <span class="mueve-meta"></span>
 
       <div class="mueve-grupo" id="mueveGrupo">
-        <!-- Fernando en persona, recortado de su propia foto -->
-        <img class="mueve-yo" src="img/fernando-empuja.webp" width="171" height="440"
+        <!-- Fernando dibujado de perfil, empujando. La ilustración salió de su propia foto -->
+        <img class="mueve-yo" src="img/fernando-empuja.webp" width="266" height="298"
              alt="Fernando Castro empujando la propiedad" loading="lazy">
 
         <div class="mueve-casa" id="mueveCasa">
@@ -1738,7 +1752,9 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
 
     <h2 class="mueve-frase rv">Si no se mueve, <em>no es el mercado.</em></h2>
     <p class="mueve-bajada rv">Es el precio de salida. <strong>El 81% de las propiedades de CABA se vendió por debajo de lo publicado</strong>, y la que arranca cara termina bajando igual, pero casi 40 días más tarde. Empecemos por saber cuánto vale la tuya de verdad.</p>
+   </div>
   </div>
+ </div>
 </section>
 
 <!-- ===== TASACIÓN ===== -->
@@ -3522,9 +3538,9 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
   if(h){ var d=new Date(); h.textContent=d.getHours()+":"+String(d.getMinutes()).padStart(2,"0"); }
 })();
 (function(){
-  var sec=document.getElementById("mueve"), grupo=document.getElementById("mueveGrupo"),
-      globo=document.getElementById("mueveGlobo");
-  if(!sec||!grupo) return;
+  var sec=document.getElementById("mueve"), alto=document.getElementById("mueveAlto"),
+      grupo=document.getElementById("mueveGrupo"), globo=document.getElementById("mueveGlobo");
+  if(!sec||!alto||!grupo) return;
 
   var TRAMOS=[
     [0,   "Publicada hace 7 meses"],
@@ -3544,9 +3560,11 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
   var pedido=false, ultimo=-1;
   function pintar(){
     pedido=false;
-    var r=sec.getBoundingClientRect(), vh=innerHeight||800;
-    /* 0 cuando la sección asoma por abajo, 1 cuando su mitad pasó el centro */
-    var p=(vh-r.top-vh*0.28)/(r.height+vh*0.22);
+    var r=alto.getBoundingClientRect(), vh=innerHeight||800;
+    /* el sobrante de la sección es todo el recorrido: 0 cuando se clava arriba,
+       1 cuando termina de pasar y la página sigue de largo */
+    var viaje=Math.max(1, alto.offsetHeight-vh);
+    var p=(-r.top)/viaje;
     p=Math.max(0,Math.min(1,p));
     sec.style.setProperty("--p",p.toFixed(3));
 
