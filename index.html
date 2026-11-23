@@ -484,7 +484,22 @@ select option{background:#0F1F42;color:#fff}
   background:#1F2C34;border-bottom:1px solid rgba(255,255,255,.06);
 }
 .wa-volver{flex:none;color:#E9EDEF;opacity:.9}
-.wa-cab img{width:36px;height:36px;border-radius:50%;object-fit:cover;flex:none}
+.wa-cab img{width:36px;height:36px;border-radius:50%;object-fit:cover;display:block}
+/* el puntito verde de "está conectado", con el latido de siempre */
+.wa-foto{position:relative;flex:none;display:block}
+.wa-luz{
+  position:absolute;right:-1px;bottom:-1px;width:11px;height:11px;border-radius:50%;
+  background:#25D366;border:2px solid #1F2C34;box-shadow:0 0 7px rgba(37,211,102,.75);
+}
+.wa-luz::after{
+  content:"";position:absolute;inset:-1px;border-radius:50%;
+  background:#25D366;animation:waLatido 2.4s ease-out infinite;
+}
+@keyframes waLatido{
+  0%{transform:scale(.75);opacity:.6}
+  70%,100%{transform:scale(2.3);opacity:0}
+}
+@media(prefers-reduced-motion:reduce){.wa-luz::after{display:none}}
 .wa-quien{flex:1;min-width:0;line-height:1.25}
 .wa-quien b{display:block;font-size:15px;font-weight:600;color:#E9EDEF;letter-spacing:-.01em}
 .wa-quien span{display:block;font-size:11.5px;color:#8696A0}
@@ -981,51 +996,61 @@ select option{background:#0F1F42;color:#fff}
     radial-gradient(560px 360px at 2% 110%,rgba(228,0,43,.28),transparent 66%);
 }
 .guia .wrap{position:relative;z-index:2}
-.guia-grid{display:grid;gap:28px;align-items:center}
-@media(min-width:880px){.guia-grid{grid-template-columns:1.15fr .85fr;gap:48px}}
+.guia-dupla{margin-top:32px;display:grid;gap:26px}
+@media(min-width:880px){.guia-dupla{grid-template-columns:1fr 1fr;gap:34px}}
+.guia-item{display:flex;flex-direction:column}
 .guia .kicker{color:#FF8DA1;margin-bottom:14px}
 .guia h2{color:#fff;font-size:clamp(1.7rem,5vw,2.5rem);text-wrap:balance}
 .guia h2 em{font-style:normal;color:var(--red)}
 .guia .bajada{margin-top:14px;color:rgba(255,255,255,.76);font-size:1.02rem;max-width:34rem}
-.guia-cifras{margin-top:24px;display:flex;flex-wrap:wrap;gap:12px}
+.guia-cifras{margin-top:18px;display:flex;flex-wrap:wrap;gap:9px}
 .guia-cifras div{
   background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.13);
-  border-radius:13px;padding:12px 15px;
+  border-radius:12px;padding:10px 13px;
 }
-.guia-cifras b{display:block;font-family:Montserrat,Inter,sans-serif;font-size:1.3rem;font-weight:800;letter-spacing:-.03em;line-height:1}
+.guia-cifras b{display:block;font-family:Montserrat,Inter,sans-serif;font-size:1.12rem;font-weight:800;letter-spacing:-.03em;line-height:1}
 .guia-cifras b.baja{color:#FF7A8F}
-.guia-cifras span{display:block;margin-top:4px;font-size:10.5px;font-weight:700;letter-spacing:.11em;text-transform:uppercase;color:rgba(255,255,255,.55)}
-.guia-botones{margin-top:26px;display:flex;flex-wrap:wrap;gap:11px}
+.guia-cifras span{display:block;margin-top:4px;font-size:10px;font-weight:700;letter-spacing:.11em;text-transform:uppercase;color:rgba(255,255,255,.55)}
+/* en el celular van de a dos por renglón: una abajo de otra ocupaban media pantalla */
+@media(max-width:620px){
+  .guia-cifras{gap:8px}
+  .guia-cifras div{flex:1 1 calc(50% - 4px)}
+}
+.guia-botones{margin-top:auto;padding-top:18px;display:flex;flex-wrap:wrap;gap:10px}
 .guia .btn-ver{
-  display:inline-flex;align-items:center;gap:9px;background:var(--red);color:#fff;
-  padding:14px 20px;border-radius:13px;font-size:15px;font-weight:700;
+  display:inline-flex;align-items:center;gap:8px;background:var(--red);color:#fff;
+  padding:13px 19px;border-radius:13px;font-size:14.5px;font-weight:700;
   box-shadow:0 0 24px rgba(228,0,43,.35),0 16px 36px -22px rgba(228,0,43,.9);
   transition:transform .2s ease,box-shadow .2s ease;
 }
 .guia .btn-ver:hover{transform:translateY(-2px);box-shadow:0 0 32px rgba(228,0,43,.5),0 20px 44px -22px rgba(228,0,43,1)}
 .guia .btn-pdf{
-  display:inline-flex;align-items:center;gap:9px;color:#fff;
+  display:inline-flex;align-items:center;gap:8px;color:#fff;
   border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.05);
-  padding:14px 20px;border-radius:13px;font-size:15px;font-weight:600;
+  padding:13px 19px;border-radius:13px;font-size:14.5px;font-weight:600;
   transition:transform .2s ease,border-color .2s ease;
 }
 .guia .btn-pdf:hover{transform:translateY(-2px);border-color:rgba(255,255,255,.45)}
 
-/* la tapa en chico, apoyada sobre el costado */
+/* la tapa del PDF en chico, como cabeza de cada tarjeta */
 .guia-tapa{
   position:relative;border-radius:var(--r-lg);overflow:hidden;
   background:linear-gradient(165deg,#132350,#070E22);
   border:1px solid rgba(255,255,255,.14);
   box-shadow:0 24px 60px -28px #000;
-  padding:30px 26px;aspect-ratio:1/1.1;display:flex;flex-direction:column;justify-content:center;
+  padding:26px 24px;aspect-ratio:16/9.6;display:flex;flex-direction:column;justify-content:center;
+  transition:transform .22s ease,border-color .22s ease;
 }
+.guia-tapa:hover{transform:translateY(-3px);border-color:rgba(255,255,255,.3)}
+/* la de Oeste va en azul para que no parezcan la misma tapa dos veces */
+.guia-tapa.oeste{background:linear-gradient(165deg,#0E2A5C,#05101F)}
 .guia-tapa span{font-size:9.5px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.5)}
 .guia-tapa strong{
-  display:block;margin-top:14px;font-family:Montserrat,Inter,sans-serif;
-  font-size:clamp(1.9rem,6vw,2.6rem);font-weight:900;letter-spacing:-.04em;line-height:.95;text-transform:uppercase;
+  display:block;margin-top:12px;font-family:Montserrat,Inter,sans-serif;
+  font-size:clamp(1.55rem,4.4vw,2.15rem);font-weight:900;letter-spacing:-.04em;line-height:.95;text-transform:uppercase;
 }
 .guia-tapa strong i{font-style:normal;color:var(--red)}
-.guia-tapa p{margin-top:16px;font-size:12.5px;color:rgba(255,255,255,.55);line-height:1.5}
+.guia-tapa p{margin-top:13px;font-size:12.5px;color:rgba(255,255,255,.55);line-height:1.5}
 @media(max-width:879px){.guia-tapa{aspect-ratio:16/9;padding:24px}}
 
 /* ---------- sobre mi ---------- */
@@ -1653,7 +1678,7 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
       <a href="#sobre-mi">Sobre mí</a>
       <a href="#simulador">Cómo publico</a>
       <a href="#vendidas">Vendidas</a>
-      <a href="precio-real-caba/">Precio real</a>
+      <a href="#cierres">Precio real</a>
       <a href="#resenas">Reseñas</a>
       <a href="#faq">Preguntas</a>
       <a href="#propiedades">Propiedades</a>
@@ -1982,7 +2007,10 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
 
             <div class="wa-cab">
               <svg class="wa-volver" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H6"/><path d="m11.5 5.5-6.5 6.5 6.5 6.5"/></svg>
-              <img src="img/fernando-retrato-avatar.webp" width="300" height="300" alt="Fernando Castro" loading="lazy">
+              <span class="wa-foto">
+                <img src="img/fernando-retrato-avatar.webp" width="300" height="300" alt="Fernando Castro" loading="lazy">
+                <i class="wa-luz" aria-hidden="true"></i>
+              </span>
               <span class="wa-quien">
                 <b>Fernando Castro</b>
                 <span>en línea</span>
@@ -2020,33 +2048,58 @@ footer{background:var(--navy);color:rgba(255,255,255,.66);padding:46px 0 112px;f
 <!-- ===== GUÍA DE CIERRES ===== -->
 <section class="guia" id="cierres">
   <div class="wrap">
-    <div class="guia-grid">
-      <div class="rv">
-        <span class="kicker">Guía gratis · Edición noviembre 2026</span>
-        <h2>Lo que de verdad se pagó por el m² en CABA, <em>barrio por barrio</em>.</h2>
-        <p class="bajada">3.009 ventas reales de la red RE/MAX en 34 barrios. Precios de cierre, no de publicación: cuánto se pagó, cuánto se negocia antes de firmar y qué tarda en venderse.</p>
+    <div class="rv">
+      <span class="kicker">Dos guías gratis · Edición noviembre 2026</span>
+      <h2>Lo que de verdad se pagó por el m², <em>cuadra por cuadra</em>.</h2>
+      <p class="bajada">3.248 ventas reales de la red RE/MAX: 3.009 en los 34 barrios de Capital y 239 en Tres de Febrero, La Matanza, Morón y Hurlingham. Precios de cierre, no de publicación: cuánto se pagó, cuánto se negocia antes de firmar y qué tarda en venderse.</p>
+    </div>
+
+    <div class="guia-dupla">
+      <article class="guia-item rv">
+        <a class="guia-tapa" href="precio-real-caba/" aria-label="Abrir la guía El precio real de CABA">
+          <span>Team Fernando Castro · Nov 2026</span>
+          <strong>El precio <i>real</i> de CABA.</strong>
+          <p>3.009 ventas reales · 34 barrios · 2025–26</p>
+        </a>
         <div class="guia-cifras">
-          <div><b class="baja">81%</b><span>vendió bajo el publicado</span></div>
+          <div><b class="baja">81%</b><span>bajo el publicado</span></div>
           <div><b>4,9%</b><span>se negocia en promedio</span></div>
           <div><b>USD 2.218</b><span>m² mediano de CABA</span></div>
         </div>
         <div class="guia-botones">
           <a class="btn-ver" href="precio-real-caba/">
-            Ver la guía completa
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13"/><path d="m12.5 5.5 6.5 6.5-6.5 6.5"/></svg>
+            Ver la guía
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13"/><path d="m12.5 5.5 6.5 6.5-6.5 6.5"/></svg>
           </a>
           <a class="btn-pdf" href="precio-real-caba/El-Precio-Real-de-CABA-Team-Fernando-Castro.pdf" download>
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7.5 10.5 4.5 4.5 4.5-4.5"/><path d="M4 19h16"/></svg>
-            Descargar el PDF
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7.5 10.5 4.5 4.5 4.5-4.5"/><path d="M4 19h16"/></svg>
+            PDF
           </a>
         </div>
-      </div>
+      </article>
 
-      <a class="guia-tapa rv" href="precio-real-caba/" aria-label="Abrir la guía El precio real de CABA">
-        <span>Team Fernando Castro · Nov 2026</span>
-        <strong>El precio <i>real</i> de CABA.</strong>
-        <p>3.009 ventas reales · 34 barrios · 2025–26<br>Datos de cierres de la red RE/MAX</p>
-      </a>
+      <article class="guia-item rv">
+        <a class="guia-tapa oeste" href="precio-real-oeste/" aria-label="Abrir la guía El precio real de Zona Oeste">
+          <span>Team Fernando Castro · Nov 2026</span>
+          <strong>El precio <i>real</i> de Zona Oeste.</strong>
+          <p>239 ventas reales · 12 localidades · 2025–26</p>
+        </a>
+        <div class="guia-cifras">
+          <div><b class="baja">49%</b><span>tardó +6 meses</span></div>
+          <div><b>5,1%</b><span>se negocia en promedio</span></div>
+          <div><b>USD 811</b><span>m² típico 2026</span></div>
+        </div>
+        <div class="guia-botones">
+          <a class="btn-ver" href="precio-real-oeste/">
+            Ver la guía
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13"/><path d="m12.5 5.5 6.5 6.5-6.5 6.5"/></svg>
+          </a>
+          <a class="btn-pdf" href="precio-real-oeste/Cierres-2026-Zona-Oeste-Team-Fernando-Castro.pdf" download>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7.5 10.5 4.5 4.5 4.5-4.5"/><path d="M4 19h16"/></svg>
+            PDF
+          </a>
+        </div>
+      </article>
     </div>
   </div>
 </section>
